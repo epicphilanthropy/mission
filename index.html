@@ -292,19 +292,19 @@
             <p style="margin-bottom: 30px; color: #666;">Match the colors! Click a blank to focus it, then click an idea from the word banks below to fill it in.</p>
             
             <div class="template-selector">
-                <div class="template-btn active" onclick="setTemplate('problem')">
+                <div class="template-btn active" id="btn-problem" onclick="setTemplate('problem')">
                     <h4>Problem Focused</h4>
                     <p style="margin:0; font-size:12px; color:#666;">Lead with what's broken.</p>
                 </div>
-                <div class="template-btn" onclick="setTemplate('action')">
+                <div class="template-btn" id="btn-action" onclick="setTemplate('action')">
                     <h4>Action Focused</h4>
                     <p style="margin:0; font-size:12px; color:#666;">Lead with what you do.</p>
                 </div>
-                <div class="template-btn" onclick="setTemplate('value')">
+                <div class="template-btn" id="btn-value" onclick="setTemplate('value')">
                     <h4>Value Focused</h4>
                     <p style="margin:0; font-size:12px; color:#666;">Lead with what you believe.</p>
                 </div>
-                <div class="template-btn" onclick="setTemplate('freestyle')">
+                <div class="template-btn" id="btn-freestyle" onclick="setTemplate('freestyle')">
                     <h4>✏️ Write Freely</h4>
                     <p style="margin:0; font-size:12px; color:#666;">Ignore the templates, just type.</p>
                 </div>
@@ -538,8 +538,9 @@
         let isFreestyle = false;
 
         function setTemplate(type) {
+            // FIX: Use IDs to safely handle the active state
             document.querySelectorAll('.template-btn').forEach(btn => btn.classList.remove('active'));
-            if(event) event.currentTarget.classList.add('active');
+            document.getElementById('btn-' + type).classList.add('active');
 
             const draftArea = document.getElementById('draft-display');
             const freewriteBox = document.getElementById('freewrite-box');
@@ -559,11 +560,11 @@
                 sidebar.style.pointerEvents = 'auto';
 
                 if (type === 'problem') {
-                    draftArea.innerHTML = `The <span class="blank blank-fund focused" onclick="focusBlank(this)">[ Fund / Family Name ]</span> exists because <span class="blank blank-problem" onclick="focusBlank(this)">[ the problem ]</span> in <span class="blank blank-where" onclick="focusBlank(this)">[ where you give ]</span>. We <span class="blank blank-action" onclick="focusBlank(this)">[ action word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ who you serve ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ how you work ]</span>. We won't stop until <span class="blank blank-impact" onclick="focusBlank(this)">[ the change you want to see ]</span> because <span class="blank blank-belief" onclick="focusBlank(this)">[ your why ]</span>.`;
+                    draftArea.innerHTML = `The <span class="blank blank-fund focused" onclick="focusBlank(this)">[ Fund / Family Name ]</span> exists because <span class="blank blank-problem" onclick="focusBlank(this)">[ the problem ]</span> in <span class="blank blank-where" onclick="focusBlank(this)">[ where you give ]</span>. We <span class="blank blank-action" onclick="focusBlank(this)">[ action word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ who you serve ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ how you work ]</span>. We won't stop until <span class="blank blank-impact" onclick="focusBlank(this)">[ impact & change ]</span> because <span class="blank blank-belief" onclick="focusBlank(this)">[ your why ]</span>.`;
                 } else if (type === 'action') {
-                    draftArea.innerHTML = `The <span class="blank blank-fund focused" onclick="focusBlank(this)">[ Fund / Family Name ]</span> <span class="blank blank-action" onclick="focusBlank(this)">[ action word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ who you serve ]</span> in <span class="blank blank-where" onclick="focusBlank(this)">[ where you give ]</span> because <span class="blank blank-belief" onclick="focusBlank(this)">[ your why ]</span>. We focus on <span class="blank blank-impact" onclick="focusBlank(this)">[ the change you want to see ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ how you work ]</span>.`;
+                    draftArea.innerHTML = `The <span class="blank blank-fund focused" onclick="focusBlank(this)">[ Fund / Family Name ]</span> <span class="blank blank-action" onclick="focusBlank(this)">[ action word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ who you serve ]</span> in <span class="blank blank-where" onclick="focusBlank(this)">[ where you give ]</span> because <span class="blank blank-belief" onclick="focusBlank(this)">[ your why ]</span>. We focus on <span class="blank blank-impact" onclick="focusBlank(this)">[ impact & change ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ how you work ]</span>.`;
                 } else if (type === 'value') {
-                    draftArea.innerHTML = `Because <span class="blank blank-belief focused" onclick="focusBlank(this)">[ your why ]</span>, the <span class="blank blank-fund" onclick="focusBlank(this)">[ Fund / Family Name ]</span> <span class="blank blank-action" onclick="focusBlank(this)">[ action word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ who you serve ]</span> in <span class="blank blank-where" onclick="focusBlank(this)">[ where you give ]</span>. Our focus is <span class="blank blank-impact" onclick="focusBlank(this)">[ the change you want to see ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ how you work ]</span>.`;
+                    draftArea.innerHTML = `Because <span class="blank blank-belief focused" onclick="focusBlank(this)">[ your why ]</span>, the <span class="blank blank-fund" onclick="focusBlank(this)">[ Fund / Family Name ]</span> <span class="blank blank-action" onclick="focusBlank(this)">[ action word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ who you serve ]</span> in <span class="blank blank-where" onclick="focusBlank(this)">[ where you give ]</span>. Our focus is <span class="blank blank-impact" onclick="focusBlank(this)">[ impact & change ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ how you work ]</span>.`;
                 }
                 currentFocusedBlank = draftArea.querySelector('.blank.focused');
             }
@@ -602,11 +603,9 @@
                 chip.innerText = text;
                 chip.onclick = function() { insertWord(this); };
                 
-                // Insert it right before the input container
                 bank.insertBefore(chip, inputElem.parentNode);
                 inputElem.value = '';
 
-                // Auto-insert it into the current blank if applicable
                 if (currentFocusedBlank && !isFreestyle) {
                     insertWord(chip);
                 }
