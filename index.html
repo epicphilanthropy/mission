@@ -6,7 +6,7 @@
     <title>Mission Statement Builder | Epic Philanthropy</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     
-    <!-- FIREBASE LIBRARIES (V8 Compat) -->
+    <!-- FIREBASE LIBRARIES -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -18,6 +18,7 @@
             --white: #ffffff;
             --off-white: #f5f5f5;
             --light-gray: #e0e0e0;
+            --dark-gray: #333333;
         }
 
         body {
@@ -118,6 +119,8 @@
             background: none;
             border: none;
             font-family: 'Montserrat', sans-serif;
+            text-align: center; /* FIXED: Centered */
+            width: 100%;
         }
 
         .form-container {
@@ -128,44 +131,17 @@
         }
 
         .form-group { margin-bottom: 25px; }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 15px;
-            color: var(--white);
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-            box-sizing: border-box;
-            background: rgba(255,255,255,0.1);
-            color: var(--white);
-        }
-        
+        .form-group label { display: block; margin-bottom: 8px; font-size: 15px; color: var(--white); }
+        .form-group input { width: 100%; padding: 15px; border: none; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 16px; box-sizing: border-box; background: rgba(255,255,255,0.1); color: var(--white); }
         .form-group input::placeholder { color: rgba(255,255,255,0.5); }
         .form-group input:focus { outline: none; background: rgba(255,255,255,0.2); }
+        .back-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; display: block; margin-top: 20px; text-align: center; cursor: pointer; }
 
-        .back-link {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-size: 14px;
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        /* --- WORKSPACE & QUADRANTS --- */
+        /* --- WORKSPACE --- */
         #workspace-view {
             display: none;
             width: 100%;
-            max-width: 1000px; /* Wider for the grid */
+            max-width: 1200px; /* Made wider to fit builder */
             margin: 40px auto;
             background: var(--off-white);
             color: var(--epic-ink);
@@ -175,115 +151,136 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .session-header {
+        .session-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--light-gray); padding-bottom: 20px; margin-bottom: 30px; }
+        .session-header h2 { margin: 0; font-size: 24px; font-weight: 600; }
+        .session-header p { margin: 5px 0 0 0; font-size: 14px; color: #666; }
+        .role-badge { background: var(--epic-gold); color: var(--white); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- QUADRANTS --- */
+        .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px;}
+        @media (max-width: 768px) { .quadrant-grid { grid-template-columns: 1fr; } }
+        
+        .quadrant-card { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
+        .quadrant-card h3 { margin: 0 0 15px 0; font-size: 16px; font-weight: 600; color: var(--epic-ink); }
+        .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .input-row input { flex: 1; padding: 10px; border: 1px solid var(--light-gray); border-radius: 4px; font-family: 'Montserrat', sans-serif; }
+        .btn-add { background: var(--epic-bg); color: var(--white); border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; }
+        .ideas-list { flex: 1; background: var(--off-white); border-radius: 4px; padding: 15px; min-height: 100px; max-height: 200px; overflow-y: auto; }
+        .idea-item { background: var(--white); padding: 10px; border-radius: 4px; margin-bottom: 8px; font-size: 14px; border-left: 3px solid var(--epic-gold); display: flex; justify-content: space-between; cursor: pointer;}
+        .idea-item:hover { background: #f0f0f0; }
+        .idea-author { font-size: 11px; color: #888; margin-left: 10px; }
+
+        /* --- BUILDER AREA --- */
+        .builder-section {
+            border-top: 4px solid var(--epic-ink);
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .builder-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .builder-layout { grid-template-columns: 1fr; }
+        }
+
+        .template-selector {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--light-gray);
-            padding-bottom: 20px;
+            gap: 15px;
             margin-bottom: 30px;
         }
 
-        .session-header h2 { margin: 0; font-size: 24px; font-weight: 600; }
-        .session-header p { margin: 5px 0 0 0; font-size: 14px; color: #666; }
+        .template-btn {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid var(--light-gray);
+            background: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s;
+        }
 
-        .role-badge {
+        .template-btn.active {
+            border-color: var(--epic-gold);
+            background: rgba(226, 183, 74, 0.1);
+        }
+
+        .template-btn h4 { margin: 0 0 5px 0; color: var(--epic-ink); font-size: 16px; }
+        .template-btn p { margin: 0; font-size: 12px; color: #666; }
+
+        /* The actual mad libs sentence */
+        .draft-area {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            font-size: 24px;
+            line-height: 2;
+            font-weight: 300;
+            color: var(--dark-gray);
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            padding: 0 10px;
+            margin: 0 5px;
+            border-bottom: 2px solid var(--epic-bg);
+            background: rgba(82, 139, 153, 0.1);
+            color: var(--epic-bg);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .blank.focused {
             background: var(--epic-gold);
             color: var(--white);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            border-bottom-color: var(--epic-gold);
         }
 
-        .error-msg {
-            color: #ffcccc;
-            font-size: 14px;
-            margin-top: -15px;
-            margin-bottom: 15px;
-            display: none;
-        }
-
-        /* The 2x2 Grid */
-        .quadrant-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .quadrant-grid { grid-template-columns: 1fr; }
-        }
-
-        .quadrant-card {
+        /* Standard Word Banks Sidebar */
+        .word-bank-sidebar {
             background: var(--white);
             border: 1px solid var(--light-gray);
             border-radius: 8px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .quadrant-card h3 {
-            margin: 0 0 15px 0;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--epic-ink);
-        }
-
-        .input-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .input-row input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid var(--light-gray);
-            border-radius: 4px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .btn-add {
-            background: var(--epic-bg);
-            color: var(--white);
-            border: none;
-            padding: 0 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .btn-add:hover { opacity: 0.9; }
-
-        .ideas-list {
-            flex: 1;
-            background: var(--off-white);
-            border-radius: 4px;
-            padding: 15px;
-            min-height: 100px;
+            padding: 20px;
+            max-height: 600px;
             overflow-y: auto;
         }
 
-        .idea-item {
-            background: var(--white);
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
+        .word-bank-section h4 {
+            margin: 0 0 10px 0;
             font-size: 14px;
-            border-left: 3px solid var(--epic-gold);
-            display: flex;
-            justify-content: space-between;
+            color: var(--epic-ink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--light-gray);
+            padding-bottom: 5px;
         }
 
-        .idea-author {
-            font-size: 11px;
-            color: #888;
-            margin-left: 10px;
+        .word-chip {
+            display: inline-block;
+            background: var(--off-white);
+            border: 1px solid #ccc;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin: 0 5px 8px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .word-chip:hover {
+            background: var(--epic-bg);
+            color: var(--white);
+            border-color: var(--epic-bg);
         }
 
     </style>
@@ -293,7 +290,10 @@
     <!-- LANDING VIEW -->
     <div class="container" id="landing-view">
         <div class="eyebrow">Family Philanthropic Planning</div>
-        <h1><span>How</span> in the world do you want to make a difference?</h1>
+        
+        <!-- FIXED: Headline text changed -->
+        <h1>Craft your family's <span>mission statement</span></h1>
+        
         <p class="intro-text">A guided workshop to craft a mission statement that sounds like your family — not a nonprofit brochure.</p>
         
         <div class="instruction-box">
@@ -303,6 +303,7 @@
         </div>
 
         <button class="btn-primary" onclick="showForm('participant-form')">Join a Session →</button>
+        <!-- FIXED: Facilitator link will center via CSS -->
         <button class="facilitator-link" onclick="showForm('facilitator-form')">Facilitator? Set up a session</button>
     </div>
 
@@ -358,7 +359,6 @@
         <p style="margin-bottom: 30px;">Don't edit yourself. Drop raw ideas into each quadrant. Everything you add carries over as the group's shared word bank.</p>
 
         <div class="quadrant-grid">
-            <!-- Quad 1 -->
             <div class="quadrant-card">
                 <h3>😟 What problem keeps you up at night?</h3>
                 <div class="input-row">
@@ -367,8 +367,6 @@
                 </div>
                 <div class="ideas-list" id="list-q1"></div>
             </div>
-
-            <!-- Quad 2 -->
             <div class="quadrant-card">
                 <h3>💙 Why do you care about this?</h3>
                 <div class="input-row">
@@ -377,8 +375,6 @@
                 </div>
                 <div class="ideas-list" id="list-q2"></div>
             </div>
-
-            <!-- Quad 3 -->
             <div class="quadrant-card">
                 <h3>📊 How will you know it's working?</h3>
                 <div class="input-row">
@@ -387,8 +383,6 @@
                 </div>
                 <div class="ideas-list" id="list-q3"></div>
             </div>
-
-            <!-- Quad 4 -->
             <div class="quadrant-card">
                 <h3>🌱 What do you want to be remembered for?</h3>
                 <div class="input-row">
@@ -399,10 +393,75 @@
             </div>
         </div>
 
+        <!-- NEW: PART 2 BUILDER SECTION -->
+        <div class="builder-section">
+            <h2>Part 2: Build It Together</h2>
+            <p style="margin-bottom: 30px; color: #666;">Choose a template. Click a blank, then click an idea from the quadrants above or the word banks below to fill it in.</p>
+            
+            <div class="template-selector">
+                <div class="template-btn active">
+                    <h4>Problem Focused</h4>
+                    <p>Lead with what's broken</p>
+                </div>
+                <div class="template-btn">
+                    <h4>Action Focused</h4>
+                    <p>Lead with what you do</p>
+                </div>
+                <div class="template-btn">
+                    <h4>Value Focused</h4>
+                    <p>Lead with what you believe</p>
+                </div>
+            </div>
+
+            <div class="builder-layout">
+                <!-- Draft Area -->
+                <div>
+                    <div class="draft-area">
+                        The [Family Name] exists to 
+                        <span class="blank focused">[ Action Word ]</span> 
+                        <span class="blank">[ The Problem ]</span> 
+                        through 
+                        <span class="blank">[ How You Work ]</span> 
+                        so that 
+                        <span class="blank">[ The Impact ]</span>.
+                    </div>
+                </div>
+
+                <!-- Word Bank Sidebar -->
+                <div class="word-bank-sidebar">
+                    <div class="word-bank-section" style="margin-bottom: 25px;">
+                        <h4>Action Words</h4>
+                        <span class="word-chip">Supports</span>
+                        <span class="word-chip">Invests in</span>
+                        <span class="word-chip">Empowers</span>
+                        <span class="word-chip">Builds</span>
+                        <span class="word-chip">Advocates for</span>
+                        <span class="word-chip">Disrupts</span>
+                    </div>
+
+                    <div class="word-bank-section" style="margin-bottom: 25px;">
+                        <h4>Who You Serve</h4>
+                        <span class="word-chip">Children</span>
+                        <span class="word-chip">Families</span>
+                        <span class="word-chip">Women & girls</span>
+                        <span class="word-chip">Students</span>
+                        <span class="word-chip">Veterans</span>
+                    </div>
+
+                    <div class="word-bank-section">
+                        <h4>How You Work</h4>
+                        <span class="word-chip">Direct support</span>
+                        <span class="word-chip">Trust-based partnerships</span>
+                        <span class="word-chip">Capacity building</span>
+                        <span class="word-chip">Policy change</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // --- 1. INITIALIZE FIREBASE ---
         const firebaseConfig = {
             apiKey: "AIzaSyDzYW4EeXy_0hrzs-ADKEhF9y6CKjvF6Q0",
             authDomain: "epic-mission-builder.firebaseapp.com",
@@ -415,13 +474,9 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // --- 2. GLOBAL VARIABLES ---
-        let myRole = ''; 
-        let myName = '';
-        let mySession = '';
+        let myRole = ''; let myName = ''; let mySession = '';
         const FACILITATOR_PASSWORD = '3742';
 
-        // --- 3. UI NAVIGATION ---
         function showForm(formId) {
             document.getElementById('landing-view').style.display = 'none';
             document.getElementById('participant-form').style.display = 'none';
@@ -442,10 +497,8 @@
             document.getElementById('landing-view').style.display = 'none';
             document.getElementById('participant-form').style.display = 'none';
             document.getElementById('facilitator-form').style.display = 'none';
-            
             document.body.style.backgroundColor = '#e0e0e0';
             document.getElementById('workspace-view').style.display = 'block';
-
             document.getElementById('display-session-code').innerText = mySession;
             document.getElementById('display-name').innerText = myName;
             document.getElementById('display-role').innerText = myRole;
@@ -453,12 +506,9 @@
             if (myRole === 'Facilitator') {
                 document.getElementById('display-role').style.backgroundColor = '#0d2b32'; 
             }
-
-            // Start pulling real-time data!
             startFirebaseListener();
         }
 
-        // --- 4. SESSION LOGIC ---
         function createSession() {
             const pass = document.getElementById('fac-pass').value.trim();
             const sess = document.getElementById('fac-session').value.trim().toUpperCase();
@@ -468,9 +518,7 @@
                 document.getElementById('fac-error').style.display = 'block';
                 return;
             }
-            myRole = 'Facilitator';
-            myName = name;
-            mySession = sess;
+            myRole = 'Facilitator'; myName = name; mySession = sess;
             showWorkspace();
         }
 
@@ -482,60 +530,33 @@
                 document.getElementById('part-error').style.display = 'block';
                 return;
             }
-            myRole = 'Participant';
-            myName = name;
-            mySession = sess;
+            myRole = 'Participant'; myName = name; mySession = sess;
             showWorkspace();
         }
 
-        // --- 5. FIREBASE LOGIC (THE MAGIC) ---
-        
-        // Allows pressing "Enter" to submit
-        function handleEnter(e, quadId) {
-            if (e.key === 'Enter') {
-                addIdea(quadId);
-            }
-        }
+        function handleEnter(e, quadId) { if (e.key === 'Enter') addIdea(quadId); }
 
-        // Saves an idea to Firebase
         function addIdea(quadId) {
             const inputField = document.getElementById('input-' + quadId);
             const text = inputField.value.trim();
-            
-            if (!text) return; // Don't save empty blanks
-            
-            // Push to Firebase!
+            if (!text) return; 
             db.ref(`sessions/${mySession}/ideas/${quadId}`).push({
-                text: text,
-                author: myName,
-                timestamp: Date.now()
+                text: text, author: myName, timestamp: Date.now()
             });
-
-            // Clear the input box
             inputField.value = '';
         }
 
-        // Listens for updates from Firebase and redraws the lists
         function startFirebaseListener() {
-            // Listen to ALL ideas for this session
             db.ref(`sessions/${mySession}/ideas`).on('value', (snapshot) => {
                 const allData = snapshot.val() || {};
-                
-                // Redraw each quadrant
                 ['q1', 'q2', 'q3', 'q4'].forEach(quadId => {
                     const listDiv = document.getElementById('list-' + quadId);
-                    listDiv.innerHTML = ''; // Clear it out
-                    
+                    listDiv.innerHTML = ''; 
                     const quadData = allData[quadId] || {};
-                    
-                    // Loop through the ideas in this quadrant
                     Object.values(quadData).forEach(idea => {
                         const div = document.createElement('div');
                         div.className = 'idea-item';
-                        div.innerHTML = `
-                            <span>${idea.text}</span>
-                            <span class="idea-author">${idea.author}</span>
-                        `;
+                        div.innerHTML = `<span>${idea.text}</span><span class="idea-author">${idea.author}</span>`;
                         listDiv.appendChild(div);
                     });
                 });
