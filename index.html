@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission Statement Builder | Epic Philanthropy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
     
     <!-- FIREBASE LIBRARIES -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -65,7 +65,7 @@
         .role-badge { background: var(--epic-gold); color: var(--epic-ink); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .btn-copy { background: #fff; border: 1px solid #ccc; padding: 6px 12px; border-radius: 4px; font-size: 13px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; }
         
-        .part-one-helper { font-size: 16px; color: #555; margin-bottom: 30px; font-weight: 400; line-height: 1.5;}
+        .part-one-helper { font-size: 16px; color: #555; margin-bottom: 30px; font-weight: 400; line-height: 1.5; background: rgba(255,255,255,0.6); padding: 15px 20px; border-radius: 6px;}
 
         /* --- QUADRANTS --- */
         .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 50px;}
@@ -108,6 +108,7 @@
         .step-instructions { background: rgba(255,255,255,0.6); padding: 20px; border-radius: 8px; border-left: 4px solid var(--epic-gold); margin-bottom: 30px; font-size: 16px; color: var(--epic-ink); }
         .step-instructions p { margin: 5px 0; font-weight: 400; }
         .step-instructions strong { font-weight: 600; }
+        .wordsmith-note { display: inline-block; background: rgba(222, 173, 47, 0.2); padding: 5px 10px; border-radius: 4px; font-size: 14px; font-style: italic; font-weight: 500; color: var(--epic-dark-teal); margin-top: 10px !important;}
         
         .builder-layout { display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
         @media (max-width: 900px) { .builder-layout { grid-template-columns: 1fr; } }
@@ -185,7 +186,6 @@
 
         .word-chip { display: inline-block; background: var(--white); border: 2px solid #d0d0d0; padding: 10px 16px; border-radius: 25px; font-size: 15px; font-weight: 500; margin: 0 8px 12px 0; cursor: pointer; transition: all 0.2s; color: var(--epic-ink); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         
-        /* The special style for family's ideas pulled from quadrants */
         .family-chip { border-color: var(--epic-gold); background-color: #fdfaf2; border-width: 2px; font-weight: 600; }
 
         .sec-fund .word-chip:hover { background: var(--c-fund); color: white; border-color: var(--c-fund); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
@@ -219,14 +219,32 @@
         .confetti-piece { position: absolute; width: 12px; height: 30px; top: -20px; opacity: 0; z-index: 1;}
 
         /* --- HELP MODAL SYSTEM --- */
-        .help-btn-floating { position: fixed; bottom: 30px; right: 30px; background: var(--epic-gold); color: var(--epic-ink); border: none; padding: 12px 24px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 900; font-family: 'Montserrat', sans-serif; transition: transform 0.2s; display: none; }
-        .help-btn-floating:hover { transform: scale(1.05); }
+        /* Circle button styling */
+        .help-btn-floating { 
+            position: fixed; bottom: 30px; right: 30px; 
+            background: var(--epic-gold); color: var(--epic-ink); 
+            border: none; 
+            width: 60px; height: 60px; border-radius: 50%; 
+            font-size: 28px; font-weight: 600; 
+            cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            z-index: 900; font-family: 'Montserrat', sans-serif; 
+            transition: transform 0.2s; 
+            display: none; /* Flex applied via JS */
+            align-items: center; justify-content: center;
+        }
+        .help-btn-floating:hover { transform: scale(1.1); }
 
         #help-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(13, 43, 50, 0.9); z-index: 999; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
-        .help-content { background: var(--white); color: var(--epic-ink); max-width: 600px; width: 100%; border-radius: 12px; padding: 40px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .help-content { background: var(--white); color: var(--epic-ink); max-width: 650px; width: 100%; border-radius: 12px; padding: 40px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-height: 90vh; overflow-y: auto;}
         .help-content h2 { margin-top: 0; color: var(--epic-dark-teal); font-size: 28px; }
         .help-content h3 { font-size: 18px; color: var(--epic-medium-teal); margin-bottom: 5px; }
         .help-content p { font-size: 16px; line-height: 1.6; margin-top: 0; margin-bottom: 20px; }
+        
+        .help-examples-box { background: var(--epic-fog); padding: 20px; border-radius: 8px; margin-bottom: 25px; font-size: 15px; border-left: 4px solid var(--epic-gold);}
+        .help-examples-box h4 { margin: 0 0 10px 0; font-size: 16px; }
+        .help-examples-box ul { margin: 0; padding-left: 20px; }
+        .help-examples-box li { margin-bottom: 8px; }
+
         .btn-close-help { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; transition: color 0.2s; }
         .btn-close-help:hover { color: var(--c-problem); }
         .btn-close-help-large { background: var(--epic-ink); color: var(--white); border: none; padding: 15px; width: 100%; border-radius: 6px; font-size: 18px; font-weight: 600; cursor: pointer; margin-top: 10px; font-family: 'Montserrat', sans-serif; }
@@ -305,7 +323,8 @@
         </div>
         
         <div class="part-one-helper">
-            Type a short idea in any box below and click <strong>Add</strong>. Don't overthink it—these will become your word bank later!
+            Type a short idea in any box below and click <strong>Add</strong>. Don't overthink it—these will become your word bank later! <br>
+            <em style="font-size: 14px; margin-top: 5px; display: inline-block;">(Need inspiration? Click the <strong>?</strong> button in the bottom right corner.)</em>
         </div>
 
         <div class="quadrant-grid">
@@ -354,6 +373,7 @@
                 <p><strong>Step 1:</strong> Look at the large white box below. The actively highlighted blank is waiting for you.</p>
                 <p><strong>Step 2:</strong> Click a physical button from the Word Banks to fill it in. <em>(Your ideas from Part 1 are waiting for you at the top of the lists!)</em></p>
                 <p style="font-size: 14px; margin-top: 10px; color: #555;"><em>(Change your mind? Just click a different word to replace it!)</em></p>
+                <p class="wordsmith-note">Don't worry if it's not perfectly grammatically correct right now—we will wordsmith it together!</p>
             </div>
             
             <div class="template-selector">
@@ -398,7 +418,6 @@
                         </div>
                     </div>
 
-                    <!-- NEW: THE PROBLEM BANK -->
                     <div class="word-bank-section sec-problem" id="section-problem">
                         <h4 id="bank-problem-header">The Problem</h4>
                         <div id="dynamic-bank-q1"></div>
@@ -407,7 +426,6 @@
                         </div>
                     </div>
 
-                    <!-- NEW: BELIEF / WHY BANK -->
                     <div class="word-bank-section sec-belief" id="section-belief">
                         <h4 id="bank-belief-header">Your Why / Belief</h4>
                         <div id="dynamic-bank-q2"></div>
@@ -520,7 +538,7 @@
     </div>
 
     <!-- HELP MODAL OVERLAY -->
-    <button class="help-btn-floating" id="help-btn" onclick="openHelp()">❓ Need Help?</button>
+    <button class="help-btn-floating" id="help-btn" onclick="openHelp()">?</button>
     
     <div id="help-modal">
         <div class="help-content">
@@ -528,8 +546,19 @@
             <h2>How to use this tool</h2>
             
             <h3>Part 1: Brain Dump</h3>
-            <p>Don't worry about writing a perfect sentence yet. Just type your raw thoughts into the four colored boxes (The Problem, Your Why, Impact, Who You Serve) and click <strong>Add</strong>. Everyone in your family can see what you write in real time.</p>
+            <p>Don't worry about writing a perfect sentence yet. Just type your raw thoughts into the four colored boxes (The Problem, Your Why, Impact, Who You Serve) and click <strong>Add</strong>.</p>
             
+            <!-- EXAMPLES MOVED HERE -->
+            <div class="help-examples-box">
+                <h4>Stuck? Here are some examples:</h4>
+                <ul>
+                    <li><strong>The Problem:</strong> Food insecurity, lack of arts funding, climate change, youth mental health crisis.</li>
+                    <li><strong>Your Why:</strong> Everyone deserves a fair start, art heals communities, health is a human right.</li>
+                    <li><strong>Impact:</strong> Higher graduation rates, cleaner local rivers, thriving local arts scene.</li>
+                    <li><strong>Who You Serve:</strong> First-generation students, single mothers, marginalized neighborhoods, small-scale farmers.</li>
+                </ul>
+            </div>
+
             <h3>Part 2: Build It Together</h3>
             <p>Pick a template style. You will see a sentence with empty blanks. The active blank will lightly pulse to let you know it's ready. Just <strong>click a word</strong> from the Word Banks on the right to instantly fill the blank. Then, click "Save This Draft."</p>
             
@@ -601,7 +630,7 @@
             
             document.body.style.backgroundColor = 'var(--epic-dark-teal)'; 
             document.getElementById('workspace-view').style.display = 'block';
-            document.getElementById('help-btn').style.display = 'block'; 
+            document.getElementById('help-btn').style.display = 'flex'; // Make circular button flex
             
             document.getElementById('display-session-code').innerText = mySession;
             document.getElementById('display-name').innerText = myName;
@@ -835,31 +864,30 @@
                     const dynamicBankDiv = document.getElementById(dynamicBankMapping[quadId]);
                     const quadData = allData[quadId] || {};
                     
-                    // Clear both the quadrant list and the dynamic word bank section
                     listDiv.innerHTML = ''; 
                     if(dynamicBankDiv) dynamicBankDiv.innerHTML = '';
                     
                     if (Object.keys(quadData).length > 0) {
+                        // User HAS entered ideas -> show ideas, hide examples
                         Object.values(quadData).forEach(idea => {
-                            // 1. Add to the Quadrant (Part 1)
                             const div = document.createElement('div');
                             div.className = `idea-item ${mapClass[quadId]}`;
                             div.onclick = function() { insertWordFromQuad(idea.text); };
                             div.innerHTML = `<span>${idea.text}</span><span class="idea-author">${idea.author}</span>`;
                             listDiv.appendChild(div);
 
-                            // 2. Add to the corresponding Word Bank (Part 2)
                             if (dynamicBankDiv) {
                                 const chip = document.createElement('span');
-                                chip.className = 'word-chip family-chip'; // family-chip applies the custom gold styling
+                                chip.className = 'word-chip family-chip';
                                 chip.innerText = idea.text;
                                 chip.onclick = function() { insertWord(this); };
                                 dynamicBankDiv.appendChild(chip);
                             }
                         });
+                    } else {
+                        // NO ideas entered yet -> show empty states (examples)
+                        listDiv.insertAdjacentHTML('beforeend', emptyStates[quadId]);
                     }
-
-                    listDiv.insertAdjacentHTML('beforeend', emptyStates[quadId]);
                 });
             });
 
