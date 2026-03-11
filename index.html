@@ -24,14 +24,14 @@
             --light-gray: #e0e0e0;
 
             /* WORKSHOP COLOR PALETTE */
-            --c-problem: #904237; /* Nonprofits (Rust) */
-            --c-belief: #4f8284;  /* Medium Teal */
-            --c-impact: #5b7666;  /* Family Foundations (Sage) */
-            --c-focus: #457093;   /* Individuals & Families (Blue) */
-            --c-action: #1b3a5c;  /* Financial Advisors (Navy) */
-            --c-how: #dead2f;     /* Golden Yellow */
-            --c-where: #1e5563;   /* Dark Teal */
-            --c-fund: #4f8284;    /* Medium Teal for consistent highlighting */
+            --c-problem: #904237; 
+            --c-belief: #4f8284;  
+            --c-impact: #5b7666;  
+            --c-focus: #457093;   
+            --c-action: #1b3a5c;  
+            --c-how: #dead2f;     
+            --c-where: #1e5563;   
+            --c-fund: #4f8284;    
         }
 
         body { font-family: 'Montserrat', sans-serif; background-color: var(--epic-dark-teal); color: var(--white); margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
@@ -43,34 +43,35 @@
 
         .intro-text { font-size: 18px; font-weight: 300; line-height: 1.6; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .instruction-box { background: var(--off-white); color: var(--epic-ink); padding: 40px; border-radius: 8px; text-align: left; max-width: 500px; margin: 0 auto 40px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .instruction-box p { margin: 0 0 20px 0; font-size: 15px; line-height: 1.6; }
+        .instruction-box p { margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; } /* Increased font size */
         
-        .btn-primary { background-color: var(--epic-gold); color: var(--epic-ink); border: none; padding: 16px 40px; font-size: 18px; font-weight: 600; border-radius: 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: opacity 0.3s ease; }
-        .btn-primary:hover { opacity: 0.9; }
+        /* Chunker primary buttons */
+        .btn-primary { background-color: var(--epic-gold); color: var(--epic-ink); border: none; padding: 18px 45px; font-size: 18px; font-weight: 600; border-radius: 6px; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: opacity 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
         
-        .facilitator-link { display: block; margin-top: 20px; color: var(--epic-gold); font-size: 14px; text-decoration: underline; font-weight: 300; cursor: pointer; background: none; border: none; font-family: 'Montserrat', sans-serif; text-align: center; width: 100%; }
+        .facilitator-link { display: block; margin-top: 20px; color: var(--epic-gold); font-size: 15px; text-decoration: underline; font-weight: 300; cursor: pointer; background: none; border: none; font-family: 'Montserrat', sans-serif; text-align: center; width: 100%; }
         .form-container { display: none; max-width: 400px; margin: 0 auto; text-align: left; }
         .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 8px; font-size: 15px; color: var(--white); }
-        .form-group input { width: 100%; padding: 15px; border: none; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 16px; box-sizing: border-box; background: rgba(255,255,255,0.1); color: var(--white); }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 16px; color: var(--white); font-weight: 600; }
+        .form-group input { width: 100%; padding: 16px; border: none; border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 18px; box-sizing: border-box; background: rgba(255,255,255,0.1); color: var(--white); }
         .form-group input::placeholder { color: rgba(255,255,255,0.5); }
-        .form-group input:focus { outline: none; background: rgba(255,255,255,0.2); }
-        .back-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; display: block; margin-top: 20px; text-align: center; cursor: pointer; }
+        .form-group input:focus { outline: none; background: rgba(255,255,255,0.2); border: 2px solid var(--epic-gold); }
+        .back-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 15px; display: block; margin-top: 20px; text-align: center; cursor: pointer; }
 
         /* --- WORKSPACE --- */
         #workspace-view { display: none; width: 100%; max-width: 1200px; margin: 40px auto; background: var(--epic-fog); color: var(--epic-ink); border-radius: 8px; padding: 40px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .session-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; margin-bottom: 30px; }
-        .session-header h2 { margin: 0; font-size: 24px; font-weight: 600; }
-        .session-header p { margin: 5px 0 0 0; font-size: 14px; color: #555; display: flex; align-items: center; gap: 10px; }
-        .role-badge { background: var(--epic-gold); color: var(--epic-ink); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-copy { background: #fff; border: 1px solid #ccc; padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-family: 'Montserrat', sans-serif;}
+        .session-header h2 { margin: 0; font-size: 26px; font-weight: 600; }
+        .session-header p { margin: 5px 0 0 0; font-size: 15px; color: #555; display: flex; align-items: center; gap: 10px; }
+        .role-badge { background: var(--epic-gold); color: var(--epic-ink); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-copy { background: #fff; border: 1px solid #ccc; padding: 6px 12px; border-radius: 4px; font-size: 13px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; }
 
-        /* --- QUADRANTS & COLOR CODING --- */
-        .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px;}
+        /* --- QUADRANTS --- */
+        .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 50px;}
         @media (max-width: 768px) { .quadrant-grid { grid-template-columns: 1fr; } }
         
-        .quadrant-card { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; border-top-width: 6px; }
-        .quadrant-card h3 { margin: 0 0 15px 0; font-size: 16px; font-weight: 600; }
+        .quadrant-card { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; border-top-width: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .quadrant-card h3 { margin: 0 0 15px 0; font-size: 18px; font-weight: 600; }
         
         .quad-problem { border-top-color: var(--c-problem); }
         .quad-problem h3 { color: var(--c-problem); }
@@ -82,64 +83,102 @@
         .quad-focus h3 { color: var(--c-focus); }
 
         .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        .input-row input { flex: 1; padding: 10px; border: 1px solid var(--light-gray); border-radius: 4px; font-family: 'Montserrat', sans-serif; }
-        .btn-add { color: var(--white); border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; }
+        .input-row input { flex: 1; padding: 14px; border: 2px solid var(--light-gray); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 15px; }
+        .input-row input:focus { outline: none; border-color: var(--epic-medium-teal); }
+        .btn-add { color: var(--white); border: none; padding: 0 25px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 15px; font-family: 'Montserrat', sans-serif; }
         
-        .ideas-list { flex: 1; background: var(--off-white); border-radius: 4px; padding: 15px; min-height: 140px; max-height: 200px; overflow-y: auto; }
+        .ideas-list { flex: 1; background: var(--off-white); border-radius: 6px; padding: 15px; min-height: 140px; max-height: 200px; overflow-y: auto; border: 1px solid #eaeaea; }
         
-        .idea-item { background: var(--white); padding: 10px; border-radius: 4px; margin-bottom: 8px; font-size: 14px; display: flex; justify-content: space-between; cursor: pointer; border-left: 4px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
-        .idea-item:hover { background: #f0f0f0; }
-        .idea-author { font-size: 11px; color: #888; margin-left: 10px; }
+        .idea-item { background: var(--white); padding: 12px 15px; border-radius: 6px; margin-bottom: 10px; font-size: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-left: 5px solid var(--light-gray); box-shadow: 0 2px 5px rgba(0,0,0,0.04); transition: transform 0.1s;}
+        .idea-item:hover { transform: scale(1.01); background: #fafafa; }
+        .idea-author { font-size: 12px; color: #888; margin-left: 10px; font-style: italic; }
         
         .item-problem { border-left-color: var(--c-problem); }
         .item-belief { border-left-color: var(--c-belief); }
         .item-impact { border-left-color: var(--c-impact); }
         .item-focus { border-left-color: var(--c-focus); }
 
-        .empty-state { color: #a0a0a0; font-style: italic; font-size: 14px; font-weight: 300; line-height: 1.6; padding: 5px; margin-top: 10px; }
-        .empty-state strong { font-weight: 600; font-style: normal; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #b0b0b0; display: block; margin-bottom: 8px; }
+        .empty-state { color: #888; font-style: italic; font-size: 14px; font-weight: 300; line-height: 1.8; padding: 10px; margin-top: 10px; background: #ebebeb; border-radius: 6px; }
+        .empty-state strong { font-weight: 600; font-style: normal; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #777; display: block; margin-bottom: 8px; }
 
         /* --- BUILDER AREA --- */
         .builder-section { border-top: 4px solid var(--epic-ink); padding-top: 40px; margin-top: 40px; }
+        
+        /* Ultra-literal instructions for older users */
+        .step-instructions { background: rgba(255,255,255,0.6); padding: 20px; border-radius: 8px; border-left: 4px solid var(--epic-gold); margin-bottom: 30px; font-size: 16px; color: var(--epic-ink); }
+        .step-instructions p { margin: 5px 0; font-weight: 400; }
+        .step-instructions strong { font-weight: 600; }
+        
         .builder-layout { display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
         @media (max-width: 900px) { .builder-layout { grid-template-columns: 1fr; } }
 
-        .template-selector { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .template-btn { flex: 1; min-width: 200px; padding: 15px; border: 2px solid var(--white); background: var(--white); border-radius: 8px; cursor: pointer; text-align: left; font-family: 'Montserrat', sans-serif; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .template-btn.active { border-color: var(--epic-gold); background: rgba(222, 173, 47, 0.1); }
-        .template-btn h4 { margin: 0 0 5px 0; color: var(--epic-ink); font-size: 16px; }
+        .template-selector { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+        .template-btn { flex: 1; min-width: 200px; padding: 20px; border: 2px solid var(--white); background: var(--white); border-radius: 8px; cursor: pointer; text-align: left; font-family: 'Montserrat', sans-serif; transition: all 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .template-btn.active { border-color: var(--epic-gold); background: rgba(222, 173, 47, 0.1); border-width: 3px; }
+        .template-btn h4 { margin: 0 0 8px 0; color: var(--epic-ink); font-size: 18px; font-weight: 600; }
 
-        .draft-area { background: var(--white); padding: 40px; border-radius: 8px; border: 1px solid var(--white); font-size: 24px; line-height: 2; font-weight: 300; color: var(--epic-ink); box-shadow: 0 5px 15px rgba(0,0,0,0.05); min-height: 200px;}
-        #freewrite-box { display: none; width: 100%; height: 200px; padding: 20px; font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 300; line-height: 1.8; border: none; resize: vertical; box-sizing: border-box; background: transparent; outline: none; }
+        .draft-area { background: var(--white); padding: 45px; border-radius: 8px; border: 1px solid var(--white); font-size: 26px; line-height: 2.2; font-weight: 300; color: var(--epic-ink); box-shadow: 0 8px 25px rgba(0,0,0,0.06); min-height: 200px;}
+        #freewrite-box { display: none; width: 100%; height: 250px; padding: 25px; font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 300; line-height: 1.8; border: 2px solid #ddd; border-radius: 8px; resize: vertical; box-sizing: border-box; background: #fff; outline: none; }
+        #freewrite-box:focus { border-color: var(--epic-medium-teal); }
+
+        /* Colored Blanks - Made to look distinctly clickable, not type-able */
+        .blank { display: inline-block; min-width: 160px; padding: 2px 12px; margin: 0 6px; border-bottom: 4px solid #ccc; background: rgba(0,0,0,0.03); color: #777; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border-radius: 4px 4px 0 0; }
         
-        /* Colored Blanks */
-        .blank { display: inline-block; min-width: 150px; padding: 0 10px; margin: 0 5px; border-bottom: 3px solid #ccc; background: rgba(0,0,0,0.02); color: #888; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; }
-        
+        /* GRANDMA FIX: Add a gentle breathing animation to the active blank so they know where to look */
+        @keyframes breath {
+            0% { filter: brightness(1); transform: scale(1); box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+            50% { filter: brightness(1.1); transform: scale(1.02); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+            100% { filter: brightness(1); transform: scale(1); box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+        }
+
         .blank-problem { border-bottom-color: var(--c-problem); }
-        .blank-problem.focused, .blank-problem.filled { background: var(--c-problem); color: var(--white); }
-        .blank-belief { border-bottom-color: var(--c-belief); }
-        .blank-belief.focused, .blank-belief.filled { background: var(--c-belief); color: var(--white); }
-        .blank-impact { border-bottom-color: var(--c-impact); }
-        .blank-impact.focused, .blank-impact.filled { background: var(--c-impact); color: var(--white); }
-        .blank-focus { border-bottom-color: var(--c-focus); }
-        .blank-focus.focused, .blank-focus.filled { background: var(--c-focus); color: var(--white); }
-        .blank-action { border-bottom-color: var(--c-action); }
-        .blank-action.focused, .blank-action.filled { background: var(--c-action); color: var(--white); }
-        .blank-how { border-bottom-color: var(--c-how); }
-        .blank-how.focused, .blank-how.filled { background: var(--c-how); color: var(--epic-ink); } 
-        .blank-where { border-bottom-color: var(--c-where); }
-        .blank-where.focused, .blank-where.filled { background: var(--c-where); color: var(--white); }
-        .blank-fund { border-bottom-color: var(--c-fund); }
-        .blank-fund.focused, .blank-fund.filled { background: var(--c-fund); color: var(--white); }
+        .blank-problem.focused { background: var(--c-problem); color: var(--white); animation: breath 2s infinite ease-in-out; }
+        .blank-problem.filled { background: var(--c-problem); color: var(--white); }
 
-        .btn-save { background: var(--epic-ink); color: var(--white); border: none; padding: 15px 30px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; margin-top: 20px; width: 100%; transition: background 0.2s; }
+        .blank-belief { border-bottom-color: var(--c-belief); }
+        .blank-belief.focused { background: var(--c-belief); color: var(--white); animation: breath 2s infinite ease-in-out; }
+        .blank-belief.filled { background: var(--c-belief); color: var(--white); }
+
+        .blank-impact { border-bottom-color: var(--c-impact); }
+        .blank-impact.focused { background: var(--c-impact); color: var(--white); animation: breath 2s infinite ease-in-out; }
+        .blank-impact.filled { background: var(--c-impact); color: var(--white); }
+
+        .blank-focus { border-bottom-color: var(--c-focus); }
+        .blank-focus.focused { background: var(--c-focus); color: var(--white); animation: breath 2s infinite ease-in-out; }
+        .blank-focus.filled { background: var(--c-focus); color: var(--white); }
+
+        .blank-action { border-bottom-color: var(--c-action); }
+        .blank-action.focused { background: var(--c-action); color: var(--white); animation: breath 2s infinite ease-in-out; }
+        .blank-action.filled { background: var(--c-action); color: var(--white); }
+
+        .blank-how { border-bottom-color: var(--c-how); }
+        .blank-how.focused { background: var(--c-how); color: var(--epic-ink); animation: breath 2s infinite ease-in-out; } 
+        .blank-how.filled { background: var(--c-how); color: var(--epic-ink); } 
+
+        .blank-where { border-bottom-color: var(--c-where); }
+        .blank-where.focused { background: var(--c-where); color: var(--white); animation: breath 2s infinite ease-in-out; }
+        .blank-where.filled { background: var(--c-where); color: var(--white); }
+
+        .blank-fund { border-bottom-color: var(--c-fund); }
+        .blank-fund.focused { background: var(--c-fund); color: var(--white); animation: breath 2s infinite ease-in-out; }
+        .blank-fund.filled { background: var(--c-fund); color: var(--white); }
+
+        .btn-save { background: var(--epic-ink); color: var(--white); border: none; padding: 20px 30px; font-size: 18px; font-weight: 600; border-radius: 6px; cursor: pointer; font-family: 'Montserrat', sans-serif; margin-top: 25px; width: 100%; transition: background 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
         .btn-save:hover { background: var(--epic-medium-teal); }
 
-        /* Word Bank Sidebar Colors */
-        /* Note: Added position:relative so we can scroll smoothly inside it */
-        .word-bank-sidebar { position: relative; background: var(--white); border: 1px solid var(--white); border-radius: 8px; padding: 20px; max-height: 700px; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05); scroll-behavior: smooth; }
-        .word-bank-section { margin-bottom: 25px; }
-        .word-bank-section h4 { margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--light-gray); padding-bottom: 5px; }
+        /* Word Bank Sidebar */
+        .word-bank-sidebar { position: relative; background: var(--white); border: 1px solid var(--white); border-radius: 8px; padding: 25px; max-height: 700px; overflow-y: auto; box-shadow: 0 8px 25px rgba(0,0,0,0.06); scroll-behavior: smooth; }
+        
+        .word-bank-section { margin-bottom: 35px; padding: 10px; border-radius: 8px; transition: background-color 0.8s ease; }
+        
+        /* GRANDMA FIX: Flash animation for when the sidebar auto-scrolls, to draw the eye */
+        @keyframes highlight-flash {
+            0% { background-color: rgba(222, 173, 47, 0.4); } /* Epic Gold light */
+            100% { background-color: transparent; }
+        }
+        .flash-active { animation: highlight-flash 1.5s ease-out; }
+
+        .word-bank-section h4 { margin: 0 0 15px 0; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--light-gray); padding-bottom: 8px; }
         
         .sec-fund h4 { color: var(--c-fund); border-bottom-color: var(--c-fund); }
         .sec-focus h4 { color: var(--c-focus); border-bottom-color: var(--c-focus); }
@@ -148,36 +187,37 @@
         .sec-how h4 { color: var(--c-how); border-bottom-color: var(--c-how); }
         .sec-where h4 { color: var(--c-where); border-bottom-color: var(--c-where); }
 
-        .word-chip { display: inline-block; background: var(--off-white); border: 1px solid #ccc; padding: 6px 12px; border-radius: 20px; font-size: 13px; margin: 0 5px 8px 0; cursor: pointer; transition: all 0.2s; color: var(--epic-ink); }
+        /* GRANDMA FIX: Chunkier Word Chips (Buttons) */
+        .word-chip { display: inline-block; background: var(--white); border: 2px solid #d0d0d0; padding: 10px 16px; border-radius: 25px; font-size: 15px; font-weight: 500; margin: 0 8px 12px 0; cursor: pointer; transition: all 0.2s; color: var(--epic-ink); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         
-        .sec-fund .word-chip:hover { background: var(--c-fund); color: white; border-color: var(--c-fund); }
-        .sec-focus .word-chip:hover { background: var(--c-focus); color: white; border-color: var(--c-focus); }
-        .sec-action .word-chip:hover { background: var(--c-action); color: white; border-color: var(--c-action); }
-        .sec-impact .word-chip:hover { background: var(--c-impact); color: white; border-color: var(--c-impact); }
-        .sec-how .word-chip:hover { background: var(--c-how); color: var(--epic-ink); border-color: var(--c-how); }
-        .sec-where .word-chip:hover { background: var(--c-where); color: white; border-color: var(--c-where); }
+        .sec-fund .word-chip:hover { background: var(--c-fund); color: white; border-color: var(--c-fund); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+        .sec-focus .word-chip:hover { background: var(--c-focus); color: white; border-color: var(--c-focus); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+        .sec-action .word-chip:hover { background: var(--c-action); color: white; border-color: var(--c-action); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+        .sec-impact .word-chip:hover { background: var(--c-impact); color: white; border-color: var(--c-impact); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+        .sec-how .word-chip:hover { background: var(--c-how); color: var(--epic-ink); border-color: var(--c-how); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+        .sec-where .word-chip:hover { background: var(--c-where); color: white; border-color: var(--c-where); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
 
-        /* Inline "Add Your Own" styling */
-        .custom-chip-container { display: inline-block; margin: 0 5px 8px 0; }
-        .custom-chip-input { background: transparent; border: 1px dashed #ccc; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-family: 'Montserrat', sans-serif; width: 140px; font-style: italic; color: #666; transition: all 0.2s;}
-        .custom-chip-input:focus { outline: none; border-color: var(--epic-ink); background: #fff; font-style: normal; color: var(--epic-ink);}
-        .custom-chip-input::placeholder { color: #aaa; }
+        /* Inline "Add Your Own" styling - Made more obvious */
+        .custom-chip-container { display: inline-block; margin: 0 8px 12px 0; }
+        .custom-chip-input { background: #f9f9f9; border: 2px dashed #bbb; padding: 10px 16px; border-radius: 25px; font-size: 15px; font-family: 'Montserrat', sans-serif; width: 160px; font-style: italic; color: #555; transition: all 0.2s;}
+        .custom-chip-input:focus { outline: none; border-style: solid; border-color: var(--epic-ink); background: #fff; font-style: normal; color: var(--epic-ink);}
+        .custom-chip-input::placeholder { color: #999; }
 
         /* --- PART 3: DRAFTS GALLERY --- */
         .drafts-section { border-top: 4px solid var(--epic-gold); padding-top: 40px; margin-top: 40px; }
-        .draft-card { background: var(--white); padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; }
-        .draft-card p { margin: 0; font-size: 20px; line-height: 1.8; font-weight: 300; }
-        .draft-meta { font-size: 12px; color: #888; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        .draft-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; }
-        .btn-delete { background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 13px; text-decoration: underline; font-family: 'Montserrat', sans-serif;}
-        .btn-final { background: var(--epic-gold); color: var(--epic-ink); border: none; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
-        .btn-final:hover { opacity: 0.9; }
+        .draft-card { background: var(--white); padding: 35px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); position: relative; }
+        .draft-card p { margin: 0; font-size: 22px; line-height: 1.8; font-weight: 300; }
+        .draft-meta { font-size: 13px; color: #888; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        .draft-actions { position: absolute; top: 25px; right: 25px; display: flex; gap: 15px; }
+        .btn-delete { background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 14px; text-decoration: underline; font-family: 'Montserrat', sans-serif; font-weight: 600;}
+        .btn-final { background: var(--epic-gold); color: var(--epic-ink); border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 13px; font-weight: 600; font-family: 'Montserrat', sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+        .btn-final:hover { opacity: 0.9; transform: translateY(-1px); }
 
         /* --- CELEBRATION OVERLAY --- */
         #celebration-view { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--epic-dark-teal); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px; box-sizing: border-box; overflow: hidden;}
-        #celebration-view h3 { color: var(--epic-gold); font-size: 18px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; z-index: 2;}
-        #final-statement-text { font-size: 42px; font-weight: 300; line-height: 1.6; max-width: 900px; color: var(--white); font-style: italic; z-index: 2;}
-        .confetti-piece { position: absolute; width: 10px; height: 25px; top: -20px; opacity: 0; z-index: 1;}
+        #celebration-view h3 { color: var(--epic-gold); font-size: 20px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; z-index: 2;}
+        #final-statement-text { font-size: 48px; font-weight: 300; line-height: 1.6; max-width: 1000px; color: var(--white); font-style: italic; z-index: 2;}
+        .confetti-piece { position: absolute; width: 12px; height: 30px; top: -20px; opacity: 0; z-index: 1;}
         
     </style>
 </head>
@@ -242,7 +282,7 @@
                 <h2>Part 1: Brain Dump</h2>
                 <p>
                     Session Code: <strong id="display-session-code">---</strong> 
-                    <button class="btn-copy" onclick="copyCode()">📋 Copy</button>
+                    <button class="btn-copy" onclick="copyCode()">📋 Copy Code</button>
                 </p>
             </div>
             <div style="text-align: right;">
@@ -292,24 +332,30 @@
         <!-- PART 2 BUILDER SECTION -->
         <div class="builder-section">
             <h2>Part 2: Build It Together</h2>
-            <p style="margin-bottom: 30px; color: #666;">Match the colors! Click a blank to focus it, then click an idea from the word banks below to fill it in.</p>
+            
+            <!-- GRANDMA FIX: Ultra clear, numbered instructions -->
+            <div class="step-instructions">
+                <p><strong>Step 1:</strong> Look at the large white box below. The actively highlighted blank is waiting for you.</p>
+                <p><strong>Step 2:</strong> Click a physical button from the Word Banks (or your ideas above) to fill it in.</p>
+                <p style="font-size: 14px; margin-top: 10px; color: #555;"><em>(Change your mind? Just click a different word to replace it!)</em></p>
+            </div>
             
             <div class="template-selector">
                 <div class="template-btn active" id="btn-problem" onclick="setTemplate('problem')">
                     <h4>Problem Focused</h4>
-                    <p style="margin:0; font-size:12px; color:#666;">Lead with what's broken.</p>
+                    <p style="margin:0; font-size:13px; color:#666;">Lead with what's broken.</p>
                 </div>
                 <div class="template-btn" id="btn-action" onclick="setTemplate('action')">
                     <h4>Action Focused</h4>
-                    <p style="margin:0; font-size:12px; color:#666;">Lead with what you do.</p>
+                    <p style="margin:0; font-size:13px; color:#666;">Lead with what you do.</p>
                 </div>
                 <div class="template-btn" id="btn-value" onclick="setTemplate('value')">
                     <h4>Value Focused</h4>
-                    <p style="margin:0; font-size:12px; color:#666;">Lead with what you believe.</p>
+                    <p style="margin:0; font-size:13px; color:#666;">Lead with what you believe.</p>
                 </div>
                 <div class="template-btn" id="btn-freestyle" onclick="setTemplate('freestyle')">
                     <h4>✏️ Write Freely</h4>
-                    <p style="margin:0; font-size:12px; color:#666;">Ignore the templates, just type.</p>
+                    <p style="margin:0; font-size:13px; color:#666;">Ignore the blanks, just type.</p>
                 </div>
             </div>
 
@@ -324,7 +370,7 @@
                 <!-- Word Bank Sidebar -->
                 <div class="word-bank-sidebar" id="word-sidebar">
 
-                    <div class="word-bank-section sec-fund">
+                    <div class="word-bank-section sec-fund" id="section-fund">
                         <h4 id="bank-fund-header">Fund / Family Name</h4>
                         <div id="bank-fund">
                             <span class="word-chip" onclick="insertWord(this)" id="chip-fam-1">The Family</span>
@@ -332,11 +378,11 @@
                             <span class="word-chip" onclick="insertWord(this)" id="chip-fam-3">The Fund</span>
                             <span class="word-chip" onclick="insertWord(this)" id="chip-fam-4">The Trust</span>
                             <span class="word-chip" onclick="insertWord(this)" id="chip-fam-5">The Philanthropies</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="[+ add your own]" onkeypress="addCustomChip(event, 'bank-fund', this)"></div>
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-fund', this)"></div>
                         </div>
                     </div>
 
-                    <div class="word-bank-section sec-focus">
+                    <div class="word-bank-section sec-focus" id="section-who">
                         <h4 id="bank-who-header">Who You Serve</h4>
                         <div id="bank-who">
                             <span class="word-chip" onclick="insertWord(this)">Children & youth</span>
@@ -351,11 +397,11 @@
                             <span class="word-chip" onclick="insertWord(this)">Seniors</span>
                             <span class="word-chip" onclick="insertWord(this)">Rural communities</span>
                             <span class="word-chip" onclick="insertWord(this)">People with disabilities</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="[+ add your own]" onkeypress="addCustomChip(event, 'bank-who', this)"></div>
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-who', this)"></div>
                         </div>
                     </div>
 
-                    <div class="word-bank-section sec-action">
+                    <div class="word-bank-section sec-action" id="section-action">
                         <h4 id="bank-action-header">Action Words</h4>
                         <div id="bank-action">
                             <span class="word-chip" onclick="insertWord(this)">Support(s)</span>
@@ -378,11 +424,11 @@
                             <span class="word-chip" onclick="insertWord(this)">Uplift(s)</span>
                             <span class="word-chip" onclick="insertWord(this)">Foster(s)</span>
                             <span class="word-chip" onclick="insertWord(this)">Partner(s) with</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="[+ add your own]" onkeypress="addCustomChip(event, 'bank-action', this)"></div>
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-action', this)"></div>
                         </div>
                     </div>
 
-                    <div class="word-bank-section sec-impact">
+                    <div class="word-bank-section sec-impact" id="section-impact">
                         <h4 id="bank-impact-header">Impact & Change Words</h4>
                         <div id="bank-impact">
                             <span class="word-chip" onclick="insertWord(this)">Systemic change</span>
@@ -394,11 +440,11 @@
                             <span class="word-chip" onclick="insertWord(this)">Shared prosperity</span>
                             <span class="word-chip" onclick="insertWord(this)">Voices heard and valued</span>
                             <span class="word-chip" onclick="insertWord(this)">Community resilience</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="[+ add your own]" onkeypress="addCustomChip(event, 'bank-impact', this)"></div>
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-impact', this)"></div>
                         </div>
                     </div>
 
-                    <div class="word-bank-section sec-how">
+                    <div class="word-bank-section sec-how" id="section-how">
                         <h4 id="bank-how-header">How You Work</h4>
                         <div id="bank-how">
                             <span class="word-chip" onclick="insertWord(this)">Trust-based partnerships</span>
@@ -410,18 +456,18 @@
                             <span class="word-chip" onclick="insertWord(this)">Multi-year unrestricted funding</span>
                             <span class="word-chip" onclick="insertWord(this)">Policy change</span>
                             <span class="word-chip" onclick="insertWord(this)">Grassroots grantmaking</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="[+ add your own]" onkeypress="addCustomChip(event, 'bank-how', this)"></div>
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-how', this)"></div>
                         </div>
                     </div>
 
-                    <div class="word-bank-section sec-where">
+                    <div class="word-bank-section sec-where" id="section-where">
                         <h4 id="bank-where-header">Where You Give</h4>
                         <div id="bank-where">
                             <span class="word-chip" onclick="insertWord(this)">Local</span>
                             <span class="word-chip" onclick="insertWord(this)">Regional</span>
                             <span class="word-chip" onclick="insertWord(this)">National</span>
                             <span class="word-chip" onclick="insertWord(this)">International</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="[+ add your own]" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
                         </div>
                     </div>
 
@@ -432,7 +478,7 @@
         <!-- PART 3: COMPARE DRAFTS -->
         <div class="drafts-section">
             <h2>Part 3: Compare & Refine</h2>
-            <p style="margin-bottom: 30px; color: #666;">Read each one out loud. Notice which one makes the family sit up straight. That's usually the one.</p>
+            <p style="margin-bottom: 30px; font-size: 18px; color: #666;">Read each one out loud. Notice which one makes the family sit up straight. That's usually the one.</p>
             <div id="saved-drafts-list"></div>
         </div>
     </div>
@@ -485,7 +531,7 @@
             navigator.clipboard.writeText(mySession);
             const btn = document.querySelector('.btn-copy');
             btn.innerText = '✅ Copied!';
-            setTimeout(() => { btn.innerText = '📋 Copy'; }, 2000);
+            setTimeout(() => { btn.innerText = '📋 Copy Code'; }, 2000);
         }
 
         function showWorkspace() {
@@ -599,23 +645,33 @@
             element.classList.add('focused');
             currentFocusedBlank = element;
 
-            // SCROLL TO WORD BANK LOGIC
-            let targetBankId = null;
-            if (element.classList.contains('blank-fund')) targetBankId = 'bank-fund-header';
-            else if (element.classList.contains('blank-focus')) targetBankId = 'bank-who-header';
-            else if (element.classList.contains('blank-action')) targetBankId = 'bank-action-header';
-            else if (element.classList.contains('blank-impact')) targetBankId = 'bank-impact-header';
-            else if (element.classList.contains('blank-how')) targetBankId = 'bank-how-header';
-            else if (element.classList.contains('blank-where')) targetBankId = 'bank-where-header';
+            // Mapping blank types to the wrapper sections
+            let targetSectionId = null;
+            if (element.classList.contains('blank-fund')) targetSectionId = 'section-fund';
+            else if (element.classList.contains('blank-focus')) targetSectionId = 'section-who';
+            else if (element.classList.contains('blank-action')) targetSectionId = 'section-action';
+            else if (element.classList.contains('blank-impact')) targetSectionId = 'section-impact';
+            else if (element.classList.contains('blank-how')) targetSectionId = 'section-how';
+            else if (element.classList.contains('blank-where')) targetSectionId = 'section-where';
 
-            if (targetBankId) {
-                const targetHeader = document.getElementById(targetBankId);
+            if (targetSectionId) {
+                const targetSection = document.getElementById(targetSectionId);
                 const sidebar = document.getElementById('word-sidebar');
-                if (targetHeader && sidebar) {
+                
+                if (targetSection && sidebar) {
+                    // Scroll it into view
                     sidebar.scrollTo({
-                        top: targetHeader.parentElement.offsetTop - 20, 
+                        top: targetSection.offsetTop - 20, 
                         behavior: 'smooth'
                     });
+
+                    // Remove previous flashes
+                    document.querySelectorAll('.word-bank-section').forEach(sec => sec.classList.remove('flash-active'));
+                    
+                    // Add the flash animation to draw their eye
+                    setTimeout(() => {
+                        targetSection.classList.add('flash-active');
+                    }, 300); // Slight delay so it flashes exactly when the scroll finishes
                 }
             }
         }
@@ -660,7 +716,6 @@
             const currentIndex = allBlanks.indexOf(currentFocusedBlank);
             
             if (currentIndex >= 0 && currentIndex < allBlanks.length - 1) {
-                // By calling focusBlank, it will also automatically scroll the sidebar!
                 focusBlank(allBlanks[currentIndex + 1]);
             } else {
                 currentFocusedBlank.classList.remove('focused');
@@ -690,9 +745,9 @@
             if(isFreestyle) { document.getElementById('freewrite-box').value = ''; }
             
             const btn = document.querySelector('.btn-save');
-            btn.innerText = "✅ Saved!";
+            btn.innerText = "✅ Saved to Compare List!";
             btn.style.backgroundColor = "var(--epic-medium-teal)";
-            setTimeout(() => { btn.innerText = "💾 Save This Draft"; btn.style.backgroundColor = "var(--epic-ink)"; }, 2000);
+            setTimeout(() => { btn.innerText = "💾 Save This Draft"; btn.style.backgroundColor = "var(--epic-ink)"; }, 3000);
         }
 
         function deleteDraft(key) {
@@ -731,10 +786,8 @@
                     const listDiv = document.getElementById('list-' + quadId);
                     const quadData = allData[quadId] || {};
                     
-                    // Clear the list entirely
                     listDiv.innerHTML = ''; 
                     
-                    // 1. Add user-submitted ideas if any exist
                     if (Object.keys(quadData).length > 0) {
                         Object.values(quadData).forEach(idea => {
                             const div = document.createElement('div');
@@ -745,7 +798,6 @@
                         });
                     }
 
-                    // 2. ALWAYS add the grey examples at the bottom of the list
                     listDiv.insertAdjacentHTML('beforeend', emptyStates[quadId]);
                 });
             });
@@ -755,7 +807,7 @@
                 const listDiv = document.getElementById('saved-drafts-list');
                 
                 if (Object.keys(draftsData).length === 0) {
-                    listDiv.innerHTML = '<p style="color: #888; font-style: italic;">No drafts saved yet. Build one above and click "Save This Draft"!</p>';
+                    listDiv.innerHTML = '<p style="color: #888; font-style: italic; font-size: 18px;">No drafts saved yet. Build one above and click "Save This Draft"!</p>';
                     return;
                 }
 
