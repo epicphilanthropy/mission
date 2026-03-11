@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission Statement Builder | Epic Philanthropy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
     
     <!-- FIREBASE LIBRARIES -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -43,9 +43,8 @@
 
         .intro-text { font-size: 18px; font-weight: 300; line-height: 1.6; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .instruction-box { background: var(--off-white); color: var(--epic-ink); padding: 40px; border-radius: 8px; text-align: left; max-width: 500px; margin: 0 auto 40px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .instruction-box p { margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; } /* Increased font size */
+        .instruction-box p { margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; }
         
-        /* Chunker primary buttons */
         .btn-primary { background-color: var(--epic-gold); color: var(--epic-ink); border: none; padding: 18px 45px; font-size: 18px; font-weight: 600; border-radius: 6px; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: opacity 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
         
@@ -59,12 +58,14 @@
         .back-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 15px; display: block; margin-top: 20px; text-align: center; cursor: pointer; }
 
         /* --- WORKSPACE --- */
-        #workspace-view { display: none; width: 100%; max-width: 1200px; margin: 40px auto; background: var(--epic-fog); color: var(--epic-ink); border-radius: 8px; padding: 40px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .session-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; margin-bottom: 30px; }
+        #workspace-view { display: none; width: 100%; max-width: 1200px; margin: 40px auto; background: var(--epic-fog); color: var(--epic-ink); border-radius: 8px; padding: 40px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
+        .session-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; margin-bottom: 20px; }
         .session-header h2 { margin: 0; font-size: 26px; font-weight: 600; }
         .session-header p { margin: 5px 0 0 0; font-size: 15px; color: #555; display: flex; align-items: center; gap: 10px; }
         .role-badge { background: var(--epic-gold); color: var(--epic-ink); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .btn-copy { background: #fff; border: 1px solid #ccc; padding: 6px 12px; border-radius: 4px; font-size: 13px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+        
+        .part-one-helper { font-size: 16px; color: #555; margin-bottom: 30px; font-weight: 400; line-height: 1.5;}
 
         /* --- QUADRANTS --- */
         .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 50px;}
@@ -104,7 +105,6 @@
         /* --- BUILDER AREA --- */
         .builder-section { border-top: 4px solid var(--epic-ink); padding-top: 40px; margin-top: 40px; }
         
-        /* Ultra-literal instructions for older users */
         .step-instructions { background: rgba(255,255,255,0.6); padding: 20px; border-radius: 8px; border-left: 4px solid var(--epic-gold); margin-bottom: 30px; font-size: 16px; color: var(--epic-ink); }
         .step-instructions p { margin: 5px 0; font-weight: 400; }
         .step-instructions strong { font-weight: 600; }
@@ -121,10 +121,8 @@
         #freewrite-box { display: none; width: 100%; height: 250px; padding: 25px; font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 300; line-height: 1.8; border: 2px solid #ddd; border-radius: 8px; resize: vertical; box-sizing: border-box; background: #fff; outline: none; }
         #freewrite-box:focus { border-color: var(--epic-medium-teal); }
 
-        /* Colored Blanks - Made to look distinctly clickable, not type-able */
         .blank { display: inline-block; min-width: 160px; padding: 2px 12px; margin: 0 6px; border-bottom: 4px solid #ccc; background: rgba(0,0,0,0.03); color: #777; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; border-radius: 4px 4px 0 0; }
         
-        /* GRANDMA FIX: Add a gentle breathing animation to the active blank so they know where to look */
         @keyframes breath {
             0% { filter: brightness(1); transform: scale(1); box-shadow: 0 0 0 0 rgba(0,0,0,0); }
             50% { filter: brightness(1.1); transform: scale(1.02); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
@@ -166,38 +164,39 @@
         .btn-save { background: var(--epic-ink); color: var(--white); border: none; padding: 20px 30px; font-size: 18px; font-weight: 600; border-radius: 6px; cursor: pointer; font-family: 'Montserrat', sans-serif; margin-top: 25px; width: 100%; transition: background 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
         .btn-save:hover { background: var(--epic-medium-teal); }
 
-        /* Word Bank Sidebar */
+        /* --- WORD BANK SIDEBAR --- */
         .word-bank-sidebar { position: relative; background: var(--white); border: 1px solid var(--white); border-radius: 8px; padding: 25px; max-height: 700px; overflow-y: auto; box-shadow: 0 8px 25px rgba(0,0,0,0.06); scroll-behavior: smooth; }
         
         .word-bank-section { margin-bottom: 35px; padding: 10px; border-radius: 8px; transition: background-color 0.8s ease; }
         
-        /* GRANDMA FIX: Flash animation for when the sidebar auto-scrolls, to draw the eye */
-        @keyframes highlight-flash {
-            0% { background-color: rgba(222, 173, 47, 0.4); } /* Epic Gold light */
-            100% { background-color: transparent; }
-        }
+        @keyframes highlight-flash { 0% { background-color: rgba(222, 173, 47, 0.4); } 100% { background-color: transparent; } }
         .flash-active { animation: highlight-flash 1.5s ease-out; }
 
         .word-bank-section h4 { margin: 0 0 15px 0; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--light-gray); padding-bottom: 8px; }
         
         .sec-fund h4 { color: var(--c-fund); border-bottom-color: var(--c-fund); }
+        .sec-problem h4 { color: var(--c-problem); border-bottom-color: var(--c-problem); }
+        .sec-belief h4 { color: var(--c-belief); border-bottom-color: var(--c-belief); }
         .sec-focus h4 { color: var(--c-focus); border-bottom-color: var(--c-focus); }
         .sec-action h4 { color: var(--c-action); border-bottom-color: var(--c-action); }
         .sec-impact h4 { color: var(--c-impact); border-bottom-color: var(--c-impact); }
         .sec-how h4 { color: var(--c-how); border-bottom-color: var(--c-how); }
         .sec-where h4 { color: var(--c-where); border-bottom-color: var(--c-where); }
 
-        /* GRANDMA FIX: Chunkier Word Chips (Buttons) */
         .word-chip { display: inline-block; background: var(--white); border: 2px solid #d0d0d0; padding: 10px 16px; border-radius: 25px; font-size: 15px; font-weight: 500; margin: 0 8px 12px 0; cursor: pointer; transition: all 0.2s; color: var(--epic-ink); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         
+        /* The special style for family's ideas pulled from quadrants */
+        .family-chip { border-color: var(--epic-gold); background-color: #fdfaf2; border-width: 2px; font-weight: 600; }
+
         .sec-fund .word-chip:hover { background: var(--c-fund); color: white; border-color: var(--c-fund); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+        .sec-problem .word-chip:hover { background: var(--c-problem); color: white; border-color: var(--c-problem); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
+        .sec-belief .word-chip:hover { background: var(--c-belief); color: white; border-color: var(--c-belief); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
         .sec-focus .word-chip:hover { background: var(--c-focus); color: white; border-color: var(--c-focus); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
         .sec-action .word-chip:hover { background: var(--c-action); color: white; border-color: var(--c-action); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
         .sec-impact .word-chip:hover { background: var(--c-impact); color: white; border-color: var(--c-impact); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
         .sec-how .word-chip:hover { background: var(--c-how); color: var(--epic-ink); border-color: var(--c-how); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
         .sec-where .word-chip:hover { background: var(--c-where); color: white; border-color: var(--c-where); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1);}
 
-        /* Inline "Add Your Own" styling - Made more obvious */
         .custom-chip-container { display: inline-block; margin: 0 8px 12px 0; }
         .custom-chip-input { background: #f9f9f9; border: 2px dashed #bbb; padding: 10px 16px; border-radius: 25px; font-size: 15px; font-family: 'Montserrat', sans-serif; width: 160px; font-style: italic; color: #555; transition: all 0.2s;}
         .custom-chip-input:focus { outline: none; border-style: solid; border-color: var(--epic-ink); background: #fff; font-style: normal; color: var(--epic-ink);}
@@ -218,6 +217,20 @@
         #celebration-view h3 { color: var(--epic-gold); font-size: 20px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; z-index: 2;}
         #final-statement-text { font-size: 48px; font-weight: 300; line-height: 1.6; max-width: 1000px; color: var(--white); font-style: italic; z-index: 2;}
         .confetti-piece { position: absolute; width: 12px; height: 30px; top: -20px; opacity: 0; z-index: 1;}
+
+        /* --- HELP MODAL SYSTEM --- */
+        .help-btn-floating { position: fixed; bottom: 30px; right: 30px; background: var(--epic-gold); color: var(--epic-ink); border: none; padding: 12px 24px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 900; font-family: 'Montserrat', sans-serif; transition: transform 0.2s; display: none; }
+        .help-btn-floating:hover { transform: scale(1.05); }
+
+        #help-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(13, 43, 50, 0.9); z-index: 999; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        .help-content { background: var(--white); color: var(--epic-ink); max-width: 600px; width: 100%; border-radius: 12px; padding: 40px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .help-content h2 { margin-top: 0; color: var(--epic-dark-teal); font-size: 28px; }
+        .help-content h3 { font-size: 18px; color: var(--epic-medium-teal); margin-bottom: 5px; }
+        .help-content p { font-size: 16px; line-height: 1.6; margin-top: 0; margin-bottom: 20px; }
+        .btn-close-help { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888; transition: color 0.2s; }
+        .btn-close-help:hover { color: var(--c-problem); }
+        .btn-close-help-large { background: var(--epic-ink); color: var(--white); border: none; padding: 15px; width: 100%; border-radius: 6px; font-size: 18px; font-weight: 600; cursor: pointer; margin-top: 10px; font-family: 'Montserrat', sans-serif; }
+        .btn-close-help-large:hover { background: var(--epic-medium-teal); }
         
     </style>
 </head>
@@ -290,6 +303,10 @@
                 <p style="margin-top: 8px;">Logged in as: <span id="display-name" style="font-weight: 600;">---</span></p>
             </div>
         </div>
+        
+        <div class="part-one-helper">
+            Type a short idea in any box below and click <strong>Add</strong>. Don't overthink it—these will become your word bank later!
+        </div>
 
         <div class="quadrant-grid">
             <div class="quadrant-card quad-problem">
@@ -333,10 +350,9 @@
         <div class="builder-section">
             <h2>Part 2: Build It Together</h2>
             
-            <!-- GRANDMA FIX: Ultra clear, numbered instructions -->
             <div class="step-instructions">
                 <p><strong>Step 1:</strong> Look at the large white box below. The actively highlighted blank is waiting for you.</p>
-                <p><strong>Step 2:</strong> Click a physical button from the Word Banks (or your ideas above) to fill it in.</p>
+                <p><strong>Step 2:</strong> Click a physical button from the Word Banks to fill it in. <em>(Your ideas from Part 1 are waiting for you at the top of the lists!)</em></p>
                 <p style="font-size: 14px; margin-top: 10px; color: #555;"><em>(Change your mind? Just click a different word to replace it!)</em></p>
             </div>
             
@@ -382,22 +398,21 @@
                         </div>
                     </div>
 
-                    <div class="word-bank-section sec-focus" id="section-who">
-                        <h4 id="bank-who-header">Who You Serve</h4>
-                        <div id="bank-who">
-                            <span class="word-chip" onclick="insertWord(this)">Children & youth</span>
-                            <span class="word-chip" onclick="insertWord(this)">Families</span>
-                            <span class="word-chip" onclick="insertWord(this)">Women & girls</span>
-                            <span class="word-chip" onclick="insertWord(this)">BIPOC communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">Immigrants</span>
-                            <span class="word-chip" onclick="insertWord(this)">Veterans</span>
-                            <span class="word-chip" onclick="insertWord(this)">People in recovery</span>
-                            <span class="word-chip" onclick="insertWord(this)">LGBTQ+ communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">Future generations</span>
-                            <span class="word-chip" onclick="insertWord(this)">Seniors</span>
-                            <span class="word-chip" onclick="insertWord(this)">Rural communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">People with disabilities</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-who', this)"></div>
+                    <!-- NEW: THE PROBLEM BANK -->
+                    <div class="word-bank-section sec-problem" id="section-problem">
+                        <h4 id="bank-problem-header">The Problem</h4>
+                        <div id="dynamic-bank-q1"></div>
+                        <div id="bank-problem">
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-problem', this)"></div>
+                        </div>
+                    </div>
+
+                    <!-- NEW: BELIEF / WHY BANK -->
+                    <div class="word-bank-section sec-belief" id="section-belief">
+                        <h4 id="bank-belief-header">Your Why / Belief</h4>
+                        <div id="dynamic-bank-q2"></div>
+                        <div id="bank-belief">
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-belief', this)"></div>
                         </div>
                     </div>
 
@@ -428,8 +443,29 @@
                         </div>
                     </div>
 
+                    <div class="word-bank-section sec-focus" id="section-who">
+                        <h4 id="bank-who-header">Who You Serve</h4>
+                        <div id="dynamic-bank-q4"></div>
+                        <div id="bank-who">
+                            <span class="word-chip" onclick="insertWord(this)">Children & youth</span>
+                            <span class="word-chip" onclick="insertWord(this)">Families</span>
+                            <span class="word-chip" onclick="insertWord(this)">Women & girls</span>
+                            <span class="word-chip" onclick="insertWord(this)">BIPOC communities</span>
+                            <span class="word-chip" onclick="insertWord(this)">Immigrants</span>
+                            <span class="word-chip" onclick="insertWord(this)">Veterans</span>
+                            <span class="word-chip" onclick="insertWord(this)">People in recovery</span>
+                            <span class="word-chip" onclick="insertWord(this)">LGBTQ+ communities</span>
+                            <span class="word-chip" onclick="insertWord(this)">Future generations</span>
+                            <span class="word-chip" onclick="insertWord(this)">Seniors</span>
+                            <span class="word-chip" onclick="insertWord(this)">Rural communities</span>
+                            <span class="word-chip" onclick="insertWord(this)">People with disabilities</span>
+                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-who', this)"></div>
+                        </div>
+                    </div>
+
                     <div class="word-bank-section sec-impact" id="section-impact">
                         <h4 id="bank-impact-header">Impact & Change Words</h4>
+                        <div id="dynamic-bank-q3"></div>
                         <div id="bank-impact">
                             <span class="word-chip" onclick="insertWord(this)">Systemic change</span>
                             <span class="word-chip" onclick="insertWord(this)">Equity and access</span>
@@ -483,6 +519,27 @@
         </div>
     </div>
 
+    <!-- HELP MODAL OVERLAY -->
+    <button class="help-btn-floating" id="help-btn" onclick="openHelp()">❓ Need Help?</button>
+    
+    <div id="help-modal">
+        <div class="help-content">
+            <button class="btn-close-help" onclick="closeHelp()">✖</button>
+            <h2>How to use this tool</h2>
+            
+            <h3>Part 1: Brain Dump</h3>
+            <p>Don't worry about writing a perfect sentence yet. Just type your raw thoughts into the four colored boxes (The Problem, Your Why, Impact, Who You Serve) and click <strong>Add</strong>. Everyone in your family can see what you write in real time.</p>
+            
+            <h3>Part 2: Build It Together</h3>
+            <p>Pick a template style. You will see a sentence with empty blanks. The active blank will lightly pulse to let you know it's ready. Just <strong>click a word</strong> from the Word Banks on the right to instantly fill the blank. Then, click "Save This Draft."</p>
+            
+            <h3>Part 3: Compare</h3>
+            <p>Any draft anyone saves will show up here. Your facilitator will read them out loud, and together you will pick the final winner!</p>
+            
+            <button class="btn-close-help-large" onclick="closeHelp()">Got it, let's go! →</button>
+        </div>
+    </div>
+
     <!-- CELEBRATION VIEW -->
     <div id="celebration-view">
         <h3 id="celeb-family-name">👑 The Final Mission Statement 👑</h3>
@@ -513,7 +570,10 @@
             q4: `<div class="empty-state"><strong>Examples:</strong>- First-generation students<br>- Local environmental groups<br>- Single mothers<br>- Marginalized neighborhoods<br>- Small-scale farmers</div>`
         };
 
-        // --- 2. UI NAVIGATION ---
+        // --- 2. UI NAVIGATION & HELP ---
+        function openHelp() { document.getElementById('help-modal').style.display = 'flex'; }
+        function closeHelp() { document.getElementById('help-modal').style.display = 'none'; }
+
         function showForm(formId) {
             document.getElementById('landing-view').style.display = 'none';
             document.getElementById('participant-form').style.display = 'none';
@@ -541,6 +601,7 @@
             
             document.body.style.backgroundColor = 'var(--epic-dark-teal)'; 
             document.getElementById('workspace-view').style.display = 'block';
+            document.getElementById('help-btn').style.display = 'block'; 
             
             document.getElementById('display-session-code').innerText = mySession;
             document.getElementById('display-name').innerText = myName;
@@ -633,7 +694,6 @@
                     draftArea.innerHTML = `Because <span class="blank blank-belief focused" onclick="focusBlank(this)">[ your why ]</span>, the <span class="blank blank-fund" onclick="focusBlank(this)">[ Fund / Family Name ]</span> <span class="blank blank-action" onclick="focusBlank(this)">[ action word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ who you serve ]</span> in <span class="blank blank-where" onclick="focusBlank(this)">[ where you give ]</span>. Our focus is <span class="blank blank-impact" onclick="focusBlank(this)">[ impact & change ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ how you work ]</span>.`;
                 }
                 
-                // Set initial focus and scroll to it
                 const firstBlank = draftArea.querySelector('.blank.focused');
                 if (firstBlank) focusBlank(firstBlank);
             }
@@ -645,9 +705,10 @@
             element.classList.add('focused');
             currentFocusedBlank = element;
 
-            // Mapping blank types to the wrapper sections
             let targetSectionId = null;
             if (element.classList.contains('blank-fund')) targetSectionId = 'section-fund';
+            else if (element.classList.contains('blank-problem')) targetSectionId = 'section-problem';
+            else if (element.classList.contains('blank-belief')) targetSectionId = 'section-belief';
             else if (element.classList.contains('blank-focus')) targetSectionId = 'section-who';
             else if (element.classList.contains('blank-action')) targetSectionId = 'section-action';
             else if (element.classList.contains('blank-impact')) targetSectionId = 'section-impact';
@@ -659,19 +720,9 @@
                 const sidebar = document.getElementById('word-sidebar');
                 
                 if (targetSection && sidebar) {
-                    // Scroll it into view
-                    sidebar.scrollTo({
-                        top: targetSection.offsetTop - 20, 
-                        behavior: 'smooth'
-                    });
-
-                    // Remove previous flashes
+                    sidebar.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
                     document.querySelectorAll('.word-bank-section').forEach(sec => sec.classList.remove('flash-active'));
-                    
-                    // Add the flash animation to draw their eye
-                    setTimeout(() => {
-                        targetSection.classList.add('flash-active');
-                    }, 300); // Slight delay so it flashes exactly when the scroll finishes
+                    setTimeout(() => { targetSection.classList.add('flash-active'); }, 300); 
                 }
             }
         }
@@ -704,9 +755,7 @@
                 bank.insertBefore(chip, inputElem.parentNode);
                 inputElem.value = '';
 
-                if (currentFocusedBlank && !isFreestyle) {
-                    insertWord(chip);
-                }
+                if (currentFocusedBlank && !isFreestyle) { insertWord(chip); }
             }
         }
 
@@ -715,12 +764,8 @@
             const allBlanks = Array.from(document.querySelectorAll('.blank'));
             const currentIndex = allBlanks.indexOf(currentFocusedBlank);
             
-            if (currentIndex >= 0 && currentIndex < allBlanks.length - 1) {
-                focusBlank(allBlanks[currentIndex + 1]);
-            } else {
-                currentFocusedBlank.classList.remove('focused');
-                currentFocusedBlank = null;
-            }
+            if (currentIndex >= 0 && currentIndex < allBlanks.length - 1) { focusBlank(allBlanks[currentIndex + 1]); } 
+            else { currentFocusedBlank.classList.remove('focused'); currentFocusedBlank = null; }
         }
 
         // --- 5. SAVING & FIREBASE LISTENERS ---
@@ -780,21 +825,37 @@
 
         function startFirebaseListeners() {
             const mapClass = { 'q1': 'item-problem', 'q2': 'item-belief', 'q3': 'item-impact', 'q4': 'item-focus' };
+            const dynamicBankMapping = { 'q1': 'dynamic-bank-q1', 'q2': 'dynamic-bank-q2', 'q3': 'dynamic-bank-q3', 'q4': 'dynamic-bank-q4' };
+            
             db.ref(`sessions/${mySession}/ideas`).on('value', (snapshot) => {
                 const allData = snapshot.val() || {};
+                
                 ['q1', 'q2', 'q3', 'q4'].forEach(quadId => {
                     const listDiv = document.getElementById('list-' + quadId);
+                    const dynamicBankDiv = document.getElementById(dynamicBankMapping[quadId]);
                     const quadData = allData[quadId] || {};
                     
+                    // Clear both the quadrant list and the dynamic word bank section
                     listDiv.innerHTML = ''; 
+                    if(dynamicBankDiv) dynamicBankDiv.innerHTML = '';
                     
                     if (Object.keys(quadData).length > 0) {
                         Object.values(quadData).forEach(idea => {
+                            // 1. Add to the Quadrant (Part 1)
                             const div = document.createElement('div');
                             div.className = `idea-item ${mapClass[quadId]}`;
                             div.onclick = function() { insertWordFromQuad(idea.text); };
                             div.innerHTML = `<span>${idea.text}</span><span class="idea-author">${idea.author}</span>`;
                             listDiv.appendChild(div);
+
+                            // 2. Add to the corresponding Word Bank (Part 2)
+                            if (dynamicBankDiv) {
+                                const chip = document.createElement('span');
+                                chip.className = 'word-chip family-chip'; // family-chip applies the custom gold styling
+                                chip.innerText = idea.text;
+                                chip.onclick = function() { insertWord(this); };
+                                dynamicBankDiv.appendChild(chip);
+                            }
                         });
                     }
 
@@ -843,6 +904,7 @@
                 const finalData = snapshot.val();
                 if (finalData && finalData.text) {
                     document.getElementById('workspace-view').style.display = 'none';
+                    document.getElementById('help-btn').style.display = 'none'; 
                     document.getElementById('celebration-view').style.display = 'flex';
                     document.getElementById('final-statement-text').innerText = `"${finalData.text}"`;
                     fireConfetti();
