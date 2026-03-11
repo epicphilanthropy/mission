@@ -12,17 +12,27 @@
 
     <style>
         :root {
-            --epic-bg: #528b99;
-            --epic-gold: #e2b74a; 
+            /* EPIC BRAND COLORS (From Image) */
+            --epic-dark-teal: #1e5563;
+            --epic-medium-teal: #4f8284;
+            --epic-gold: #dead2f; 
             --epic-ink: #0d2b32;
+            --epic-fog: #d7e0e6;
+            
             --white: #ffffff;
             --off-white: #f5f5f5;
             --light-gray: #e0e0e0;
-            --dark-gray: #333333;
-            --workspace-bg: #d7e0e6; /* NEW BACKGROUND COLOR */
+
+            /* WORKSHOP 6-COLOR PALETTE (Mapped from Brand Services) */
+            --c-problem: #904237; /* Nonprofits (Rust) */
+            --c-belief: #4f8284;  /* Medium Teal */
+            --c-impact: #5b7666;  /* Family Foundations (Sage) */
+            --c-focus: #457093;   /* Individuals & Families (Blue) */
+            --c-action: #1b3a5c;  /* Financial Advisors (Navy) */
+            --c-how: #dead2f;     /* Golden Yellow */
         }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--epic-bg); color: var(--white); margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--epic-dark-teal); color: var(--white); margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .container { max-width: 800px; width: 90%; margin: 80px auto; text-align: center; }
         .eyebrow { color: var(--epic-gold); font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
         
@@ -32,9 +42,8 @@
         .intro-text { font-size: 18px; font-weight: 300; line-height: 1.6; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; }
         .instruction-box { background: var(--off-white); color: var(--epic-ink); padding: 40px; border-radius: 8px; text-align: left; max-width: 500px; margin: 0 auto 40px auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .instruction-box p { margin: 0 0 20px 0; font-size: 15px; line-height: 1.6; }
-        .instruction-box p:last-child { margin-bottom: 0; }
         
-        .btn-primary { background-color: var(--epic-gold); color: var(--white); border: none; padding: 16px 40px; font-size: 18px; font-weight: 600; border-radius: 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: opacity 0.3s ease; }
+        .btn-primary { background-color: var(--epic-gold); color: var(--epic-ink); border: none; padding: 16px 40px; font-size: 18px; font-weight: 600; border-radius: 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: opacity 0.3s ease; }
         .btn-primary:hover { opacity: 0.9; }
         
         .facilitator-link { display: block; margin-top: 20px; color: var(--epic-gold); font-size: 14px; text-decoration: underline; font-weight: 300; cursor: pointer; background: none; border: none; font-family: 'Montserrat', sans-serif; text-align: center; width: 100%; }
@@ -47,26 +56,52 @@
         .back-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; display: block; margin-top: 20px; text-align: center; cursor: pointer; }
 
         /* --- WORKSPACE --- */
-        #workspace-view { display: none; width: 100%; max-width: 1200px; margin: 40px auto; background: var(--workspace-bg); color: var(--epic-ink); border-radius: 8px; padding: 40px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        #workspace-view { display: none; width: 100%; max-width: 1200px; margin: 40px auto; background: var(--epic-fog); color: var(--epic-ink); border-radius: 8px; padding: 40px; box-sizing: border-box; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .session-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; margin-bottom: 30px; }
         .session-header h2 { margin: 0; font-size: 24px; font-weight: 600; }
         .session-header p { margin: 5px 0 0 0; font-size: 14px; color: #555; display: flex; align-items: center; gap: 10px; }
-        .role-badge { background: var(--epic-gold); color: var(--white); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .role-badge { background: var(--epic-gold); color: var(--epic-ink); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .btn-copy { background: #fff; border: 1px solid #ccc; padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; font-family: 'Montserrat', sans-serif;}
-        .btn-copy:hover { background: #f0f0f0; }
 
-        /* --- QUADRANTS --- */
+        /* --- QUADRANTS & COLOR CODING --- */
         .quadrant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px;}
         @media (max-width: 768px) { .quadrant-grid { grid-template-columns: 1fr; } }
-        .quadrant-card { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; }
-        .quadrant-card h3 { margin: 0 0 15px 0; font-size: 16px; font-weight: 600; color: var(--epic-ink); }
+        
+        .quadrant-card { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; border-top-width: 6px; }
+        .quadrant-card h3 { margin: 0 0 15px 0; font-size: 16px; font-weight: 600; }
+        
+        /* Quadrant Top Borders */
+        .quad-problem { border-top-color: var(--c-problem); }
+        .quad-problem h3 { color: var(--c-problem); }
+        
+        .quad-belief { border-top-color: var(--c-belief); }
+        .quad-belief h3 { color: var(--c-belief); }
+        
+        .quad-impact { border-top-color: var(--c-impact); }
+        .quad-impact h3 { color: var(--c-impact); }
+        
+        .quad-focus { border-top-color: var(--c-focus); }
+        .quad-focus h3 { color: var(--c-focus); }
+
         .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
         .input-row input { flex: 1; padding: 10px; border: 1px solid var(--light-gray); border-radius: 4px; font-family: 'Montserrat', sans-serif; }
-        .btn-add { background: var(--epic-ink); color: var(--white); border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; }
+        .btn-add { color: var(--white); border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; font-weight: 600; font-family: 'Montserrat', sans-serif; }
+        
         .ideas-list { flex: 1; background: var(--off-white); border-radius: 4px; padding: 15px; min-height: 100px; max-height: 200px; overflow-y: auto; }
-        .idea-item { background: var(--white); padding: 10px; border-radius: 4px; margin-bottom: 8px; font-size: 14px; border-left: 3px solid var(--epic-gold); display: flex; justify-content: space-between; cursor: pointer;}
+        
+        .idea-item { background: var(--white); padding: 10px; border-radius: 4px; margin-bottom: 8px; font-size: 14px; display: flex; justify-content: space-between; cursor: pointer; border-left: 4px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
         .idea-item:hover { background: #f0f0f0; }
         .idea-author { font-size: 11px; color: #888; margin-left: 10px; }
+        
+        /* Idea item borders matching colors */
+        .item-problem { border-left-color: var(--c-problem); }
+        .item-belief { border-left-color: var(--c-belief); }
+        .item-impact { border-left-color: var(--c-impact); }
+        .item-focus { border-left-color: var(--c-focus); }
+
+        /* Empty State Styling */
+        .empty-state { color: #a0a0a0; font-style: italic; font-size: 14px; font-weight: 300; line-height: 1.6; padding: 5px; }
+        .empty-state strong { font-weight: 600; font-style: normal; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #b0b0b0; display: block; margin-bottom: 5px; }
 
         /* --- BUILDER AREA --- */
         .builder-section { border-top: 4px solid var(--epic-ink); padding-top: 40px; margin-top: 40px; }
@@ -75,40 +110,77 @@
 
         .template-selector { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
         .template-btn { flex: 1; min-width: 200px; padding: 15px; border: 2px solid var(--white); background: var(--white); border-radius: 8px; cursor: pointer; text-align: left; font-family: 'Montserrat', sans-serif; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .template-btn.active { border-color: var(--epic-gold); background: rgba(226, 183, 74, 0.1); }
+        .template-btn.active { border-color: var(--epic-gold); background: rgba(222, 173, 47, 0.1); }
         .template-btn h4 { margin: 0 0 5px 0; color: var(--epic-ink); font-size: 16px; }
-        .template-btn p { margin: 0; font-size: 12px; color: #666; }
 
-        .draft-area { background: var(--white); padding: 40px; border-radius: 8px; border: 1px solid var(--white); font-size: 24px; line-height: 2; font-weight: 300; color: var(--dark-gray); box-shadow: 0 5px 15px rgba(0,0,0,0.05); min-height: 200px;}
-        
-        /* Free Write Textarea */
+        .draft-area { background: var(--white); padding: 40px; border-radius: 8px; border: 1px solid var(--white); font-size: 24px; line-height: 2; font-weight: 300; color: var(--epic-ink); box-shadow: 0 5px 15px rgba(0,0,0,0.05); min-height: 200px;}
         #freewrite-box { display: none; width: 100%; height: 200px; padding: 20px; font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 300; line-height: 1.8; border: none; resize: vertical; box-sizing: border-box; background: transparent; outline: none; }
         
-        .blank { display: inline-block; min-width: 150px; padding: 0 10px; margin: 0 5px; border-bottom: 2px solid #ccc; background: rgba(0,0,0,0.03); color: #888; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; }
-        .blank.focused { background: var(--epic-gold); color: var(--white); border-bottom-color: var(--epic-gold); }
-        .blank.filled { color: var(--epic-ink); }
+        /* Colored Blanks */
+        .blank { display: inline-block; min-width: 150px; padding: 0 10px; margin: 0 5px; border-bottom: 3px solid #ccc; background: rgba(0,0,0,0.02); color: #888; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s; }
+        
+        .blank-problem { border-bottom-color: var(--c-problem); }
+        .blank-problem.focused, .blank-problem.filled { background: var(--c-problem); color: var(--white); }
+        
+        .blank-belief { border-bottom-color: var(--c-belief); }
+        .blank-belief.focused, .blank-belief.filled { background: var(--c-belief); color: var(--white); }
+        
+        .blank-impact { border-bottom-color: var(--c-impact); }
+        .blank-impact.focused, .blank-impact.filled { background: var(--c-impact); color: var(--white); }
+        
+        .blank-focus { border-bottom-color: var(--c-focus); }
+        .blank-focus.focused, .blank-focus.filled { background: var(--c-focus); color: var(--white); }
+        
+        .blank-action { border-bottom-color: var(--c-action); }
+        .blank-action.focused, .blank-action.filled { background: var(--c-action); color: var(--white); }
+        
+        .blank-how { border-bottom-color: var(--c-how); }
+        .blank-how.focused, .blank-how.filled { background: var(--c-how); color: var(--epic-ink); } /* Gold needs dark text */
 
         .btn-save { background: var(--epic-ink); color: var(--white); border: none; padding: 15px 30px; font-size: 16px; font-weight: 600; border-radius: 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; margin-top: 20px; width: 100%; transition: background 0.2s; }
-        .btn-save:hover { background: var(--epic-gold); }
+        .btn-save:hover { background: var(--epic-medium-teal); }
 
+        /* Word Bank Sidebar Colors */
         .word-bank-sidebar { background: var(--white); border: 1px solid var(--white); border-radius: 8px; padding: 20px; max-height: 700px; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .word-bank-section { margin-bottom: 25px; }
-        .word-bank-section h4 { margin: 0 0 10px 0; font-size: 14px; color: var(--epic-ink); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--light-gray); padding-bottom: 5px; }
-        .word-chip { display: inline-block; background: var(--off-white); border: 1px solid #ccc; padding: 6px 12px; border-radius: 20px; font-size: 13px; margin: 0 5px 8px 0; cursor: pointer; transition: all 0.2s; }
-        .word-chip:hover { background: var(--epic-bg); color: var(--white); border-color: var(--epic-bg); }
+        .word-bank-section h4 { margin: 0 0 10px 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid var(--light-gray); padding-bottom: 5px; }
+        
+        /* Section Headers matched to colors */
+        .sec-focus h4 { color: var(--c-focus); border-bottom-color: var(--c-focus); }
+        .sec-action h4 { color: var(--c-action); border-bottom-color: var(--c-action); }
+        .sec-belief h4 { color: var(--c-belief); border-bottom-color: var(--c-belief); }
+        .sec-impact h4 { color: var(--c-impact); border-bottom-color: var(--c-impact); }
+        .sec-how h4 { color: var(--c-how); border-bottom-color: var(--c-how); }
+
+        .word-chip { display: inline-block; background: var(--off-white); border: 1px solid #ccc; padding: 6px 12px; border-radius: 20px; font-size: 13px; margin: 0 5px 8px 0; cursor: pointer; transition: all 0.2s; color: var(--epic-ink); }
+        
+        /* Chip hover states mapped to colors */
+        .sec-focus .word-chip:hover { background: var(--c-focus); color: white; border-color: var(--c-focus); }
+        .sec-action .word-chip:hover { background: var(--c-action); color: white; border-color: var(--c-action); }
+        .sec-belief .word-chip:hover { background: var(--c-belief); color: white; border-color: var(--c-belief); }
+        .sec-impact .word-chip:hover { background: var(--c-impact); color: white; border-color: var(--c-impact); }
+        .sec-how .word-chip:hover { background: var(--c-how); color: var(--epic-ink); border-color: var(--c-how); }
 
         .custom-word-input { display: flex; gap: 5px; margin-bottom: 20px; }
         .custom-word-input input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif;}
         .custom-word-input button { background: var(--epic-ink); color: white; border: none; border-radius: 4px; padding: 0 10px; cursor: pointer; }
-        .error-msg { color: #ffcccc; font-size: 14px; margin-top: -15px; margin-bottom: 15px; display: none; }
 
         /* --- PART 3: DRAFTS GALLERY --- */
         .drafts-section { border-top: 4px solid var(--epic-gold); padding-top: 40px; margin-top: 40px; }
         .draft-card { background: var(--white); padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; }
         .draft-card p { margin: 0; font-size: 20px; line-height: 1.8; font-weight: 300; }
         .draft-meta { font-size: 12px; color: #888; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-        .btn-delete { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 14px; text-decoration: underline; font-family: 'Montserrat', sans-serif;}
+        .draft-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 15px; }
+        .btn-delete { background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 13px; text-decoration: underline; font-family: 'Montserrat', sans-serif;}
+        .btn-final { background: var(--epic-gold); color: var(--epic-ink); border: none; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
+        .btn-final:hover { opacity: 0.9; }
 
+        /* --- CELEBRATION OVERLAY --- */
+        #celebration-view { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--epic-dark-teal); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px; box-sizing: border-box; overflow: hidden;}
+        #celebration-view h3 { color: var(--epic-gold); font-size: 18px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px; z-index: 2;}
+        #final-statement-text { font-size: 42px; font-weight: 300; line-height: 1.6; max-width: 900px; color: var(--white); font-style: italic; z-index: 2;}
+        .confetti-piece { position: absolute; width: 10px; height: 25px; top: -20px; opacity: 0; z-index: 1;}
+        
     </style>
 </head>
 <body>
@@ -132,7 +204,7 @@
     <!-- PARTICIPANT FORM -->
     <div class="container form-container" id="participant-form">
         <div class="eyebrow" style="text-align: center;">Join Session</div>
-        <div id="part-error" class="error-msg">Please enter a valid code and your name.</div>
+        <div id="part-error" class="error-msg" style="display:none; color: #ffcccc; margin-bottom: 15px;">Please enter a valid code.</div>
         <div class="form-group">
             <label>Session Code</label>
             <input type="text" id="part-session" placeholder="e.g., COBB-2026" style="text-transform: uppercase;">
@@ -148,7 +220,7 @@
     <!-- FACILITATOR FORM -->
     <div class="container form-container" id="facilitator-form">
         <div class="eyebrow" style="text-align: center;">Create Session</div>
-        <div id="fac-error" class="error-msg">Incorrect password or missing details.</div>
+        <div id="fac-error" class="error-msg" style="display:none; color: #ffcccc; margin-bottom: 15px;">Incorrect password or details.</div>
         <div class="form-group">
             <label>Facilitator Password</label>
             <input type="password" id="fac-pass" placeholder="Enter password">
@@ -180,39 +252,44 @@
                 <p style="margin-top: 8px;">Logged in as: <span id="display-name" style="font-weight: 600;">---</span></p>
             </div>
         </div>
-        
-        <p style="margin-bottom: 30px;">Don't edit yourself. Drop raw ideas into each quadrant. Everything you add carries over as the group's shared word bank.</p>
 
         <div class="quadrant-grid">
-            <div class="quadrant-card">
+            <!-- Q1: Problem (Rust) -->
+            <div class="quadrant-card quad-problem">
                 <h3>😟 What problem keeps you up at night?</h3>
                 <div class="input-row">
-                    <input type="text" id="input-q1" placeholder="e.g. Food insecurity" onkeypress="handleEnter(event, 'q1')">
-                    <button class="btn-add" onclick="addIdea('q1')">Add</button>
+                    <input type="text" id="input-q1" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q1')">
+                    <button class="btn-add" style="background: var(--c-problem);" onclick="addIdea('q1')">Add</button>
                 </div>
                 <div class="ideas-list" id="list-q1"></div>
             </div>
-            <div class="quadrant-card">
+            
+            <!-- Q2: Belief/Why (Teal) -->
+            <div class="quadrant-card quad-belief">
                 <h3>💙 Why do you care about this?</h3>
                 <div class="input-row">
-                    <input type="text" id="input-q2" placeholder="e.g. Everyone deserves a chance" onkeypress="handleEnter(event, 'q2')">
-                    <button class="btn-add" onclick="addIdea('q2')">Add</button>
+                    <input type="text" id="input-q2" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q2')">
+                    <button class="btn-add" style="background: var(--c-belief);" onclick="addIdea('q2')">Add</button>
                 </div>
                 <div class="ideas-list" id="list-q2"></div>
             </div>
-            <div class="quadrant-card">
-                <h3>📊 How will you know it's working?</h3>
+            
+            <!-- Q3: Impact (Sage) -->
+            <div class="quadrant-card quad-impact">
+                <h3>📊 What does success look like?</h3>
                 <div class="input-row">
-                    <input type="text" id="input-q3" placeholder="e.g. Higher graduation rates" onkeypress="handleEnter(event, 'q3')">
-                    <button class="btn-add" onclick="addIdea('q3')">Add</button>
+                    <input type="text" id="input-q3" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q3')">
+                    <button class="btn-add" style="background: var(--c-impact);" onclick="addIdea('q3')">Add</button>
                 </div>
                 <div class="ideas-list" id="list-q3"></div>
             </div>
-            <div class="quadrant-card">
-                <h3>🌱 What do you want to be remembered for?</h3>
+            
+            <!-- Q4: Focus / Who (Steel Blue) -->
+            <div class="quadrant-card quad-focus">
+                <h3>🎯 Who or what are you helping?</h3>
                 <div class="input-row">
-                    <input type="text" id="input-q4" placeholder="e.g. Lasting systemic change" onkeypress="handleEnter(event, 'q4')">
-                    <button class="btn-add" onclick="addIdea('q4')">Add</button>
+                    <input type="text" id="input-q4" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q4')">
+                    <button class="btn-add" style="background: var(--c-focus);" onclick="addIdea('q4')">Add</button>
                 </div>
                 <div class="ideas-list" id="list-q4"></div>
             </div>
@@ -221,33 +298,30 @@
         <!-- PART 2 BUILDER SECTION -->
         <div class="builder-section">
             <h2>Part 2: Build It Together</h2>
-            <p style="margin-bottom: 30px; color: #666;">Choose a template. Click a blank to focus it, then click an idea from the word banks to fill it in.</p>
+            <p style="margin-bottom: 30px; color: #666;">Match the colors! Click a blank to focus it, then click an idea from the word banks below to fill it in.</p>
             
             <div class="template-selector">
                 <div class="template-btn active" onclick="setTemplate('problem')">
                     <h4>Problem Focused</h4>
-                    <p>Lead with what's broken.</p>
+                    <p style="margin:0; font-size:12px; color:#666;">Lead with what's broken.</p>
                 </div>
                 <div class="template-btn" onclick="setTemplate('action')">
                     <h4>Action Focused</h4>
-                    <p>Lead with who you serve.</p>
+                    <p style="margin:0; font-size:12px; color:#666;">Lead with who you serve.</p>
                 </div>
                 <div class="template-btn" onclick="setTemplate('value')">
                     <h4>Value Focused</h4>
-                    <p>Lead with what you believe.</p>
+                    <p style="margin:0; font-size:12px; color:#666;">Lead with what you believe.</p>
                 </div>
                 <div class="template-btn" onclick="setTemplate('freestyle')">
                     <h4>✏️ Write Freely</h4>
-                    <p>Ignore the templates, just type.</p>
+                    <p style="margin:0; font-size:12px; color:#666;">Ignore the templates, just type.</p>
                 </div>
             </div>
 
             <div class="builder-layout">
-                <!-- Draft Area -->
                 <div>
-                    <div class="draft-area" id="draft-display">
-                        We exist to <span class="blank focused" onclick="focusBlank(this)">[ Action Word ]</span> the <span class="blank" onclick="focusBlank(this)">[ Problem ]</span> through <span class="blank" onclick="focusBlank(this)">[ How You Work ]</span> so that <span class="blank" onclick="focusBlank(this)">[ Impact ]</span>.
-                    </div>
+                    <div class="draft-area" id="draft-display"></div>
                     <textarea id="freewrite-box" placeholder="Type your family's mission statement here..."></textarea>
                     
                     <button class="btn-save" onclick="saveDraft()">💾 Save This Draft</button>
@@ -260,108 +334,59 @@
                         <button onclick="insertCustomWord()">Use</button>
                     </div>
 
-                    <div class="word-bank-section">
+                    <div class="word-bank-section sec-focus">
                         <h4>Who You Serve</h4>
                         <div id="bank-who">
                             <span class="word-chip" onclick="insertWord(this)">Children & youth</span>
                             <span class="word-chip" onclick="insertWord(this)">Families</span>
-                            <span class="word-chip" onclick="insertWord(this)">Women & girls</span>
                             <span class="word-chip" onclick="insertWord(this)">BIPOC communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">Students</span>
-                            <span class="word-chip" onclick="insertWord(this)">Immigrants</span>
-                            <span class="word-chip" onclick="insertWord(this)">Veterans</span>
-                            <span class="word-chip" onclick="insertWord(this)">People in recovery</span>
-                            <span class="word-chip" onclick="insertWord(this)">LGBTQ+ communities</span>
                             <span class="word-chip" onclick="insertWord(this)">Future generations</span>
                             <span class="word-chip" onclick="insertWord(this)">Marginalized communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">Seniors</span>
-                            <span class="word-chip" onclick="insertWord(this)">Rural communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">People with disabilities</span>
                         </div>
                     </div>
 
-                    <div class="word-bank-section">
+                    <div class="word-bank-section sec-action">
                         <h4>Action Words</h4>
                         <div id="bank-action">
                             <span class="word-chip" onclick="insertWord(this)">Supports</span>
-                            <span class="word-chip" onclick="insertWord(this)">Champions</span>
                             <span class="word-chip" onclick="insertWord(this)">Invests in</span>
                             <span class="word-chip" onclick="insertWord(this)">Empowers</span>
-                            <span class="word-chip" onclick="insertWord(this)">Advances</span>
                             <span class="word-chip" onclick="insertWord(this)">Builds</span>
-                            <span class="word-chip" onclick="insertWord(this)">Creates</span>
-                            <span class="word-chip" onclick="insertWord(this)">Drives</span>
                             <span class="word-chip" onclick="insertWord(this)">Advocates for</span>
-                            <span class="word-chip" onclick="insertWord(this)">Strengthens</span>
-                            <span class="word-chip" onclick="insertWord(this)">Protects</span>
-                            <span class="word-chip" onclick="insertWord(this)">Nurtures</span>
-                            <span class="word-chip" onclick="insertWord(this)">Amplifies</span>
-                            <span class="word-chip" onclick="insertWord(this)">Cultivates</span>
                             <span class="word-chip" onclick="insertWord(this)">Transforms</span>
-                            <span class="word-chip" onclick="insertWord(this)">Mobilizes</span>
-                            <span class="word-chip" onclick="insertWord(this)">Elevates</span>
-                            <span class="word-chip" onclick="insertWord(this)">Fuels</span>
                             <span class="word-chip" onclick="insertWord(this)">Catalyzes</span>
-                            <span class="word-chip" onclick="insertWord(this)">Unlocks</span>
-                            <span class="word-chip" onclick="insertWord(this)">Centers</span>
-                            <span class="word-chip" onclick="insertWord(this)">Uplifts</span>
-                            <span class="word-chip" onclick="insertWord(this)">Fosters</span>
                             <span class="word-chip" onclick="insertWord(this)">Partners with</span>
-                            <span class="word-chip" onclick="insertWord(this)">Equips</span>
-                            <span class="word-chip" onclick="insertWord(this)">Prioritizes</span>
-                            <span class="word-chip" onclick="insertWord(this)">Expands access for</span>
                         </div>
                     </div>
 
-                    <div class="word-bank-section">
+                    <div class="word-bank-section sec-belief">
                         <h4>Belief Starters</h4>
                         <div id="bank-belief">
                             <span class="word-chip" onclick="insertWord(this)">Everyone deserves...</span>
                             <span class="word-chip" onclick="insertWord(this)">Change happens when...</span>
-                            <span class="word-chip" onclick="insertWord(this)">No one should have to...</span>
                             <span class="word-chip" onclick="insertWord(this)">Justice demands...</span>
-                            <span class="word-chip" onclick="insertWord(this)">True impact requires...</span>
                             <span class="word-chip" onclick="insertWord(this)">Communities thrive when...</span>
-                            <span class="word-chip" onclick="insertWord(this)">People have the right to...</span>
-                            <span class="word-chip" onclick="insertWord(this)">Real progress means...</span>
-                            <span class="word-chip" onclick="insertWord(this)">Healing begins when...</span>
-                            <span class="word-chip" onclick="insertWord(this)">Opportunity shouldn't depend on...</span>
-                            <span class="word-chip" onclick="insertWord(this)">Lasting change requires...</span>
                         </div>
                     </div>
 
-                    <div class="word-bank-section">
+                    <div class="word-bank-section sec-impact">
                         <h4>Impact Language</h4>
                         <div id="bank-impact">
                             <span class="word-chip" onclick="insertWord(this)">Systemic change</span>
                             <span class="word-chip" onclick="insertWord(this)">Equity and access</span>
-                            <span class="word-chip" onclick="insertWord(this)">Dignity and respect</span>
                             <span class="word-chip" onclick="insertWord(this)">Lasting legacy</span>
-                            <span class="word-chip" onclick="insertWord(this)">Collective power</span>
                             <span class="word-chip" onclick="insertWord(this)">Thriving communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">Generational impact</span>
-                            <span class="word-chip" onclick="insertWord(this)">Shared prosperity</span>
-                            <span class="word-chip" onclick="insertWord(this)">Voices heard and valued</span>
-                            <span class="word-chip" onclick="insertWord(this)">Community resilience</span>
-                            <span class="word-chip" onclick="insertWord(this)">Sustainable transformation</span>
                         </div>
                     </div>
 
-                    <div class="word-bank-section">
+                    <div class="word-bank-section sec-how">
                         <h4>How You Work</h4>
                         <div id="bank-how">
                             <span class="word-chip" onclick="insertWord(this)">Trust-based partnerships</span>
                             <span class="word-chip" onclick="insertWord(this)">Direct support</span>
-                            <span class="word-chip" onclick="insertWord(this)">Community collaboration</span>
-                            <span class="word-chip" onclick="insertWord(this)">Local organizing</span>
                             <span class="word-chip" onclick="insertWord(this)">Advocacy</span>
-                            <span class="word-chip" onclick="insertWord(this)">Shared funding</span>
                             <span class="word-chip" onclick="insertWord(this)">Capacity building</span>
                             <span class="word-chip" onclick="insertWord(this)">Multi-year unrestricted funding</span>
-                            <span class="word-chip" onclick="insertWord(this)">Policy change</span>
-                            <span class="word-chip" onclick="insertWord(this)">Leadership development</span>
-                            <span class="word-chip" onclick="insertWord(this)">Grassroots grantmaking</span>
-                            <span class="word-chip" onclick="insertWord(this)">Community organizing</span>
                         </div>
                     </div>
                 </div>
@@ -372,13 +397,14 @@
         <div class="drafts-section">
             <h2>Part 3: Compare & Refine</h2>
             <p style="margin-bottom: 30px; color: #666;">Read each one out loud. Notice which one makes the family sit up straight. That's usually the one.</p>
-            
-            <div id="saved-drafts-list">
-                <!-- Drafts pop up here from Firebase -->
-                <p style="color: #888; font-style: italic;">No drafts saved yet. Build one above and click "Save This Draft"!</p>
-            </div>
+            <div id="saved-drafts-list"></div>
         </div>
+    </div>
 
+    <!-- CELEBRATION VIEW -->
+    <div id="celebration-view">
+        <h3 id="celeb-family-name">👑 The Final Mission Statement 👑</h3>
+        <div id="final-statement-text"></div>
     </div>
 
     <script>
@@ -392,19 +418,25 @@
             messagingSenderId: "561834463026",
             appId: "1:561834463026:web:06a1f86f5a41ba3fff112b"
         };
-        firebase.initializeApp(firebaseConfig);
+        if(!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const db = firebase.database();
 
-        let myRole = ''; let myName = ''; let mySession = '';
+        let myRole = ''; let myName = ''; let mySession = ''; let justFamilyName = '';
         const FACILITATOR_PASSWORD = '3742';
+
+        // EMPTY STATE EXAMPLES FOR QUADRANTS
+        const emptyStates = {
+            q1: `<div class="empty-state"><strong>Examples:</strong>- Food insecurity<br>- Lack of arts funding</div>`,
+            q2: `<div class="empty-state"><strong>Examples:</strong>- Everyone deserves a fair start<br>- Art heals communities</div>`,
+            q3: `<div class="empty-state"><strong>Examples:</strong>- Higher graduation rates<br>- More stable housing</div>`,
+            q4: `<div class="empty-state"><strong>Examples:</strong>- First-generation students<br>- Local environmental groups</div>`
+        };
 
         // --- 2. UI NAVIGATION ---
         function showForm(formId) {
             document.getElementById('landing-view').style.display = 'none';
             document.getElementById('participant-form').style.display = 'none';
             document.getElementById('facilitator-form').style.display = 'none';
-            document.getElementById('part-error').style.display = 'none';
-            document.getElementById('fac-error').style.display = 'none';
             document.getElementById(formId).style.display = 'block';
         }
 
@@ -412,7 +444,6 @@
             document.getElementById('participant-form').style.display = 'none';
             document.getElementById('facilitator-form').style.display = 'none';
             document.getElementById('landing-view').style.display = 'block';
-            document.querySelectorAll('input').forEach(input => input.value = '');
         }
 
         function copyCode() {
@@ -426,29 +457,38 @@
             document.getElementById('landing-view').style.display = 'none';
             document.getElementById('participant-form').style.display = 'none';
             document.getElementById('facilitator-form').style.display = 'none';
-            document.body.style.backgroundColor = 'var(--epic-bg)'; // Keeps outer body color
+            
+            // Set Body Background to Dark Teal, Workspace handles Fog
+            document.body.style.backgroundColor = 'var(--epic-dark-teal)'; 
             document.getElementById('workspace-view').style.display = 'block';
+            
             document.getElementById('display-session-code').innerText = mySession;
             document.getElementById('display-name').innerText = myName;
             document.getElementById('display-role').innerText = myRole;
+            
+            if(justFamilyName) {
+                document.getElementById('celeb-family-name').innerText = `👑 The ${justFamilyName} Family Mission Statement 👑`;
+            }
 
             if (myRole === 'Facilitator') {
-                document.getElementById('display-role').style.backgroundColor = '#0d2b32'; 
+                document.getElementById('display-role').style.backgroundColor = 'var(--epic-ink)'; 
+                document.getElementById('display-role').style.color = 'var(--white)'; 
             }
-            startFirebaseListener();
-            startDraftsListener(); // NEW: Listen for saved drafts
+            
+            setTemplate('problem'); 
+            startFirebaseListeners();
         }
 
         function createSession() {
             const pass = document.getElementById('fac-pass').value.trim();
-            const family = document.getElementById('fac-session').value.trim().replace(/[^a-zA-Z]/g, '').toUpperCase();
+            const family = document.getElementById('fac-session').value.trim().replace(/[^a-zA-Z]/g, '');
             const name = document.getElementById('fac-name').value.trim();
 
             if (pass !== FACILITATOR_PASSWORD || !family || !name) {
-                document.getElementById('fac-error').style.display = 'block';
-                return;
+                document.getElementById('fac-error').style.display = 'block'; return;
             }
-            myRole = 'Facilitator'; myName = name; mySession = family + '-2026';
+            justFamilyName = family.charAt(0).toUpperCase() + family.slice(1);
+            myRole = 'Facilitator'; myName = name; mySession = family.toUpperCase() + '-2026';
             showWorkspace();
         }
 
@@ -456,16 +496,16 @@
             const sess = document.getElementById('part-session').value.trim().toUpperCase();
             const name = document.getElementById('part-name').value.trim();
 
-            if (!sess || !name) {
-                document.getElementById('part-error').style.display = 'block';
-                return;
-            }
+            if (!sess || !name) { document.getElementById('part-error').style.display = 'block'; return; }
             myRole = 'Participant'; myName = name; mySession = sess;
+            justFamilyName = sess.split('-')[0];
+            justFamilyName = justFamilyName.charAt(0) + justFamilyName.slice(1).toLowerCase();
             showWorkspace();
         }
 
         // --- 3. QUADRANT LOGIC ---
         function handleEnter(e, quadId) { if (e.key === 'Enter') addIdea(quadId); }
+        
         function addIdea(quadId) {
             const inputField = document.getElementById('input-' + quadId);
             const text = inputField.value.trim();
@@ -474,36 +514,13 @@
             inputField.value = '';
         }
 
-        function startFirebaseListener() {
-            db.ref(`sessions/${mySession}/ideas`).on('value', (snapshot) => {
-                const allData = snapshot.val() || {};
-                ['q1', 'q2', 'q3', 'q4'].forEach(quadId => {
-                    const listDiv = document.getElementById('list-' + quadId);
-                    listDiv.innerHTML = ''; 
-                    const quadData = allData[quadId] || {};
-                    Object.values(quadData).forEach(idea => {
-                        const div = document.createElement('div');
-                        div.className = 'idea-item';
-                        div.onclick = function() { insertWordFromQuad(idea.text); };
-                        div.innerHTML = `<span>${idea.text}</span><span class="idea-author">${idea.author}</span>`;
-                        listDiv.appendChild(div);
-                    });
-                });
-            });
-        }
-
-        // --- 4. BUILDER LOGIC ---
+        // --- 4. TEMPLATES & BUILDER ---
         let currentFocusedBlank = null;
         let isFreestyle = false;
 
-        window.onload = function() {
-            const firstBlank = document.querySelector('.blank');
-            if(firstBlank) currentFocusedBlank = firstBlank;
-        };
-
         function setTemplate(type) {
             document.querySelectorAll('.template-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            if(event) event.currentTarget.classList.add('active');
 
             const draftArea = document.getElementById('draft-display');
             const freewriteBox = document.getElementById('freewrite-box');
@@ -513,8 +530,8 @@
                 isFreestyle = true;
                 draftArea.style.display = 'none';
                 freewriteBox.style.display = 'block';
-                sidebar.style.opacity = '0.3'; // dim the sidebar
-                sidebar.style.pointerEvents = 'none'; // disable clicks
+                sidebar.style.opacity = '0.3'; 
+                sidebar.style.pointerEvents = 'none'; 
             } else {
                 isFreestyle = false;
                 draftArea.style.display = 'block';
@@ -523,13 +540,13 @@
                 sidebar.style.pointerEvents = 'auto';
 
                 if (type === 'problem') {
-                    draftArea.innerHTML = `We exist to <span class="blank focused" onclick="focusBlank(this)">[ Action Word ]</span> the <span class="blank" onclick="focusBlank(this)">[ Problem ]</span> through <span class="blank" onclick="focusBlank(this)">[ How You Work ]</span> so that <span class="blank" onclick="focusBlank(this)">[ Impact ]</span>.`;
+                    draftArea.innerHTML = `We exist to <span class="blank blank-action focused" onclick="focusBlank(this)">[ Action Word ]</span> the <span class="blank blank-problem" onclick="focusBlank(this)">[ Problem ]</span> through <span class="blank blank-how" onclick="focusBlank(this)">[ How You Work ]</span> so that <span class="blank blank-impact" onclick="focusBlank(this)">[ Impact ]</span>.`;
                 } else if (type === 'action') {
-                    draftArea.innerHTML = `Our family <span class="blank focused" onclick="focusBlank(this)">[ Action Word ]</span> <span class="blank" onclick="focusBlank(this)">[ Who You Serve ]</span> by focusing on <span class="blank" onclick="focusBlank(this)">[ Problem ]</span> to create <span class="blank" onclick="focusBlank(this)">[ Impact ]</span>.`;
+                    draftArea.innerHTML = `Our family <span class="blank blank-action focused" onclick="focusBlank(this)">[ Action Word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ Who You Serve ]</span> by focusing on <span class="blank blank-problem" onclick="focusBlank(this)">[ Problem ]</span> to create <span class="blank blank-impact" onclick="focusBlank(this)">[ Impact ]</span>.`;
                 } else if (type === 'value') {
-                    draftArea.innerHTML = `Because we believe <span class="blank focused" onclick="focusBlank(this)">[ Belief Starter ]</span>, we use <span class="blank" onclick="focusBlank(this)">[ How You Work ]</span> to <span class="blank" onclick="focusBlank(this)">[ Action Word ]</span> <span class="blank" onclick="focusBlank(this)">[ Who You Serve ]</span>.`;
+                    draftArea.innerHTML = `Because we believe <span class="blank blank-belief focused" onclick="focusBlank(this)">[ Belief Starter ]</span>, we use <span class="blank blank-how" onclick="focusBlank(this)">[ How You Work ]</span> to <span class="blank blank-action" onclick="focusBlank(this)">[ Action Word ]</span> <span class="blank blank-focus" onclick="focusBlank(this)">[ Who You Serve ]</span>.`;
                 }
-                currentFocusedBlank = draftArea.querySelector('.blank');
+                currentFocusedBlank = draftArea.querySelector('.blank.focused');
             }
         }
 
@@ -573,32 +590,23 @@
             if (currentIndex >= 0 && currentIndex < allBlanks.length - 1) {
                 focusBlank(allBlanks[currentIndex + 1]);
             } else {
-                // If it was the last blank, just unfocus
                 currentFocusedBlank.classList.remove('focused');
                 currentFocusedBlank = null;
             }
         }
 
-        // --- 5. DRAFTS & SAVING ---
+        // --- 5. SAVING & FIREBASE LISTENERS ---
         function saveDraft() {
             let finalSentence = "";
             let templateName = document.querySelector('.template-btn.active h4').innerText.replace('✏️ ', '');
 
             if (isFreestyle) {
                 finalSentence = document.getElementById('freewrite-box').value.trim();
-                if (!finalSentence) { alert("Please type something first!"); return; }
+                if (!finalSentence) return;
             } else {
-                // Grab the plain text of the builder area (strips out HTML spans)
                 finalSentence = document.getElementById('draft-display').innerText.replace(/\n/g, '').replace(/\s+/g, ' ').trim();
-                
-                // Quick check to see if they left blanks empty
-                if (finalSentence.includes('[') && finalSentence.includes(']')) {
-                    const proceed = confirm("It looks like you still have some unfilled [ blanks ]. Save anyway?");
-                    if(!proceed) return;
-                }
             }
 
-            // Push to Firebase
             db.ref(`sessions/${mySession}/drafts`).push({
                 text: finalSentence,
                 author: myName,
@@ -606,20 +614,69 @@
                 timestamp: Date.now()
             });
 
-            // If it was freestyle, clear the box
             if(isFreestyle) { document.getElementById('freewrite-box').value = ''; }
             
-            // Visual confirmation
             const btn = document.querySelector('.btn-save');
             btn.innerText = "✅ Saved!";
-            btn.style.backgroundColor = "#528b99";
-            setTimeout(() => { 
-                btn.innerText = "💾 Save This Draft"; 
-                btn.style.backgroundColor = "var(--epic-ink)"; 
-            }, 2000);
+            btn.style.backgroundColor = "var(--epic-medium-teal)";
+            setTimeout(() => { btn.innerText = "💾 Save This Draft"; btn.style.backgroundColor = "var(--epic-ink)"; }, 2000);
         }
 
-        function startDraftsListener() {
+        function deleteDraft(key) {
+            if (confirm("Delete this draft?")) { db.ref(`sessions/${mySession}/drafts/${key}`).remove(); }
+        }
+
+        function triggerCelebration(encodedText) {
+            if (confirm("Are you sure? This will lock in the final mission statement and show it to everyone.")) {
+                db.ref(`sessions/${mySession}/finalStatement`).set({ text: encodedText });
+            }
+        }
+
+        // --- CONFETTI ANIMATION ---
+        function fireConfetti() {
+            const container = document.getElementById('celebration-view');
+            const colors = ['#904237', '#4f8284', '#5b7666', '#457093', '#1b3a5c', '#dead2f'];
+            for(let i=0; i<80; i++) {
+                let conf = document.createElement('div');
+                conf.className = 'confetti-piece';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                conf.style.animationDelay = `${Math.random() * 2}s`;
+                container.appendChild(conf);
+            }
+        }
+        
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1;} 100% { transform: translateY(110vh) rotate(720deg); opacity: 1;} }`;
+        document.head.appendChild(style);
+
+        // --- FIREBASE SYNCING ---
+        function startFirebaseListeners() {
+            // 1. Listen for Ideas
+            const mapClass = { 'q1': 'item-problem', 'q2': 'item-belief', 'q3': 'item-impact', 'q4': 'item-focus' };
+            db.ref(`sessions/${mySession}/ideas`).on('value', (snapshot) => {
+                const allData = snapshot.val() || {};
+                ['q1', 'q2', 'q3', 'q4'].forEach(quadId => {
+                    const listDiv = document.getElementById('list-' + quadId);
+                    const quadData = allData[quadId] || {};
+                    
+                    if (Object.keys(quadData).length === 0) {
+                        listDiv.innerHTML = emptyStates[quadId];
+                    } else {
+                        listDiv.innerHTML = ''; 
+                        Object.values(quadData).forEach(idea => {
+                            const div = document.createElement('div');
+                            div.className = `idea-item ${mapClass[quadId]}`;
+                            div.onclick = function() { insertWordFromQuad(idea.text); };
+                            div.innerHTML = `<span>${idea.text}</span><span class="idea-author">${idea.author}</span>`;
+                            listDiv.appendChild(div);
+                        });
+                    }
+                });
+            });
+
+            // 2. Listen for Drafts
             db.ref(`sessions/${mySession}/drafts`).on('value', (snapshot) => {
                 const draftsData = snapshot.val() || {};
                 const listDiv = document.getElementById('saved-drafts-list');
@@ -629,33 +686,47 @@
                     return;
                 }
 
-                listDiv.innerHTML = ''; // Clear it out
+                listDiv.innerHTML = ''; 
                 
-                // Add each draft
                 Object.keys(draftsData).forEach(key => {
                     const draft = draftsData[key];
                     const div = document.createElement('div');
                     div.className = 'draft-card';
                     
-                    // Only Facilitator can delete drafts
-                    const deleteBtn = (myRole === 'Facilitator') ? `<button class="btn-delete" onclick="deleteDraft('${key}')">Delete</button>` : '';
+                    // Safely encode text to pass via data attribute to prevent quote errors
+                    const safeText = draft.text.replace(/"/g, '&quot;');
+                    
+                    let actionsHtml = '';
+                    if (myRole === 'Facilitator') {
+                        actionsHtml = `
+                            <div class="draft-actions">
+                                <button class="btn-final" data-text="${safeText}" onclick="triggerCelebration(this.getAttribute('data-text'))">👑 Select as Final</button>
+                                <button class="btn-delete" onclick="deleteDraft('${key}')">Delete</button>
+                            </div>
+                        `;
+                    }
 
                     div.innerHTML = `
                         <div class="draft-meta">${draft.template} Template • Saved by ${draft.author}</div>
                         <p>"${draft.text}"</p>
-                        ${deleteBtn}
+                        ${actionsHtml}
                     `;
                     listDiv.appendChild(div);
                 });
             });
-        }
 
-        function deleteDraft(key) {
-            if (confirm("Are you sure you want to delete this draft?")) {
-                db.ref(`sessions/${mySession}/drafts/${key}`).remove();
-            }
+            // 3. Listen for Final Statement Celebration
+            db.ref(`sessions/${mySession}/finalStatement`).on('value', (snapshot) => {
+                const finalData = snapshot.val();
+                if (finalData && finalData.text) {
+                    // Hide everything else and show the celebration overlay
+                    document.getElementById('workspace-view').style.display = 'none';
+                    document.getElementById('celebration-view').style.display = 'flex';
+                    document.getElementById('final-statement-text').innerText = `"${finalData.text}"`;
+                    fireConfetti();
+                }
+            });
         }
-
     </script>
 </body>
 </html>
