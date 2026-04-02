@@ -211,6 +211,14 @@
         .word-bank-toggle[open] summary { border-bottom: 1px solid var(--light-gray); background: #eef2f5; }
         .toggle-content { padding: 15px 15px 5px 15px; background: var(--white); }
 
+        /* --- MAIN SECTION TOGGLES --- */
+        details.section-toggle > summary { list-style: none; outline: none; }
+        details.section-toggle > summary::-webkit-details-marker { display: none; }
+        details.section-toggle > summary h4 { display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: opacity 0.2s; margin-bottom: 10px;}
+        details.section-toggle > summary h4:hover { opacity: 0.7; }
+        details.section-toggle > summary h4::after { content: '+'; font-size: 26px; font-weight: 300; }
+        details.section-toggle[open] > summary h4::after { content: '−'; }
+
 
         /* --- PART 3: DRAFTS GALLERY --- */
         .drafts-section { border-top: 4px solid var(--epic-gold); padding-top: 40px; margin-top: 40px; }
@@ -416,18 +424,21 @@
                 </div>
 
                 <!-- Word Bank Sidebar -->
+                <!-- Word Bank Sidebar -->
                 <div class="word-bank-sidebar" id="word-sidebar">
 
                     <div class="word-bank-section sec-fund" id="section-fund">
-                        <h4 id="bank-fund-header">Fund / Family Name</h4>
-                        <div id="bank-fund">
-                            <span class="word-chip" onclick="insertWord(this)" id="chip-fam-1">The Family</span>
-                            <span class="word-chip" onclick="insertWord(this)" id="chip-fam-2">The Foundation</span>
-                            <span class="word-chip" onclick="insertWord(this)" id="chip-fam-3">The Fund</span>
-                            <span class="word-chip" onclick="insertWord(this)" id="chip-fam-4">The Trust</span>
-                            <span class="word-chip" onclick="insertWord(this)" id="chip-fam-5">The Philanthropies</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-fund', this)"></div>
-                        </div>
+                        <details class="section-toggle">
+                            <summary><h4 id="bank-fund-header">Fund / Family Name</h4></summary>
+                            <div id="bank-fund">
+                                <span class="word-chip" onclick="insertWord(this)" id="chip-fam-1">Family</span>
+                                <span class="word-chip" onclick="insertWord(this)" id="chip-fam-2">Foundation</span>
+                                <span class="word-chip" onclick="insertWord(this)" id="chip-fam-3">Fund</span>
+                                <span class="word-chip" onclick="insertWord(this)" id="chip-fam-4">Trust</span>
+                                <span class="word-chip" onclick="insertWord(this)" id="chip-fam-5">Philanthropies</span>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-fund', this)"></div>
+                            </div>
+                        </details>
                     </div>
 
                     <div class="word-bank-section sec-problem" id="section-problem">
@@ -447,228 +458,224 @@
                     </div>
 
                     <div class="word-bank-section sec-action" id="section-action">
-                        <h4 id="bank-action-header">Action Words</h4>
-                        <div id="bank-action">
-                            <span class="word-chip" onclick="insertWord(this)">Support(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Champion(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Invest(s) in</span>
-                            <span class="word-chip" onclick="insertWord(this)">Empower(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Advance(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Build(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Create(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Drive(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Advocate(s) for</span>
-                            <span class="word-chip" onclick="insertWord(this)">Strengthen(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Cultivate(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Transform(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Mobilize(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Elevate(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Catalyze(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Unlock(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Center(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Uplift(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Foster(s)</span>
-                            <span class="word-chip" onclick="insertWord(this)">Partner(s) with</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-action', this)"></div>
-                        </div>
+                        <details class="section-toggle">
+                            <summary><h4 id="bank-action-header">Action Words</h4></summary>
+                            <div id="bank-action">
+                                <span class="word-chip" onclick="insertWord(this)">Support(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Champion(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Invest(s) in</span>
+                                <span class="word-chip" onclick="insertWord(this)">Empower(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Advance(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Build(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Create(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Drive(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Advocate(s) for</span>
+                                <span class="word-chip" onclick="insertWord(this)">Strengthen(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Cultivate(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Transform(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Mobilize(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Elevate(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Catalyze(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Unlock(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Center(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Uplift(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Foster(s)</span>
+                                <span class="word-chip" onclick="insertWord(this)">Partner(s) with</span>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-action', this)"></div>
+                            </div>
+                        </details>
                     </div>
 
                     <div class="word-bank-section sec-focus" id="section-who">
-                        <h4 id="bank-who-header">Who / What You Serve</h4>
-                        <div id="dynamic-bank-q4"></div>
-                        <div id="bank-who">
-
-                            <details class="word-bank-toggle">
-                                <summary>🧑‍🤝‍🧑 People & Communities</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Children & youth</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Families</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Women & girls</span>
-                                    <span class="word-chip" onclick="insertWord(this)">BIPOC communities</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Immigrants & refugees</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Veterans</span>
-                                    <span class="word-chip" onclick="insertWord(this)">LGBTQ+ communities</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Seniors</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Rural communities</span>
-                                    <span class="word-chip" onclick="insertWord(this)">People with disabilities</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Indigenous populations</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>🏠 Basic Needs & Crisis</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Food banks & emergency pantries</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Housing & homelessness</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Survivors of domestic abuse</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Survivors of human trafficking</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Crisis hotlines & suicide prevention</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Disaster response & recovery</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Emergency medical response</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Refugee crisis & resettlement</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Foster youth & child welfare</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Clean water access</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Poverty alleviation</span>
-                                </div>
-                            </details>
-                            
-                            <details class="word-bank-toggle">
-                                <summary>📚 Education & Learning</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Early childhood education</span>
-                                    <span class="word-chip" onclick="insertWord(this)">K-12 students</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Higher education & scholarships</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Literacy programs</span>
-                                    <span class="word-chip" onclick="insertWord(this)">STEM education</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Vocational training</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>🏥 Health & Wellness</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Mental health</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Medical research</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Healthcare access</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Rare diseases</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Reproductive health</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Addiction & recovery</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>🌍 Environment & Climate</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Climate resilience</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Local ecosystems</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Clean waterways</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Public lands & parks</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Sustainable agriculture</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Renewable energy</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Conservation efforts</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>🐾 Animals & Wildlife</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Companion animals</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Endangered species</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Local wildlife</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Marine life</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Farm & agricultural animals</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Animal sanctuaries</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>⚖️ Systems, Justice & Society</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Systemic justice</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Voting rights & democracy</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Criminal justice reform</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Public policy & legislation</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Human rights</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Civic engagement</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>💰 Economic Development</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Small businesses & entrepreneurs</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Local economies</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Neighborhood revitalization</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Workforce development</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Financial literacy</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>🎨 Arts, Culture & History</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Local artists</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Historical preservation</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Cultural institutions</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Public broadcasting</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Arts education</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>🕊️ Faith & Religion</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Faith-based communities</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Religious institutions</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Spiritual development</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Interfaith initiatives</span>
-                                </div>
-                            </details>
-
-                            <details class="word-bank-toggle">
-                                <summary>🌐 Global & Innovation</summary>
-                                <div class="toggle-content">
-                                    <span class="word-chip" onclick="insertWord(this)">Developing nations</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Global health</span>
-                                    <span class="word-chip" onclick="insertWord(this)">International disaster relief</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Scientific research</span>
-                                    <span class="word-chip" onclick="insertWord(this)">Environmental technology</span>
-                                </div>
-                            </details>
-
-                            <div class="custom-chip-container" style="margin-top: 15px; display: block;"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-who', this)"></div>
-                        </div>
+                        <details class="section-toggle">
+                            <summary><h4 id="bank-who-header">Who / What You Serve</h4></summary>
+                            <div id="dynamic-bank-q4"></div>
+                            <div id="bank-who">
+                                <details class="word-bank-toggle">
+                                    <summary>🧑‍🤝‍🧑 People & Communities</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Children & youth</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Families</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Women & girls</span>
+                                        <span class="word-chip" onclick="insertWord(this)">BIPOC communities</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Immigrants & refugees</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Veterans</span>
+                                        <span class="word-chip" onclick="insertWord(this)">LGBTQ+ communities</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Seniors</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Rural communities</span>
+                                        <span class="word-chip" onclick="insertWord(this)">People with disabilities</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Indigenous populations</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🏠 Basic Needs & Crisis</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Food banks & emergency pantries</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Housing & homelessness</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Survivors of domestic abuse</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Survivors of human trafficking</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Crisis hotlines & suicide prevention</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Disaster response & recovery</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Emergency medical response</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Refugee crisis & resettlement</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Foster youth & child welfare</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Clean water access</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Poverty alleviation</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>📚 Education & Learning</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Early childhood education</span>
+                                        <span class="word-chip" onclick="insertWord(this)">K-12 students</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Higher education & scholarships</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Literacy programs</span>
+                                        <span class="word-chip" onclick="insertWord(this)">STEM education</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Vocational training</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🏥 Health & Wellness</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Mental health</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Medical research</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Healthcare access</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Rare diseases</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Reproductive health</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Addiction & recovery</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🌍 Environment & Climate</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Climate resilience</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Local ecosystems</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Clean waterways</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Public lands & parks</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Sustainable agriculture</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Renewable energy</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Conservation efforts</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🐾 Animals & Wildlife</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Companion animals</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Endangered species</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Local wildlife</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Marine life</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Farm & agricultural animals</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Animal sanctuaries</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>⚖️ Systems, Justice & Society</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Systemic justice</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Voting rights & democracy</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Criminal justice reform</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Public policy & legislation</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Human rights</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Civic engagement</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🤝 Economic Development</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Small businesses & entrepreneurs</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Local economies</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Neighborhood revitalization</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Workforce development</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Financial literacy</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🎨 Arts, Culture & History</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Local artists</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Historical preservation</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Cultural institutions</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Public broadcasting</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Arts education</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🕊️ Faith & Religion</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Faith-based communities</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Religious institutions</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Spiritual development</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Interfaith initiatives</span>
+                                    </div>
+                                </details>
+                                <details class="word-bank-toggle">
+                                    <summary>🌐 Global & Innovation</summary>
+                                    <div class="toggle-content">
+                                        <span class="word-chip" onclick="insertWord(this)">Developing nations</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Global health</span>
+                                        <span class="word-chip" onclick="insertWord(this)">International disaster relief</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Scientific research</span>
+                                        <span class="word-chip" onclick="insertWord(this)">Environmental technology</span>
+                                    </div>
+                                </details>
+                                <div class="custom-chip-container" style="margin-top: 15px; display: block;"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-who', this)"></div>
+                            </div>
+                        </details>
                     </div>
 
-
-
                     <div class="word-bank-section sec-impact" id="section-impact">
-                        <h4 id="bank-impact-header">Impact & Change Words</h4>
-                        <div id="dynamic-bank-q3"></div>
-                        <div id="bank-impact">
-                            <span class="word-chip" onclick="insertWord(this)">Systemic change</span>
-                            <span class="word-chip" onclick="insertWord(this)">Equity and access</span>
-                            <span class="word-chip" onclick="insertWord(this)">Dignity and respect</span>
-                            <span class="word-chip" onclick="insertWord(this)">Collective power</span>
-                            <span class="word-chip" onclick="insertWord(this)">Thriving communities</span>
-                            <span class="word-chip" onclick="insertWord(this)">Generational impact</span>
-                            <span class="word-chip" onclick="insertWord(this)">Shared prosperity</span>
-                            <span class="word-chip" onclick="insertWord(this)">Voices heard and valued</span>
-                            <span class="word-chip" onclick="insertWord(this)">Community resilience</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-impact', this)"></div>
-                        </div>
+                        <details class="section-toggle">
+                            <summary><h4 id="bank-impact-header">Impact & Change Words</h4></summary>
+                            <div id="dynamic-bank-q3"></div>
+                            <div id="bank-impact">
+                                <span class="word-chip" onclick="insertWord(this)">Systemic change</span>
+                                <span class="word-chip" onclick="insertWord(this)">Equity and access</span>
+                                <span class="word-chip" onclick="insertWord(this)">Dignity and respect</span>
+                                <span class="word-chip" onclick="insertWord(this)">Collective power</span>
+                                <span class="word-chip" onclick="insertWord(this)">Thriving communities</span>
+                                <span class="word-chip" onclick="insertWord(this)">Generational impact</span>
+                                <span class="word-chip" onclick="insertWord(this)">Shared prosperity</span>
+                                <span class="word-chip" onclick="insertWord(this)">Voices heard and valued</span>
+                                <span class="word-chip" onclick="insertWord(this)">Community resilience</span>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-impact', this)"></div>
+                            </div>
+                        </details>
                     </div>
 
                     <div class="word-bank-section sec-how" id="section-how">
-                        <h4 id="bank-how-header">How You Work</h4>
-                        <div id="bank-how">
-                            <span class="word-chip" onclick="insertWord(this)">Trust-based partnerships</span>
-                            <span class="word-chip" onclick="insertWord(this)">Direct support</span>
-                            <span class="word-chip" onclick="insertWord(this)">Community collaboration</span>
-                            <span class="word-chip" onclick="insertWord(this)">Advocacy</span>
-                            <span class="word-chip" onclick="insertWord(this)">Shared funding</span>
-                            <span class="word-chip" onclick="insertWord(this)">Capacity building</span>
-                            <span class="word-chip" onclick="insertWord(this)">Multi-year unrestricted funding</span>
-                            <span class="word-chip" onclick="insertWord(this)">Policy change</span>
-                            <span class="word-chip" onclick="insertWord(this)">Grassroots grantmaking</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-how', this)"></div>
-                        </div>
+                        <details class="section-toggle">
+                            <summary><h4 id="bank-how-header">How You Work</h4></summary>
+                            <div id="bank-how">
+                                <span class="word-chip" onclick="insertWord(this)">Trust-based partnerships</span>
+                                <span class="word-chip" onclick="insertWord(this)">Direct support</span>
+                                <span class="word-chip" onclick="insertWord(this)">Community collaboration</span>
+                                <span class="word-chip" onclick="insertWord(this)">Advocacy</span>
+                                <span class="word-chip" onclick="insertWord(this)">Shared funding</span>
+                                <span class="word-chip" onclick="insertWord(this)">Capacity building</span>
+                                <span class="word-chip" onclick="insertWord(this)">Multi-year unrestricted funding</span>
+                                <span class="word-chip" onclick="insertWord(this)">Policy change</span>
+                                <span class="word-chip" onclick="insertWord(this)">Grassroots grantmaking</span>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-how', this)"></div>
+                            </div>
+                        </details>
                     </div>
 
                     <div class="word-bank-section sec-where" id="section-where">
-                        <h4 id="bank-where-header">Where You Give</h4>
-                        <div id="bank-where">
-                            <span class="word-chip" onclick="insertWord(this)">Local</span>
-                            <span class="word-chip" onclick="insertWord(this)">Regional</span>
-                            <span class="word-chip" onclick="insertWord(this)">National</span>
-                            <span class="word-chip" onclick="insertWord(this)">International</span>
-                            <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
-                        </div>
+                        <details class="section-toggle">
+                            <summary><h4 id="bank-where-header">Where You Give</h4></summary>
+                            <div id="bank-where">
+                                <span class="word-chip" onclick="insertWord(this)">Local</span>
+                                <span class="word-chip" onclick="insertWord(this)">Regional</span>
+                                <span class="word-chip" onclick="insertWord(this)">National</span>
+                                <span class="word-chip" onclick="insertWord(this)">International</span>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                            </div>
+                        </details>
                     </div>
 
                 </div>
-            </div>
-        </div>
+
+
 
         <!-- PART 3: COMPARE DRAFTS -->
         <div class="drafts-section">
@@ -808,12 +815,14 @@ function logoutMission() {
             if(justFamilyName) {
                 document.getElementById('celeb-family-name').innerText = `👑 The ${justFamilyName} Family Mission Statement 👑`;
                 
-                document.getElementById('chip-fam-1').innerText = `The ${justFamilyName} Family`;
-                document.getElementById('chip-fam-2').innerText = `The ${justFamilyName} Foundation`;
-                document.getElementById('chip-fam-3').innerText = `The ${justFamilyName} Fund`;
-                document.getElementById('chip-fam-4').innerText = `The ${justFamilyName} Trust`;
-                document.getElementById('chip-fam-5').innerText = `The ${justFamilyName} Philanthropies`;
+                document.getElementById('chip-fam-1').innerText = `${justFamilyName} Family`;
+                document.getElementById('chip-fam-2').innerText = `${justFamilyName} Foundation`;
+                document.getElementById('chip-fam-3').innerText = `${justFamilyName} Fund`;
+                document.getElementById('chip-fam-4').innerText = `${justFamilyName} Trust`;
+                document.getElementById('chip-fam-5').innerText = `${justFamilyName} Philanthropies`;
             }
+
+
 
             if (myRole === 'Facilitator') {
                 document.getElementById('display-role').style.backgroundColor = 'var(--epic-ink)'; 
@@ -972,11 +981,17 @@ function logoutMission() {
                 const sidebar = document.getElementById('word-sidebar');
                 
                 if (targetSection && sidebar) {
+                    // NEW: Auto-open the accordion if it is closed
+                    const toggle = targetSection.querySelector('details.section-toggle');
+                    if(toggle && !toggle.open) { toggle.open = true; }
+
                     sidebar.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
                     document.querySelectorAll('.word-bank-section').forEach(sec => sec.classList.remove('flash-active'));
                     setTimeout(() => { targetSection.classList.add('flash-active'); }, 300); 
                 }
             }
+
+
         }
 
         function insertWord(chipElement) {
