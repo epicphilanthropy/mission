@@ -839,12 +839,26 @@
             if (confirm("Delete this draft?")) { db.ref(`sessions/${mySession}/drafts/${key}`).remove(); }
         }
 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyw-5vYD_Yew9qCgMVQMJ8B_3v0nrLCrduLbAEJpXZ_uB69UrVGZcdWscq7I6kJ4HK0/exec';
+
         function triggerCelebration(encodedText) {
             if (confirm("Are you sure? This will lock in the final mission statement and show it to everyone.")) {
+                // 1. Save to Firebase for the confetti
                 db.ref(`sessions/${mySession}/finalStatement`).set({ text: encodedText });
+                
+                // 2. SEND A COPY TO YOUR SPREADSHEET!
+                const params = new URLSearchParams({
+                    action: 'save',
+                    session: mySession,
+                    tab: 'mission',
+                    name: 'Family Draft',
+                    ranked: encodedText
+                });
+                
+                fetch(SCRIPT_URL + '?' + params.toString(), { mode: 'no-cors' })
+                    .catch(e => console.log("Silent save error", e));
             }
         }
-
         function fireConfetti() {
             const container = document.getElementById('celebration-view');
             const colors = ['#904237', '#4f8284', '#5b7666', '#457093', '#1b3a5c', '#dead2f'];
