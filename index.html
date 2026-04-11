@@ -1,349 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission Statement Builder | Epic Philanthropy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
-    
-    <!-- FIREBASE LIBRARIES -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Statement Builder | Epic Philanthropy</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,500&display=swap" rel="stylesheet">
+<!-- FIREBASE LIBRARIES -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<style>
+:root {
+/* EPIC BRAND COLORS */
+--epic-dark-teal: #1e5563;
+--epic-medium-teal: #4f8284;
+--epic-gold: #dead2f;
+--epic-ink: #0d2b32;
+--epic-fog: #d7e0e6;
+--white: #ffffff;
+--off-white: #f0f0f0;
+--light-gray: #d7e0e6;
 
-    <style>
-        :root {
-            /* EPIC BRAND COLORS */
-            --epic-dark-teal: #1e5563;
-            --epic-medium-teal: #4f8284;
-            --epic-gold: #dead2f; 
-            --epic-ink: #0d2b32;
-            --epic-fog: #d7e0e6;
-            
-            --white: #ffffff;
-            --off-white: #f0f0f0;
-            --light-gray: #d7e0e6;
+/* WORKSHOP COLOR PALETTE */
+--c-problem: #904237;
+--c-belief: #4f8284;
+--c-impact: #5b7666;
+--c-focus: #457093;
+--c-action: #1b3a5c;
+--c-how: #dead2f;
+--c-where: #1e5563;
+--c-fund: #4f8284;
+}
 
-            /* WORKSHOP COLOR PALETTE */
-            --c-problem: #904237; 
-            --c-belief: #4f8284;  
-            --c-impact: #5b7666;  
-            --c-focus: #457093;   
-            --c-action: #1b3a5c;  
-            --c-how: #dead2f;     
-            --c-where: #1e5563;   
-            --c-fund: #4f8284;    
-        }
+body { font-family: 'Montserrat', sans-serif; background-color: var(--epic-dark-teal); color: var(--white); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+.container { max-width: 800px; width: 100%; margin: 40px auto; text-align: center; }
+.eyebrow { color: var(--epic-gold); font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+h1 { font-weight: 600; font-size: 52px; line-height: 1.2; margin: 0 0 20px 0; }
+h1 span { font-style: italic; font-weight: 300; color: var(--epic-gold); }
+.btn-primary { background-color: var(--epic-gold); color: var(--epic-ink); border: none; padding: 18px 45px; font-size: 18px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: opacity 0.3s ease; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--epic-dark-teal); color: var(--white); margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        .container { max-width: 800px; width: 100%; margin: 40px auto; text-align: center; }
-        .eyebrow { color: var(--epic-gold); font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
-        
-        h1 { font-weight: 600; font-size: 52px; line-height: 1.2; margin: 0 0 20px 0; }
-        h1 span { font-style: italic; font-weight: 300; color: var(--epic-gold); }
+/* FORMS */
+.form-container { display: none; max-width: 400px; margin: 0 auto; text-align: left; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+.form-group input { width: 100%; padding: 12px; border: none; border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 16px; box-sizing: border-box; }
 
-        .btn-primary { background-color: var(--epic-gold); color: var(--epic-ink); border: none; padding: 18px 45px; font-size: 18px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: opacity 0.3s ease; }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-        
-        /* FORMS */
-        .form-container { display: none; max-width: 400px; margin: 0 auto; text-align: left; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 8px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group input { width: 100%; padding: 12px; border: none; border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 16px; box-sizing: border-box; }
+/* WORKSPACE */
+#workspace-view { display: none; width: 100%; max-width: 1200px; margin: 0 auto; background: var(--epic-fog); color: var(--epic-ink); border-radius: 8px; padding: 40px; box-sizing: border-box; position: relative; }
+.session-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; margin-bottom: 20px; }
+.btn-leave { background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600; }
 
-        /* WORKSPACE */
-        #workspace-view { display: none; width: 100%; max-width: 1200px; margin: 0 auto; background: var(--epic-fog); color: var(--epic-ink); border-radius: 8px; padding: 40px; box-sizing: border-box; position: relative; }
-        
-        .session-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; margin-bottom: 20px; }
-        .btn-leave { background: #ff6b6b; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600; }
-        
-        /* BUILDER LAYOUT */
-        .builder-layout { display: grid; grid-template-columns: 1fr 350px; gap: 30px; margin-top: 30px; }
-        
-        /* MAD LIBS DRAFT AREA */
-        .draft-area { background: var(--white); padding: 40px; border-radius: 8px; font-size: 24px; line-height: 2.2; font-weight: 300; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        
-        .blank { display: inline-block; min-width: 120px; padding: 2px 10px; margin: 0 6px; border-bottom: 3px solid #ccc; background: rgba(0,0,0,0.03); color: #777; font-weight: 600; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; }
-        .blank.focused { animation: breath 1.5s infinite ease-in-out; }
-        
-        @keyframes breath {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-            100% { transform: scale(1); }
-        }
+/* BRAIN DUMP GRID (PART 1) */
+.grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px; }
+.quadrant { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 5px solid var(--epic-dark-teal); }
+.quadrant h3 { margin-top: 0; font-size: 18px; }
+.input-group { display: flex; gap: 10px; margin-bottom: 15px; }
+.input-group input { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-family: 'Montserrat', sans-serif; }
+.input-group button { background: var(--epic-dark-teal); color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; }
+.idea-list { list-style-type: none; padding: 0; margin: 0; max-height: 150px; overflow-y: auto; }
+.idea-item { background: var(--off-white); padding: 8px 12px; border-radius: 4px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
 
-        .blank-fund.focused, .blank-fund.filled { background: var(--c-fund); color: white; border-bottom-color: var(--c-fund); }
-        .blank-action.focused, .blank-action.filled { background: var(--c-action); color: white; border-bottom-color: var(--c-action); }
-        .blank-focus.focused, .blank-focus.filled { background: var(--c-focus); color: white; border-bottom-color: var(--c-focus); }
-        .blank-impact.focused, .blank-impact.filled { background: var(--c-impact); color: white; border-bottom-color: var(--c-impact); }
+@media (max-width: 768px) {
+  .grid-container { grid-template-columns: 1fr; }
+  .builder-layout { grid-template-columns: 1fr; }
+}
 
-        /* ACCORDION SIDEBAR */
-        .word-bank-sidebar { background: var(--white); border-radius: 8px; padding: 20px; max-height: 600px; overflow-y: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        
-        details.word-bank-toggle { margin-bottom: 10px; background: var(--off-white); border-radius: 6px; border: 1px solid var(--light-gray); overflow: hidden; }
-        details.word-bank-toggle summary { padding: 15px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
-        details.word-bank-toggle summary::-webkit-details-marker { display: none; }
-        details.word-bank-toggle summary::after { content: '+'; font-size: 20px; color: var(--epic-medium-teal); }
-        details.word-bank-toggle[open] summary::after { content: '−'; }
-        details.word-bank-toggle[open] summary { border-bottom: 1px solid var(--light-gray); background: #eef2f5; }
-        
-        .toggle-content { padding: 15px; background: var(--white); }
-        
-        .word-chip { display: inline-block; background: var(--white); border: 2px solid #d0d0d0; padding: 8px 14px; border-radius: 20px; font-size: 14px; margin: 0 6px 10px 0; cursor: pointer; transition: all 0.2s; }
-        .word-chip:hover { transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+/* BUILDER LAYOUT (PART 2) */
+.builder-layout { display: grid; grid-template-columns: 1fr 350px; gap: 30px; margin-top: 30px; border-top: 2px dashed rgba(0,0,0,0.1); padding-top: 40px; }
 
-        .btn-submit-draft { background: var(--epic-ink); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
+/* MAD LIBS DRAFT AREA */
+.draft-area { background: var(--white); padding: 40px; border-radius: 8px; font-size: 24px; line-height: 2.2; font-weight: 300; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+.blank { display: inline-block; min-width: 120px; padding: 2px 10px; margin: 0 6px; border-bottom: 3px solid #ccc; background: rgba(0,0,0,0.03); color: #777; font-weight: 600; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; }
+.blank.focused { animation: breath 1.5s infinite ease-in-out; }
 
-        /* WORDSMITH MODAL */
-        #wordsmith-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: white; padding: 40px; border-radius: 8px; width: 90%; max-width: 600px; text-align: center; }
-        .modal-content textarea { width: 100%; height: 150px; padding: 15px; font-family: 'Montserrat'; font-size: 18px; margin-bottom: 20px; border: 2px solid var(--light-gray); border-radius: 6px; }
-        .btn-crown { background: var(--epic-gold); color: var(--epic-ink); padding: 15px 30px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; font-size: 16px;}
-        
-    </style>
+@keyframes breath {
+0% { transform: scale(1); }
+50% { transform: scale(1.05); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+100% { transform: scale(1); }
+}
+
+.blank-fund.focused, .blank-fund.filled { background: var(--c-fund); color: white; border-bottom-color: var(--c-fund); }
+.blank-action.focused, .blank-action.filled { background: var(--c-action); color: white; border-bottom-color: var(--c-action); }
+.blank-focus.focused, .blank-focus.filled { background: var(--c-focus); color: white; border-bottom-color: var(--c-focus); }
+.blank-impact.focused, .blank-impact.filled { background: var(--c-impact); color: white; border-bottom-color: var(--c-impact); }
+
+/* ACCORDION SIDEBAR */
+.word-bank-sidebar { background: var(--white); border-radius: 8px; padding: 20px; max-height: 600px; overflow-y: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+details.word-bank-toggle { margin-bottom: 10px; background: var(--off-white); border-radius: 6px; border: 1px solid var(--light-gray); overflow: hidden; }
+details.word-bank-toggle summary { padding: 15px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+details.word-bank-toggle summary::-webkit-details-marker { display: none; }
+details.word-bank-toggle summary::after { content: '+'; font-size: 20px; color: var(--epic-medium-teal); }
+details.word-bank-toggle[open] summary::after { content: '−'; }
+details.word-bank-toggle[open] summary { border-bottom: 1px solid var(--light-gray); background: #eef2f5; }
+.toggle-content { padding: 15px; background: var(--white); }
+.word-chip { display: inline-block; background: var(--white); border: 2px solid #d0d0d0; padding: 8px 14px; border-radius: 20px; font-size: 14px; margin: 0 6px 10px 0; cursor: pointer; transition: all 0.2s; }
+.word-chip:hover { transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.btn-submit-draft { background: var(--epic-ink); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 20px; }
+
+/* WORDSMITH MODAL */
+#wordsmith-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+.modal-content { background: white; padding: 40px; border-radius: 8px; width: 90%; max-width: 600px; text-align: center; }
+.modal-content textarea { width: 100%; height: 150px; padding: 15px; font-family: 'Montserrat'; font-size: 18px; margin-bottom: 20px; border: 2px solid var(--light-gray); border-radius: 6px; }
+.btn-crown { background: var(--epic-gold); color: var(--epic-ink); padding: 15px 30px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; font-size: 16px;}
+</style>
 </head>
 <body>
 
-    <!-- LANDING VIEW -->
-    <div class="container" id="landing-view">
-        <div class="eyebrow">Family Philanthropic Planning</div>
-        <h1><span>Craft</span> your family's mission statement</h1>
-        <button class="btn-primary" onclick="document.getElementById('landing-view').style.display='none'; document.getElementById('participant-form').style.display='block';">Join a Session →</button>
+<!-- LANDING VIEW -->
+<div class="container" id="landing-view">
+<div class="eyebrow">Family Philanthropic Planning</div>
+<h1><span>Craft</span> your family's mission statement</h1>
+<button class="btn-primary" onclick="document.getElementById('landing-view').style.display='none'; document.getElementById('participant-form').style.display='block';">Join a Session →</button>
+</div>
+
+<!-- JOIN FORM -->
+<div class="container form-container" id="participant-form">
+<div class="form-group">
+<label>Session Code</label>
+<input type="text" id="session-code" placeholder="e.g. COBB-2026" style="text-transform: uppercase;">
+</div>
+<div class="form-group">
+<label>Your Name</label>
+<input type="text" id="participant-name" placeholder="First Name">
+</div>
+<button class="btn-primary" style="width: 100%;" onclick="joinSession()">Enter Workshop</button>
+</div>
+
+<!-- WORKSPACE VIEW -->
+<div id="workspace-view">
+<div class="session-header">
+<div>
+<h2 id="display-session">Session: ---</h2>
+<p>Welcome, <span id="display-name">---</span></p>
+</div>
+<button class="btn-leave" onclick="leaveSession()">Leave Session</button>
+</div>
+
+<!-- PART 1: BRAIN DUMP GRID -->
+<h2 style="margin-top:0;">Part 1: Brain Dump</h2>
+<p style="margin-bottom: 30px;">Don't edit yourself. Drop raw ideas into each quadrant.</p>
+<div class="grid-container">
+    
+    <!-- Quadrant 1: The Problem -->
+    <div class="quadrant" style="border-color: var(--c-problem);">
+      <h3 style="color: var(--c-problem);">😟 What problem keeps you up at night?</h3>
+      <div class="input-group">
+        <input type="text" id="input-problem" placeholder="Type a short idea..." onkeypress="handleEnter(event, 'problem')">
+        <button onclick="addIdea('problem')">Add</button>
+      </div>
+      <ul id="list-problem" class="idea-list"></ul>
     </div>
 
-    <!-- JOIN FORM -->
-    <div class="container form-container" id="participant-form">
-        <div class="form-group">
-            <label>Session Code</label>
-            <input type="text" id="session-code" placeholder="e.g. COBB-2026" style="text-transform: uppercase;">
-        </div>
-        <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" id="participant-name" placeholder="First Name">
-        </div>
-        <button class="btn-primary" style="width: 100%;" onclick="joinSession()">Enter Workshop</button>
+    <!-- Quadrant 2: Your Why -->
+    <div class="quadrant" style="border-color: var(--c-belief);">
+      <h3 style="color: var(--c-belief);">💙 Why do you care about this?</h3>
+      <div class="input-group">
+        <input type="text" id="input-belief" placeholder="Type a short idea..." onkeypress="handleEnter(event, 'belief')">
+        <button onclick="addIdea('belief')">Add</button>
+      </div>
+      <ul id="list-belief" class="idea-list"></ul>
     </div>
 
-    <!-- WORKSPACE VIEW -->
-    <div id="workspace-view">
-        <div class="session-header">
-            <div>
-                <h2 id="display-session">Session: ---</h2>
-                <p>Welcome, <span id="display-name">---</span></p>
-            </div>
-            <button class="btn-leave" onclick="leaveSession()">Leave Session</button>
-        </div>
-
-        <div class="builder-layout">
-            <!-- DRAFT AREA -->
-            <div>
-                <div class="draft-area">
-                    <span class="blank blank-fund" id="blank-fund" data-target="details-fund" onclick="focusBlank('fund')">The [Family] Fund</span> exists to 
-                    <span class="blank blank-action" id="blank-action" data-target="details-action" onclick="focusBlank('action')">[Action]</span> 
-                    <span class="blank blank-focus" id="blank-focus" data-target="details-focus" onclick="focusBlank('focus')">[Who/What]</span>, 
-                    so that <span class="blank blank-impact" id="blank-impact" data-target="details-impact" onclick="focusBlank('impact')">[Impact/Change]</span>.
-                </div>
-                <button class="btn-submit-draft" onclick="submitDraft()">Save to Dashboard</button>
-                <button class="btn-submit-draft" style="background: var(--epic-gold); color: var(--epic-ink); margin-top: 10px;" onclick="openWordsmithModal()">👑 Crown Final Mission</button>
-            </div>
-
-            <!-- SIDEBAR ACCORDIONS -->
-            <div class="word-bank-sidebar">
-                
-                <details class="word-bank-toggle" id="details-fund">
-                    <summary>Your Name</summary>
-                    <div class="toggle-content" id="bank-fund">
-                        <div class="word-chip" onclick="fillBlank('fund', 'Cobb Family Fund')">Cobb Family Fund</div>
-                        <div class="word-chip" onclick="fillBlank('fund', 'DividedSky Foundation')">DividedSky Foundation</div>
-                    </div>
-                </details>
-
-                <details class="word-bank-toggle" id="details-problem">
-                    <summary>The Problem</summary>
-                    <div class="toggle-content" id="bank-problem">
-                        <!-- Fetched from Firebase Brain Dump -->
-                    </div>
-                </details>
-
-                <details class="word-bank-toggle" id="details-belief">
-                    <summary>Your Why</summary>
-                    <div class="toggle-content" id="bank-belief">
-                        <!-- Fetched from Firebase Brain Dump -->
-                    </div>
-                </details>
-
-                <details class="word-bank-toggle" id="details-action">
-                    <summary>Action</summary>
-                    <div class="toggle-content" id="bank-action">
-                        <div class="word-chip" onclick="fillBlank('action', 'empower')">Empower</div>
-                        <div class="word-chip" onclick="fillBlank('action', 'invest in')">Invest in</div>
-                        <div class="word-chip" onclick="fillBlank('action', 'protect')">Protect</div>
-                        <div class="word-chip" onclick="fillBlank('action', 'dismantle')">Dismantle</div>
-                    </div>
-                </details>
-
-                <details class="word-bank-toggle" id="details-focus">
-                    <summary>Who/What You Serve</summary>
-                    <div class="toggle-content" id="bank-focus">
-                        <div class="word-chip" onclick="fillBlank('focus', 'vulnerable youth')">Vulnerable Youth</div>
-                        <div class="word-chip" onclick="fillBlank('focus', 'animal welfare')">Animal Welfare</div>
-                        <div class="word-chip" onclick="fillBlank('focus', 'environmental conservation')">Environmental Conservation</div>
-                        <div class="word-chip" onclick="fillBlank('focus', 'systemic justice initiatives')">Systemic Justice Initiatives</div>
-                        <div class="word-chip" onclick="fillBlank('focus', 'faith-based organizations')">Faith-based Organizations</div>
-                    </div>
-                </details>
-
-                <details class="word-bank-toggle" id="details-impact">
-                    <summary>The Impact</summary>
-                    <div class="toggle-content" id="bank-impact">
-                        <div class="word-chip" onclick="fillBlank('impact', 'every child has a home')">Every child has a home</div>
-                        <div class="word-chip" onclick="fillBlank('impact', 'our ecosystems thrive')">Our ecosystems thrive</div>
-                        <div class="word-chip" onclick="fillBlank('impact', 'barriers are broken down')">Barriers are broken down</div>
-                    </div>
-                </details>
-
-            </div>
-        </div>
+    <!-- Quadrant 3: Your Focus -->
+    <div class="quadrant" style="border-color: var(--c-focus);">
+      <h3 style="color: var(--c-focus);">🎯 Who or what are you helping?</h3>
+      <div class="input-group">
+        <input type="text" id="input-focus" placeholder="Type a short idea..." onkeypress="handleEnter(event, 'focus')">
+        <button onclick="addIdea('focus')">Add</button>
+      </div>
+      <ul id="list-focus" class="idea-list"></ul>
     </div>
 
-    <!-- WORDSMITH MODAL -->
-    <div id="wordsmith-modal">
-        <div class="modal-content">
-            <h2 style="color: var(--epic-dark-teal);">Wordsmith & Crown Final</h2>
-            <p>Make your final edits before locking it in.</p>
-            <textarea id="final-edit-box"></textarea>
-            <button class="btn-crown" onclick="submitFinalMission()">Submit 👑 FINAL MISSION</button>
-            <button onclick="document.getElementById('wordsmith-modal').style.display='none'" style="display:block; margin: 15px auto 0; background:none; border:none; cursor:pointer; text-decoration:underline;">Cancel</button>
-        </div>
+    <!-- Quadrant 4: The Impact -->
+    <div class="quadrant" style="border-color: var(--c-impact);">
+      <h3 style="color: var(--c-impact);">📊 What does success look like?</h3>
+      <div class="input-group">
+        <input type="text" id="input-impact" placeholder="Type a short idea..." onkeypress="handleEnter(event, 'impact')">
+        <button onclick="addIdea('impact')">Add</button>
+      </div>
+      <ul id="list-impact" class="idea-list"></ul>
     </div>
+</div>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // --- 1. FIREBASE CONFIGURATION (PASTE YOUR KEYS HERE) ---
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
+<!-- PART 2: BUILDER LAYOUT -->
+<h2>Part 2: Build Your Mission Statement</h2>
+<p>Click a blank to focus it, then click an idea from the word banks to fill it in.</p>
+<div class="builder-layout">
+
+<!-- DRAFT AREA -->
+<div>
+<div class="draft-area">
+<span class="blank blank-fund" id="blank-fund" data-target="details-fund" onclick="focusBlank('fund')">The [Family] Fund</span> exists to
+<span class="blank blank-action" id="blank-action" data-target="details-action" onclick="focusBlank('action')">[Action]</span>
+<span class="blank blank-focus" id="blank-focus" data-target="details-focus" onclick="focusBlank('focus')">[Who/What]</span>,
+so that <span class="blank blank-impact" id="blank-impact" data-target="details-impact" onclick="focusBlank('impact')">[Impact/Change]</span>.
+</div>
+<button class="btn-submit-draft" onclick="submitDraft()">Save to Dashboard</button>
+<button class="btn-submit-draft" style="background: var(--epic-gold); color: var(--epic-ink); margin-top: 10px;" onclick="openWordsmithModal()">👑 Crown Final Mission</button>
+</div>
+
+<!-- SIDEBAR ACCORDIONS -->
+<div class="word-bank-sidebar">
+<details class="word-bank-toggle" id="details-fund">
+<summary>Your Name</summary>
+<div class="toggle-content" id="bank-fund">
+<div class="word-chip" onclick="fillBlank('fund', 'Cobb Family Fund')">Cobb Family Fund</div>
+<div class="word-chip" onclick="fillBlank('fund', 'DividedSky Foundation')">DividedSky Foundation</div>
+</div>
+</details>
+
+<details class="word-bank-toggle" id="details-problem">
+<summary>The Problem</summary>
+<div class="toggle-content" id="bank-problem-chips">
+<!-- Fetched from Firebase Brain Dump -->
+</div>
+</details>
+
+<details class="word-bank-toggle" id="details-belief">
+<summary>Your Why</summary>
+<div class="toggle-content" id="bank-belief-chips">
+<!-- Fetched from Firebase Brain Dump -->
+</div>
+</details>
+
+<details class="word-bank-toggle" id="details-action">
+<summary>Action</summary>
+<div class="toggle-content" id="bank-action">
+<div class="word-chip" onclick="fillBlank('action', 'Empower')">Empower</div>
+<div class="word-chip" onclick="fillBlank('action', 'Invest in')">Invest in</div>
+<div class="word-chip" onclick="fillBlank('action', 'Protect')">Protect</div>
+<div class="word-chip" onclick="fillBlank('action', 'Dismantle')">Dismantle</div>
+</div>
+</details>
+
+<details class="word-bank-toggle" id="details-focus">
+<summary>Who/What You Serve</summary>
+<div class="toggle-content" id="bank-focus-chips">
+<!-- Will populate with Brain Dump Focus ideas, plus some defaults -->
+<div class="word-chip" onclick="fillBlank('focus', 'vulnerable youth')">Vulnerable Youth</div>
+<div class="word-chip" onclick="fillBlank('focus', 'animal welfare')">Animal Welfare</div>
+<div class="word-chip" onclick="fillBlank('focus', 'environmental conservation')">Environmental Conservation</div>
+<div class="word-chip" onclick="fillBlank('focus', 'systemic justice initiatives')">Systemic Justice Initiatives</div>
+<div class="word-chip" onclick="fillBlank('focus', 'faith-based organizations')">Faith-based Organizations</div>
+</div>
+</details>
+
+<details class="word-bank-toggle" id="details-impact">
+<summary>The Impact</summary>
+<div class="toggle-content" id="bank-impact-chips">
+<!-- Will populate with Brain Dump Impact ideas, plus some defaults -->
+<div class="word-chip" onclick="fillBlank('impact', 'every child has a home')">Every child has a home</div>
+<div class="word-chip" onclick="fillBlank('impact', 'our ecosystems thrive')">Our ecosystems thrive</div>
+<div class="word-chip" onclick="fillBlank('impact', 'barriers are broken down')">Barriers are broken down</div>
+</div>
+</details>
+
+</div>
+</div>
+</div>
+
+<!-- WORDSMITH MODAL -->
+<div id="wordsmith-modal">
+<div class="modal-content">
+<h2 style="color: var(--epic-dark-teal);">Wordsmith & Crown Final</h2>
+<p>Make your final edits before locking it in.</p>
+<textarea id="final-edit-box"></textarea>
+<button class="btn-crown" onclick="submitFinalMission()">Submit 👑 FINAL MISSION</button>
+<button onclick="document.getElementById('wordsmith-modal').style.display='none'" style="display:block; margin: 15px auto 0; background:none; border:none; cursor:pointer; text-decoration:underline;">Cancel</button>
+</div>
+</div>
+
+<!-- JAVASCRIPT LOGIC -->
+<script>
+// --- 1. FIREBASE CONFIGURATION (PASTE YOUR KEYS HERE) ---
+const firebaseConfig = {
+  apiKey: "[GCP_KEY]",
+  authDomain: "[GENERIC_SECRET]",
+  databaseURL: "https://epic-mission-builder-default-rtdb.firebaseio.com",
+  projectId: "epic-mission-builder",
+  storageBucket: "epic-mission-builder.firebasestorage.app",
+  messagingSenderId: "561834463026",
+  appId: "1:561834463026:web:06a1f86f5a41ba3fff112b"
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+const db = firebase.database();
+
+// --- 2. GOOGLE APPS SCRIPT URL ---
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbw7Q6VeJIu5FcU2kyNDI6MIRiQ2HIwP5WtXTW9aCN1-mEDXd9mhDUlfo88BX15_LSo/exec';
+
+// --- 3. STATE VARIABLES ---
+let currentSession = "";
+let currentUser = "";
+let currentBlank = "";
+
+// --- 4. SESSION LOGIC ---
+function joinSession() {
+  const code = document.getElementById('session-code').value.trim().toUpperCase();
+  const name = document.getElementById('participant-name').value.trim();
+  
+  if(!code || !name) { alert("Please enter both a code and a name."); return; }
+  
+  currentSession = code;
+  currentUser = name;
+  
+  document.getElementById('participant-form').style.display = 'none';
+  document.getElementById('workspace-view').style.display = 'block';
+  document.getElementById('display-session').innerText = "Session: " + code;
+  document.getElementById('display-name').innerText = name;
+  
+  // Start syncing the brain dump boxes!
+  startFirebaseListener();
+}
+
+function leaveSession() {
+  currentSession = "";
+  currentUser = "";
+  document.getElementById('workspace-view').style.display = 'none';
+  document.getElementById('landing-view').style.display = 'block';
+}
+
+// --- 5. FIREBASE BRAIN DUMP SYNC LOGIC ---
+function handleEnter(e, quadId) {
+  if (e.key === 'Enter') {
+    addIdea(quadId);
+  }
+}
+
+function addIdea(quadId) {
+  const inputEl = document.getElementById('input-' + quadId);
+  const text = inputEl.value.trim();
+  
+  if (text === '') return; 
+  
+  db.ref(`sessions/${currentSession}/ideas/${quadId}`).push({
+    text: text,
+    author: currentUser,
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  });
+  
+  inputEl.value = '';
+}
+
+function startFirebaseListener() {
+  db.ref(`sessions/${currentSession}/ideas`).on('value', (snapshot) => {
+    const data = snapshot.val() || {};
+    const quadrants = ['problem', 'belief', 'focus', 'impact'];
+    
+    quadrants.forEach(quad => {
+      // 1. Update the Part 1 Lists
+      const listEl = document.getElementById('list-' + quad);
+      if (listEl) listEl.innerHTML = ''; 
+      
+      // 2. Update the Part 2 Word Banks (if they exist)
+      const chipContainerEl = document.getElementById('bank-' + quad + '-chips');
+      // We want to keep default chips for focus and impact, so we'll prepend new ideas instead of clearing if we want. 
+      // But for simplicity, let's just add the dynamic chips to the top.
+      let dynamicHTML = '';
+
+      const ideas = data[quad] || {};
+      
+      Object.keys(ideas).forEach(key => {
+        const idea = ideas[key];
         
-        // Initialize Firebase
-        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-        const db = firebase.database();
-
-        // --- 2. GOOGLE APPS SCRIPT URL ---
-        const GAS_URL = 'https://script.google.com/macros/s/AKfycbw7Q6VeJIu5FcU2kyNDI6MIRiQ2HIwP5WtXTW9aCN1-mEDXd9mhDUlfo88BX15_LSo/exec';
-
-        // --- 3. STATE VARIABLES ---
-        let currentSession = "";
-        let currentUser = "";
-        let currentBlank = "";
-
-        // --- 4. SESSION LOGIC (POST to GAS) ---
-        function joinSession() {
-            const code = document.getElementById('session-code').value.trim().toUpperCase();
-            const name = document.getElementById('participant-name').value.trim();
-            
-            if(!code || !name) { alert("Please enter both a code and a name."); return; }
-
-            // Alert for demo - in production this checks the GAS lock status
-            currentSession = code;
-            currentUser = name;
-            
-            document.getElementById('participant-form').style.display = 'none';
-            document.getElementById('workspace-view').style.display = 'block';
-            document.getElementById('display-session').innerText = "Session: " + code;
-            document.getElementById('display-name').innerText = name;
+        // Add to list in Part 1
+        if (listEl) {
+          const li = document.createElement('li');
+          li.className = 'idea-item';
+          li.innerHTML = `<span>${idea.text} <span style="font-size: 11px; color: #888; font-style: italic;">(${idea.author})</span></span>`;
+          listEl.appendChild(li);
         }
-
-        function leaveSession() {
-            currentSession = "";
-            currentUser = "";
-            document.getElementById('workspace-view').style.display = 'none';
-            document.getElementById('landing-view').style.display = 'block';
+        
+        // Create chip HTML for Part 2
+        // We use string replacement to escape single quotes so the onclick doesn't break
+        const safeText = idea.text.replace(/'/g, "\\'");
+        dynamicHTML += `<div class="word-chip" onclick="fillBlank('${quad}', '${safeText}')">${idea.text}</div>`;
+      });
+      
+      // Inject the dynamic chips into Part 2 word banks
+      if(chipContainerEl) {
+        // Find existing default chips so we don't overwrite them
+        const existingDefaults = chipContainerEl.innerHTML.match(/<div class="word-chip".*?<\/div>/g) || [];
+        // Only keep the hardcoded ones if this is focus or impact, or just wipe and replace for problem/belief
+        if (quad === 'focus' || quad === 'impact') {
+          // A bit hacky: we'll just prepend the dynamic ones
+          // To do this cleanly, let's just find the chips that don't have our dynamic text
+           // For now, let's just stick them at the top!
         }
+        
+        // Actually, the cleanest way is just to populate the container. 
+        // For focus and impact, the default HTML will get overwritten if we do innerHTML. 
+        // Let's just create a dedicated div inside the container for dynamic chips.
+      }
+      
+      // Better approach for Part 2 chips:
+      const bankEl = document.getElementById('bank-' + quad + '-chips');
+      if (bankEl) {
+          bankEl.innerHTML = dynamicHTML;
+      }
+    });
+  });
+}
 
-        // --- 5. AUTO-OPEN MAGIC & BLANK FOCUS ---
-        function focusBlank(category) {
-            // Remove highlight from all
-            document.querySelectorAll('.blank').forEach(b => b.classList.remove('focused'));
-            
-            // Add highlight to clicked
-            const blankEl = document.getElementById('blank-' + category);
-            blankEl.classList.add('focused');
-            currentBlank = category;
+// --- 6. AUTO-OPEN MAGIC & BLANK FOCUS ---
+function focusBlank(category) {
+  document.querySelectorAll('.blank').forEach(b => b.classList.remove('focused'));
+  
+  const blankEl = document.getElementById('blank-' + category);
+  blankEl.classList.add('focused');
+  currentBlank = category;
 
-            // Auto-open magic: Close all accordions, then open the right one
-            document.querySelectorAll('.word-bank-toggle').forEach(acc => acc.removeAttribute('open'));
-            const targetAccordion = document.getElementById(blankEl.dataset.target);
-            if(targetAccordion) {
-                targetAccordion.setAttribute('open', 'true');
-                targetAccordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
+  document.querySelectorAll('.word-bank-toggle').forEach(acc => acc.removeAttribute('open'));
+  const targetAccordion = document.getElementById(blankEl.dataset.target);
+  
+  if(targetAccordion) {
+    targetAccordion.setAttribute('open', 'true');
+    targetAccordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
 
-        // --- 6. FILL BLANKS & REMOVE 'THE' LOGIC ---
-        function fillBlank(category, text) {
-            if(category === 'fund') {
-                // Logic to prevent double "The"
-                text = text.replace(/^The\s+/i, '');
-            }
-            
-            const blankEl = document.getElementById('blank-' + category);
-            blankEl.innerText = text;
-            blankEl.classList.remove('focused');
-            blankEl.classList.add('filled');
-        }
+// --- 7. FILL BLANKS & REMOVE 'THE' LOGIC ---
+function fillBlank(category, text) {
+  if(category === 'fund') {
+    text = text.replace(/^The\s+/i, '');
+  }
+  
+  const blankEl = document.getElementById('blank-' + category);
+  if(blankEl) {
+    blankEl.innerText = text;
+    blankEl.classList.remove('focused');
+    blankEl.classList.add('filled');
+  }
+}
 
-        // --- 7. SUBMIT TO GOOGLE SHEET (DRAFTS & FINAL) ---
-        function getDraftText() {
-            const fund = document.getElementById('blank-fund').innerText;
-            const action = document.getElementById('blank-action').innerText;
-            const focus = document.getElementById('blank-focus').innerText;
-            const impact = document.getElementById('blank-impact').innerText;
-            return `The ${fund} exists to ${action} ${focus}, so that ${impact}.`;
-        }
+// --- 8. SUBMIT TO GOOGLE SHEET (DRAFTS & FINAL) ---
+function getDraftText() {
+  const fund = document.getElementById('blank-fund').innerText;
+  const action = document.getElementById('blank-action').innerText;
+  const focus = document.getElementById('blank-focus').innerText;
+  const impact = document.getElementById('blank-impact').innerText;
+  return `The ${fund} exists to ${action} ${focus}, so that ${impact}.`;
+}
 
-        function submitDraft() {
-            const draft = getDraftText();
-            sendToSheet(currentUser, draft);
-            alert("Draft saved to Dashboard!");
-        }
+function submitDraft() {
+  const draft = getDraftText();
+  sendToSheet(currentUser, draft);
+  alert("Draft saved to Dashboard!");
+}
 
-        function openWordsmithModal() {
-            document.getElementById('final-edit-box').value = getDraftText();
-            document.getElementById('wordsmith-modal').style.display = 'flex';
-        }
+function openWordsmithModal() {
+  document.getElementById('final-edit-box').value = getDraftText();
+  document.getElementById('wordsmith-modal').style.display = 'flex';
+}
 
-        function submitFinalMission() {
-            const finalStatement = document.getElementById('final-edit-box').value;
-            sendToSheet("👑 FINAL MISSION", finalStatement);
-            document.getElementById('wordsmith-modal').style.display = 'none';
-            alert("Final Mission Crowned! Check the dashboard.");
-        }
+function submitFinalMission() {
+  const finalStatement = document.getElementById('final-edit-box').value;
+  sendToSheet("👑 FINAL MISSION", finalStatement);
+  document.getElementById('wordsmith-modal').style.display = 'none';
+  alert("Final Mission Crowned! Check the dashboard.");
+}
 
-        function sendToSheet(name, responseText) {
-            const payload = {
-                sessionCode: currentSession,
-                name: name,
-                tool: "Mission Statement",
-                response: responseText
-            };
-
-            fetch(GAS_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                console.log("Sent to Control Panel successfully.");
-            }).catch(err => console.error(err));
-        }
-
-    </script>
+function sendToSheet(name, responseText) {
+  const payload = {
+    sessionCode: currentSession,
+    name: name,
+    tool: "Mission Statement",
+    response: responseText
+  };
+  
+  fetch(GAS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    console.log("Sent to Control Panel successfully.");
+  }).catch(err => console.error(err));
+}
+</script>
 </body>
 </html>
-
-
+```_
