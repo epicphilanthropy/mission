@@ -668,11 +668,10 @@
                         <details class="section-toggle">
                             <summary><h4 id="bank-where-header">Where You Give</h4></summary>
                             <div id="bank-where">
-                                <span class="word-chip" onclick="insertWord(this)">Local</span>
-                                <span class="word-chip" onclick="insertWord(this)">Regional</span>
-                                <span class="word-chip" onclick="insertWord(this)">National</span>
-                                <span class="word-chip" onclick="insertWord(this)">International</span>
-                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="your town" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="your state" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="your country" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="another country" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
                             </div>
                         </details>
                    </div>
@@ -715,6 +714,47 @@
 
             <h3>Part 3: Compare</h3>
             <p>Any draft anyone saves will show up here. Your facilitator will read them out loud, and together you will pick the final winner!</p>
+
+            <h3>Word Bank Reference</h3>
+            <p>Every word listed here is available to click in Part 2. Browse by category below if you want to see all your options before you start building.</p>
+
+            <details class="word-bank-toggle">
+                <summary>Action Words</summary>
+                <div class="toggle-content"><p style="font-size:15px;line-height:1.8;">Support(s), Champion(s), Invest(s) in, Empower(s), Advance(s), Build(s), Create(s), Drive(s), Advocate(s) for, Strengthen(s), Cultivate(s), Transform(s), Mobilize(s), Elevate(s), Catalyze(s), Unlock(s), Center(s), Uplift(s), Foster(s), Partner(s) with</p></div>
+            </details>
+            <details class="word-bank-toggle">
+                <summary>Impact & Change Words</summary>
+                <div class="toggle-content"><p style="font-size:15px;line-height:1.8;">Systemic change, Equity and access, Dignity and respect, Collective power, Thriving communities, Generational impact, Shared prosperity, Voices heard and valued, Community resilience</p></div>
+            </details>
+            <details class="word-bank-toggle">
+                <summary>How You Work</summary>
+                <div class="toggle-content"><p style="font-size:15px;line-height:1.8;">Trust-based partnerships, Direct support, Community collaboration, Advocacy, Shared funding, Capacity building, Multi-year unrestricted funding, Policy change, Grassroots grantmaking</p></div>
+            </details>
+            <details class="word-bank-toggle">
+                <summary>Fund / Family Name</summary>
+                <div class="toggle-content"><p style="font-size:15px;line-height:1.8;">Family, Foundation, Fund, Trust, Philanthropies — each automatically shows your family name in front (e.g. "Morgan Foundation").</p></div>
+            </details>
+            <details class="word-bank-toggle">
+                <summary>Where You Give</summary>
+                <div class="toggle-content"><p style="font-size:15px;line-height:1.8;">Type your own: your town, your state, your country, or another country.</p></div>
+            </details>
+            <details class="word-bank-toggle">
+                <summary>Who / What You Serve</summary>
+                <div class="toggle-content">
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>People & Communities:</strong> Children & youth, Families, Women & girls, BIPOC communities, Immigrants & refugees, Veterans, LGBTQ+ communities, Seniors, Rural communities, People with disabilities, Indigenous populations</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Basic Needs & Crisis:</strong> Food banks & emergency pantries, Housing & homelessness, Survivors of domestic abuse, Survivors of human trafficking, Crisis hotlines & suicide prevention, Disaster response & recovery, Emergency medical response, Refugee crisis & resettlement, Foster youth & child welfare, Clean water access, Poverty alleviation</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Education & Learning:</strong> Early childhood education, K-12 students, Higher education & scholarships, Literacy programs, STEM education, Vocational training</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Health & Wellness:</strong> Mental health, Medical research, Healthcare access, Rare diseases, Reproductive health, Addiction & recovery</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Environment & Climate:</strong> Climate resilience, Local ecosystems, Clean waterways, Public lands & parks, Sustainable agriculture, Renewable energy, Conservation efforts</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Animals & Wildlife:</strong> Companion animals, Endangered species, Local wildlife, Marine life, Farm & agricultural animals, Animal sanctuaries</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Systems, Justice & Society:</strong> Systemic justice, Voting rights & democracy, Criminal justice reform, Public policy & legislation, Human rights, Civic engagement</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Economic Development:</strong> Small businesses & entrepreneurs, Local economies, Neighborhood revitalization, Workforce development, Financial literacy</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Arts, Culture & History:</strong> Local artists, Historical preservation, Cultural institutions, Public broadcasting, Arts education</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:10px;"><strong>Faith & Religion:</strong> Faith-based communities, Religious institutions, Spiritual development, Interfaith initiatives</p>
+                    <p style="font-size:15px;line-height:1.6;margin-bottom:0;"><strong>Global & Innovation:</strong> Developing nations, Global health, International disaster relief, Scientific research, Environmental technology</p>
+                </div>
+            </details>
+            <p style="font-size:14px;color:#888;font-style:italic;margin-top:15px;">Every word bank also has a "+ Add your own" option if what you need isn't listed.</p>
 
             <button class="btn-close-help-large" onclick="closeHelp()">Got it, let's go! →</button>
         </div>
