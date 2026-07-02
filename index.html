@@ -668,10 +668,11 @@
                         <details class="section-toggle">
                             <summary><h4 id="bank-where-header">Where You Give</h4></summary>
                             <div id="bank-where">
-                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="your town" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
-                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="your state" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
-                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="your country" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
-                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="another country" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="Community" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="State" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="Country" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="Another country" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
+                                <div class="custom-chip-container"><input type="text" class="custom-chip-input" placeholder="+ Add your own" onkeypress="addCustomChip(event, 'bank-where', this)"></div>
                             </div>
                         </details>
                    </div>
@@ -736,7 +737,12 @@
             </details>
             <details class="word-bank-toggle">
                 <summary>Where You Give</summary>
-                <div class="toggle-content"><p style="font-size:15px;line-height:1.8;">Type your own: your town, your state, your country, or another country.</p></div>
+                <div class="toggle-content">
+                    <p style="font-size:15px;line-height:1.8;margin-bottom:6px;"><strong>Community:</strong> your town, city, or immediate neighborhood</p>
+                    <p style="font-size:15px;line-height:1.8;margin-bottom:6px;"><strong>State:</strong> your state or region</p>
+                    <p style="font-size:15px;line-height:1.8;margin-bottom:6px;"><strong>Country:</strong> your home country</p>
+                    <p style="font-size:15px;line-height:1.8;margin-bottom:0;"><strong>Another country:</strong> anywhere outside your own country</p>
+                </div>
             </details>
             <details class="word-bank-toggle">
                 <summary>Who / What You Serve</summary>
