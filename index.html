@@ -33,7 +33,10 @@
             --c-where: #1e5563;
             --c-fund: #4f8284;
         }
-
+.q-second {
+    font-weight: 500;
+    opacity: 0.7;
+}
         body { font-family: 'Montserrat', sans-serif; background-color: var(--epic-dark-teal); color: var(--white); margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
         .container { max-width: 800px; width: 90%; margin: 80px auto; text-align: center; }
         .eyebrow { color: var(--epic-gold); font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
@@ -74,8 +77,8 @@
         .quadrant-card { background: var(--white); border: 1px solid var(--light-gray); border-radius: 8px; padding: 25px; display: flex; flex-direction: column; border-top-width: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         .quadrant-card h3 { margin: 0 0 15px 0; font-size: 18px; font-weight: 600; }
 
-        .quad-problem { border-top-color: var(--c-problem); }
-        .quad-problem h3 { color: var(--c-problem); }
+.quad-problem { border-top-color: var(--c-problem); }
+.quad-problem h3 { color: var(--c-problem); }
         .quad-belief { border-top-color: var(--c-belief); }
         .quad-belief h3 { color: var(--c-belief); }
         .quad-impact { border-top-color: var(--c-impact); }
@@ -88,13 +91,13 @@
         .input-row input:focus { outline: none; border-color: var(--epic-medium-teal); }
         .btn-add { color: var(--white); border: none; padding: 0 25px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 15px; font-family: 'Montserrat', sans-serif; }
 
-        .ideas-list { flex: 1; background: var(--off-white); border-radius: 6px; padding: 15px; min-height: 140px; max-height: 200px; overflow-y: auto; border: 1px solid #eaeaea; }
+        .ideas-list { flex: 1; background: var(--off-white); border-radius: 6px; padding: 15px; min-height: 60px; max-height: 200px; overflow-y: auto; border: 1px solid #eaeaea; }
 
         .idea-item { background: var(--white); padding: 12px 15px; border-radius: 6px; margin-bottom: 10px; font-size: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border-left: 5px solid var(--light-gray); box-shadow: 0 2px 5px rgba(0,0,0,0.04); transition: transform 0.1s;}
         .idea-item:hover { transform: scale(1.01); background: #fafafa; }
         .idea-author { font-size: 12px; color: #888; margin-left: 10px; font-style: italic; }
 
-        .item-problem { border-left-color: var(--c-problem); }
+.item-problem { border-left-color: var(--c-problem); }
         .item-belief { border-left-color: var(--c-belief); }
         .item-impact { border-left-color: var(--c-impact); }
         .item-focus { border-left-color: var(--c-focus); }
@@ -130,10 +133,10 @@
             100% { filter: brightness(1); transform: scale(1); box-shadow: 0 0 0 0 rgba(0,0,0,0); }
         }
 
-        .blank-problem { border-bottom-color: var(--c-problem); }
-        .blank-problem.focused { background: var(--c-problem); color: var(--white); animation: breath 2s infinite ease-in-out; }
-        .blank-problem.filled { background: var(--c-problem); color: var(--white); }
-
+.blank-problem { border-bottom-color: var(--c-problem); }
+.blank-problem.focused { background: var(--c-problem); color: var(--white); animation: breath 2s infinite ease-in-out; }
+.blank-problem.filled { background: var(--c-problem); color: var(--white); }
+        
         .blank-belief { border-bottom-color: var(--c-belief); }
         .blank-belief.focused { background: var(--c-belief); color: var(--white); animation: breath 2s infinite ease-in-out; }
         .blank-belief.filled { background: var(--c-belief); color: var(--white); }
@@ -349,7 +352,7 @@
 
         <div class="quadrant-grid">
             <div class="quadrant-card quad-problem">
-                <h3>What problem keeps you up at night?</h3>
+<h3>What problem keeps you up at night? <span class="q-second">What do you wish more people understood?</span></h3>                
                 <div class="input-row">
                     <input type="text" id="input-q1" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q1')">
                     <button class="btn-add" style="background: var(--c-problem);" onclick="addIdea('q1')">Add</button>
@@ -358,7 +361,7 @@
             </div>
 
             <div class="quadrant-card quad-belief">
-                <h3>Why do you care about this?</h3>
+<h3>Why do you care about this? <span class="q-second">What keeps you coming back to this?</span></h3>
                 <div class="input-row">
                     <input type="text" id="input-q2" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q2')">
                     <button class="btn-add" style="background: var(--c-belief);" onclick="addIdea('q2')">Add</button>
@@ -367,7 +370,7 @@
             </div>
 
             <div class="quadrant-card quad-impact">
-                <h3>What does success look like?</h3>
+<h3>What does a better future look like? <span class="q-second">What do you hope changes?</span></h3>
                 <div class="input-row">
                     <input type="text" id="input-q3" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q3')">
                     <button class="btn-add" style="background: var(--c-impact);" onclick="addIdea('q3')">Add</button>
@@ -376,7 +379,7 @@
             </div>
 
             <div class="quadrant-card quad-focus">
-                <h3>Who or what are you helping?</h3>
+<h3>Who or what are you helping? <span class="q-second">Who or what needs a stronger voice?</span></h3>
                 <div class="input-row">
                     <input type="text" id="input-q4" placeholder="Type an idea..." onkeypress="handleEnter(event, 'q4')">
                     <button class="btn-add" style="background: var(--c-focus);" onclick="addIdea('q4')">Add</button>
@@ -697,18 +700,18 @@
             <h2>How to use this tool</h2>
 
             <h3>Part 1: Brain Dump</h3>
-            <p>Don't worry about writing a perfect sentence yet. Just type your raw thoughts into the four colored boxes (The Problem, Your Why, Impact, Who You Serve) and click <strong>Add</strong>.</p>
+            <p>Don't worry about writing a perfect sentence yet. Just type your raw thoughts into the four colored boxes (The Problem, Your Why, A Better Future, Who You Serve) and click <strong>Add</strong>.</p>
 
             <!-- EXAMPLES MOVED HERE -->
-            <div class="help-examples-box">
-                <h4>Stuck? Here are some examples:</h4>
-                <ul>
-                    <li><strong>The Problem:</strong> Food insecurity, lack of arts funding, climate change, youth mental health crisis.</li>
-                    <li><strong>Your Why:</strong> Everyone deserves a fair start, art heals communities, health is a human right.</li>
-                    <li><strong>Impact:</strong> Higher graduation rates, cleaner local rivers, thriving local arts scene.</li>
-                    <li><strong>Who You Serve:</strong> First-generation students, single mothers, marginalized neighborhoods, small-scale farmers.</li>
-                </ul>
-            </div>
+<div class="help-examples-box">
+    <h4>Stuck? Here are some examples:</h4>
+    <ul>
+        <li><strong>The Problem:</strong> Food insecurity, lack of arts funding, climate change, animals without protection, people's rights being ignored.</li>
+        <li><strong>Your Why:</strong> Everyone deserves a fair start, art heals communities, the families I've met along the way, animals deserve to be safe, health is a human right.</li>
+        <li><strong>A Better Future:</strong> Higher graduation rates, more stable housing, cleaner local rivers, healthy wildlife populations, stronger protections for human rights.</li>
+        <li><strong>Who You Serve:</strong> First-generation students, local environmental groups, single mothers, rescue animals, marginalized neighborhoods.</li>
+    </ul>
+</div>
 
             <h3>Part 2: Build It Together</h3>
             <p>Pick a template style. You will see a sentence with empty blanks. The active blank will lightly pulse to let you know it's ready. Just <strong>click a word</strong> from the Word Banks on the right to instantly fill the blank. Then, click "Save This Draft."</p>
@@ -816,13 +819,23 @@ function logoutMission() {
         const CONTROL_PANEL_URL = 'https://script.google.com/macros/s/AKfycbw7Q6VeJIu5FcU2kyNDI6MIRiQ2HIwP5WtXTW9aCN1-mEDXd9mhDUlfo88BX15_LSo/exec';
 
 
-        const emptyStates = {
-            q1: `<div class="empty-state"><strong>Examples:</strong>- Food insecurity<br>- Lack of arts funding<br>- Climate change<br>- Unequal access to healthcare<br>- Youth mental health crisis</div>`,
-            q2: `<div class="empty-state"><strong>Examples:</strong>- Everyone deserves a fair start<br>- Art heals communities<br>- Education is the great equalizer<br>- We must protect our planet<br>- Health is a human right</div>`,
-            q3: `<div class="empty-state"><strong>Examples:</strong>- Higher graduation rates<br>- More stable housing<br>- Cleaner local rivers<br>- Thriving local arts scene<br>- Reduced food waste</div>`,
-            q4: `<div class="empty-state"><strong>Examples:</strong>- First-generation students<br>- Local environmental groups<br>- Single mothers<br>- Marginalized neighborhoods<br>- Small-scale farmers</div>`
-        };
-
+const emptyStates = {
+    q1: `<div class="empty-state"><strong>Examples:</strong>- Food insecurity<br>- Lack of arts funding<br>- Climate change<br>- Animals without protection<br>- People's rights being ignored</div>`,
+    q2: `<div class="empty-state"><strong>Examples:</strong>- Everyone deserves a fair start<br>- Art heals communities<br>- The families I've met along the way<br>- Animals deserve to be safe<br>- Health is a human right</div>`,
+    q3: `<div class="empty-state"><strong>Examples:</strong>- Higher graduation rates<br>- More stable housing<br>- Cleaner local rivers<br>- Healthy wildlife populations<br>- Stronger protections for human rights</div>`,
+    q4: `<div class="empty-state"><strong>Examples:</strong>- First-generation students<br>- Local environmental groups<br>- Single mothers<br>- Rescue animals<br>- Marginalized neighborhoods</div>`
+};
+function renderExamples() {
+    ['q1', 'q2', 'q3', 'q4'].forEach(quadId => {
+        if (document.getElementById('examples-' + quadId)) return;
+        const list = document.getElementById('list-' + quadId);
+        const box = document.createElement('div');
+        box.id = 'examples-' + quadId;
+        box.style.marginBottom = '15px';
+        box.innerHTML = emptyStates[quadId];
+        list.parentNode.insertBefore(box, list);
+    });
+}
         // --- 2. UI NAVIGATION & HELP ---
         function openHelp() { document.getElementById('help-modal').style.display = 'flex'; }
         function closeHelp() { document.getElementById('help-modal').style.display = 'none'; }
@@ -876,7 +889,7 @@ function logoutMission() {
                 document.getElementById('display-role').style.backgroundColor = 'var(--epic-ink)';
                 document.getElementById('display-role').style.color = 'var(--white)';
             }
-
+renderExamples();
             setTemplate('problem');
             startFirebaseListeners();
         }
@@ -1225,8 +1238,6 @@ function logoutMission() {
                                 dynamicBankDiv.appendChild(chip);
                             }
                         });
-                    } else {
-                        listDiv.insertAdjacentHTML('beforeend', emptyStates[quadId]);
                     }
                 });
             });
